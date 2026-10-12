@@ -1,0 +1,52 @@
+{
+  "menu": "happy-hour",
+  "title": "Happy Hour",
+  "source": "Happy Hour item list supplied by owner, 12 Oct 2026 (see source/2026-10-12-happy-hour-source.txt)",
+  "currency": "CAD",
+  "price_display": "no dollar sign, as on the other printed menus",
+  "schedule": {
+    "needs_review": "Times taken from the current live website; not yet confirmed against the printed Happy Hour menu.",
+    "windows": [
+      { "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "start": "14:00", "end": "17:00", "text": "Monday – Friday · 2 – 5 PM" },
+      { "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "start": "21:00", "end": "close", "text": "Monday – Friday · 9 PM – Close" },
+      { "days": ["Sunday"], "start": "open", "end": "close", "text": "Sunday · All Day" }
+    ]
+  },
+  "story": {
+    "needs_review": "Not yet supplied. The Campbelltown / Sherwood Park story must be provided word for word before the story section is built.",
+    "title": null,
+    "body": null,
+    "closing": "Pull up a chair. You're among neighbours."
+  },
+  "categories": [
+    {
+      "id": "bites",
+      "title": "Bites",
+      "needs_review": "Heading inferred: the first table arrived without a title.",
+      "items": [
+        { "id": "hh-wings", "name": "Wings", "detail": "1 lb, salt and pepper", "price": 15, "links_to": "signature-wings" },
+        { "id": "hh-korean-fried-chicken", "name": "Korean Fried Chicken", "detail": "snack", "price": 12, "links_to": "korean-fried-chicken" },
+        { "id": "hh-mini-zesty-nachos", "name": "Mini Zesty Nachos", "detail": null, "price": 12, "links_to": "zesty-nachos" },
+        { "id": "hh-personal-quesadilla", "name": "Personal Quesadilla", "detail": null, "price": 12, "links_to": null },
+        { "id": "hh-curry-chicken-poutine", "name": "Curry Chicken Poutine", "detail": null, "price": 14, "links_to": null },
+        { "id": "hh-crispy-prawns", "name": "Crispy Prawns", "detail": null, "price": 12, "links_to": null },
+        { "id": "hh-taco-chicken-tacos", "name": "Taco Chicken Tacos", "detail": "2", "price": 12, "links_to": null },
+        { "id": "hh-happy-pizza", "name": "Happy Pizza", "detail": "personal Sonoma Margherita or Yosemite", "price": 11, "choices": ["Sonoma Margherita", "Yosemite"], "links_to": null },
+        { "id": "hh-truffle-parmesan-fries", "name": "Truffle Parmesan Fries", "detail": null, "price": 8, "links_to": "truffle-parmesan-fries" }
+      ]
+    },
+    {
+      "id": "sips",
+      "title": "Sips",
+      "items": [
+        { "id": "hh-house-draft", "name": "House draft", "detail": "16 oz", "price": 5 },
+        { "id": "hh-well-highball", "name": "Well highball", "detail": "1 oz", "price": 5 },
+        { "id": "hh-house-wine", "name": "House wine", "detail": "6 oz / 9 oz", "prices": { "6oz": 7, "9oz": 10 } },
+        { "id": "hh-wine-bottles", "name": "Wine bottles", "detail": null, "price": null, "deal_text": "$10 off", "discount": 10 },
+        { "id": "hh-cocktails", "name": "Cocktails", "detail": "Polos Caesar, Spicy Margarita, Mojito, Whisky Sour", "price": 9, "choices": ["Polos Caesar", "Spicy Margarita", "Mojito", "Whisky Sour"] },
+        { "id": "hh-sangria", "name": "Sangria", "detail": "red or white", "price": 11, "choices": ["red", "white"] },
+        { "id": "hh-zero-proof-cocktail", "name": "Zero-proof cocktail", "detail": null, "price": 5 }
+      ]
+    }
+  ]
+}

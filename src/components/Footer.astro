@@ -1,0 +1,81 @@
+---
+import Wordmark from './Wordmark.astro';
+import business from '../data/business.json';
+const year = new Date().getFullYear();
+const b = business;
+---
+<footer class="site-footer" data-theme="night">
+  <div class="container">
+    <div class="top">
+      <a href="/" class="f-brand" aria-label="Polos Social Lounge, home"><Wordmark variant="lockup" decorative /></a>
+      <p class="f-place eyebrow">Sherwood Park · Alberta</p>
+    </div>
+    <div class="double-rule" aria-hidden="true"></div>
+    <div class="cols">
+      <div>
+        <h2 class="f-h">Visit</h2>
+        <address>
+          {b.address.line1}<br />{b.address.city}, {b.address.regionName} {b.address.postalCode}
+        </address>
+        <p><a href={`tel:${b.phone.tel}`} data-track="phone_click" data-track-location="footer">{b.phone.display}</a></p>
+        <p><a href={b.links.directions} data-track="directions_click" data-track-location="footer">Get directions</a></p>
+      </div>
+      <div>
+        <h2 class="f-h">Hours</h2>
+        <dl class="f-hours">
+          {b.hours.weekly.map((h) => (<><dt>{h.label}</dt><dd>{h.text}</dd></>))}
+        </dl>
+        <p class="muted small">{b.hours.note}</p>
+      </div>
+      <nav aria-label="Footer">
+        <h2 class="f-h">Explore</h2>
+        <ul>
+          <li><a href="/menu">Menu</a></li>
+          <li><a href="/happy-hour">Happy Hour</a></li>
+          <li><a href="/private-events">Private Events</a></li>
+          <li><a href="/gallery">Gallery</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div>
+        <h2 class="f-h">More</h2>
+        <ul>
+          <li><a href={b.links.reserve} data-track="reserve_click" data-track-location="footer">Reserve a table</a></li>
+          <li><a href={b.links.order} data-track="order_click" data-track-location="footer">Order online</a></li>
+          <li><a href={b.links.giftCards} data-track="gift_card_click">Gift cards</a></li>
+          <li><a href={b.links.play} data-track="play_open" data-track-location="footer">Play at your table</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">
+      <ul class="social" aria-label="Social media">
+        <li><a href={b.links.instagram} rel="noopener">Instagram</a></li>
+        <li><a href={b.links.facebook} rel="noopener">Facebook</a></li>
+        <li><a href={b.links.x} rel="noopener">X</a></li>
+      </ul>
+      <p class="muted small">© {year} Polos Social Lounge · Sherwood Park · poloslounge.com</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer { background: var(--espresso); color: var(--ivory-on-night); padding-block: var(--s-9) var(--s-7); }
+  .site-footer .muted { color: var(--stone-night); }
+  .top { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: var(--s-5); margin-bottom: var(--s-6); }
+  .f-brand { color: var(--logo-gold); width: min(20rem, 70vw); }
+  .f-place { color: var(--gold); }
+  .cols { display: grid; gap: var(--s-7) var(--s-6); grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); padding-block: var(--s-7); }
+  .f-h { font-family: var(--font-sans); font-weight: 600; font-size: var(--fs-eyebrow); letter-spacing: var(--track-eyebrow); text-transform: uppercase; color: var(--gold); margin-bottom: var(--s-4); }
+  address { font-style: normal; margin-bottom: var(--s-3); }
+  .cols p, .cols li { margin-bottom: var(--s-2); }
+  .cols a, .social a { text-decoration: none; background: linear-gradient(var(--gold), var(--gold)) left bottom / 0 var(--hair) no-repeat; transition: background-size var(--t-ui) var(--ease); }
+  .cols a:hover, .social a:hover { background-size: 100% var(--hair); }
+  .f-hours { display: grid; grid-template-columns: auto 1fr; gap: var(--s-1) var(--s-4); margin: 0 0 var(--s-3); }
+  .f-hours dd { margin: 0; }
+  .small { font-size: var(--fs-small); }
+  .bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--s-4); padding-top: var(--s-5); border-top: var(--hair) solid rgba(184,154,102,.3); }
+  .social { display: flex; gap: var(--s-5); font-family: var(--font-sans); font-weight: 600; font-size: var(--fs-ui); letter-spacing: var(--track-ui); text-transform: uppercase; }
+  .social a { display: inline-block; padding-block: var(--s-2); }
+  @media (max-width: 767px) { .site-footer { padding-bottom: calc(var(--s-7) + 4.5rem); } }
+</style>

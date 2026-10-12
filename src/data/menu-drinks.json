@@ -1,0 +1,729 @@
+{
+  "menu": "drinks",
+  "title": "Drink Menu",
+  "source": "2026-10-09-polos-drink-menu-v7-PRINT-11x8.5-fold.pdf (website text supplied by owner, 12 Oct 2026)",
+  "currency": "CAD",
+  "price_display": "no dollar sign, as printed",
+  "name_display": "Title Case in data; uppercase via CSS to match print",
+  "signature_marker": "✦ marks a Polos signature.",
+  "categories": [
+    {
+      "id": "signature-cocktails",
+      "title": "Signature Cocktails",
+      "note": null,
+      "label": "Polos Signature",
+      "items": [
+        {
+          "id": "polos-style-caesar",
+          "name": "Polos Style Caesar",
+          "description": "1oz Smirnoff Vodka, worcestershire, tabasco, signature rim salt and skewer",
+          "price": 13.0,
+          "signature": true,
+          "panel_label": "Polos Signature",
+          "modifiers": [
+            {
+              "label": "Double shot",
+              "price": 4.0,
+              "text": "Double shot add 4"
+            }
+          ]
+        },
+        {
+          "id": "old-fashioned",
+          "name": "Old Fashioned",
+          "description": "2oz Bulleit Bourbon, Angostura orange bitters, simple syrup, bourbon soaked cherry, orange peel",
+          "price": 15.0,
+          "signature": false
+        },
+        {
+          "id": "the-hillstone-crisp-martini",
+          "name": "The Hillstone Crisp Martini",
+          "description": "1.5oz Bombay Gin, 1oz St. Germain, fresh squeezed lemon juice, 2oz Oyster Bay Sauvignon Blanc, lime wedge",
+          "price": 15.0,
+          "signature": false
+        },
+        {
+          "id": "sunkissed-sangria",
+          "name": "Sunkissed Sangria",
+          "description": "1oz Absolut Peach vodka, 0.5oz peach schnapps, 0.5oz Triple Sec, 3oz white wine, signature juice mix",
+          "price": 15.0,
+          "signature": false
+        },
+        {
+          "id": "top-shelf-margarita",
+          "name": "Top Shelf Margarita",
+          "description": "1.5oz 1800 Blanco Tequila, 0.5oz Triple Sec, fresh lime juice, salted rim, lime wedge",
+          "price": 17.0,
+          "signature": false
+        },
+        {
+          "id": "moscow-mule",
+          "name": "Moscow Mule",
+          "description": "1.5oz Smirnoff Vodka, 3oz Royal Jamaican Ginger Beer, fresh squeezed lime juice, lime wedge",
+          "price": 13.0,
+          "signature": false
+        },
+        {
+          "id": "salted-caramel-espresso-martini",
+          "name": "Salted Caramel Espresso Martini",
+          "description": "1oz Smirnoff, 0.5oz Kahlua, 0.5oz Baileys, cream, salted caramel syrup, fresh espresso and coffee bean garnish",
+          "price": 15.0,
+          "signature": false
+        },
+        {
+          "id": "blueberry-smash",
+          "name": "Blueberry Smash",
+          "description": "2oz Smirnoff Blueberry Vodka, fresh squeezed lime and lemon juice, blueberries",
+          "price": 13.0,
+          "signature": false
+        },
+        {
+          "id": "shaft",
+          "name": "Shaft",
+          "description": "1oz Vanilla Vodka, 0.5oz Kahlua, 0.5oz Baileys, fresh espresso shot",
+          "price": 13.0,
+          "signature": false
+        },
+        {
+          "id": "aperol-spritz",
+          "name": "Aperol Spritz",
+          "description": "2oz Aperol, 3oz Prosecco, topped with sparkling soda, fresh orange",
+          "price": 15.0,
+          "signature": false
+        },
+        {
+          "id": "mimosa",
+          "name": "Mimosa",
+          "description": "La Marca Prosecco 187ml bottle, orange juice",
+          "price": 13.0,
+          "signature": false
+        }
+      ]
+    },
+    {
+      "id": "coffees-and-warmers",
+      "title": "Coffees & Warmers",
+      "note": "Just ask for the classics",
+      "label": null,
+      "items": [
+        {
+          "id": "buttered-rum-hot-toddy",
+          "name": "Buttered Rum Hot Toddy",
+          "description": "2oz Dark Rum, brown sugar, butter, water, served hot with a cinnamon stick",
+          "price": 12.0,
+          "signature": false
+        },
+        {
+          "id": "blueberry-tea",
+          "name": "Blueberry Tea",
+          "description": "0.5oz Amaretto, 0.5oz Grand Marnier, orange pekoe",
+          "price": 12.0,
+          "signature": false
+        },
+        {
+          "id": "spanish-coffee",
+          "name": "Spanish Coffee",
+          "description": "0.5oz Kahlua, 0.5oz Captain Morgan Rum, 0.5oz Cointreau",
+          "price": 12.0,
+          "signature": false
+        },
+        {
+          "id": "b52",
+          "name": "B52",
+          "description": "0.5oz Baileys, 0.5oz Kahlua, 0.5oz Grand Marnier",
+          "price": 12.0,
+          "signature": false
+        },
+        {
+          "id": "polos-irish-coffee",
+          "name": "Polos Irish Coffee",
+          "description": "2oz Bushmills Irish Whiskey, brown sugar, hot coffee and cream",
+          "price": 13.0,
+          "signature": true
+        }
+      ]
+    },
+    {
+      "id": "draft-beer",
+      "title": "Draft Beer",
+      "note": "16oz pours",
+      "label": null,
+      "items": [
+        {
+          "id": "polos-house-lager",
+          "name": "Polos House Lager",
+          "details": "Railyard, Alberta · 5.0% ABV",
+          "price": 8.0,
+          "signature": false
+        },
+        {
+          "id": "polos-india-pale-ale",
+          "name": "Polos India Pale Ale",
+          "details": "Railyard, Alberta · 6.1% ABV",
+          "price": 8.0,
+          "signature": false
+        },
+        {
+          "id": "polos-peach-sour",
+          "name": "Polos Peach Sour",
+          "details": "Railyard, Alberta · 5.2% ABV",
+          "price": 9.0,
+          "signature": false
+        },
+        {
+          "id": "polos-red-ale",
+          "name": "Polos Red Ale",
+          "details": "Railyard, Alberta · 4.5% ABV",
+          "price": 9.0,
+          "signature": false
+        },
+        {
+          "id": "modelo-especial",
+          "name": "Modelo Especial",
+          "details": "4.5% ABV",
+          "price": 11.0,
+          "signature": false
+        },
+        {
+          "id": "prairie-fairy-blackberry-wheat",
+          "name": "Prairie Fairy Blackberry Wheat",
+          "details": "5.0% ABV",
+          "price": 9.0,
+          "signature": false
+        },
+        {
+          "id": "classic-blonde-ale",
+          "name": "Classic Blonde Ale",
+          "details": "4.5% ABV",
+          "price": 9.0,
+          "signature": false
+        },
+        {
+          "id": "mangolorian-mango-ale",
+          "name": "Mangolorian Mango Ale",
+          "details": "5.0% ABV",
+          "price": 9.0,
+          "signature": false
+        },
+        {
+          "id": "blue-moon-belgian-white-ale",
+          "name": "Blue Moon Belgian White Ale",
+          "details": "5.4% ABV",
+          "price": 9.0,
+          "signature": false
+        },
+        {
+          "id": "stella-artois",
+          "name": "Stella Artois",
+          "details": "5.0% ABV",
+          "price": 11.0,
+          "signature": false
+        },
+        {
+          "id": "budweiser-pale-lager",
+          "name": "Budweiser Pale Lager",
+          "details": "5.0% ABV",
+          "price": 9.0,
+          "signature": false
+        },
+        {
+          "id": "guinness-stout-20oz",
+          "name": "Guinness Stout 20oz",
+          "details": "4.2% ABV",
+          "price": 11.0,
+          "signature": false
+        },
+        {
+          "id": "alexander-keiths",
+          "name": "Alexander Keith's",
+          "details": "5.0% ABV",
+          "price": 9.0,
+          "signature": false
+        },
+        {
+          "id": "hendazed-and-confused",
+          "name": "Hendaze'd & Confused",
+          "details": "5.2% ABV",
+          "price": 9.0,
+          "signature": false
+        },
+        {
+          "id": "coors-light",
+          "name": "Coors Light",
+          "details": "4.0% ABV",
+          "price": 9.0,
+          "signature": false
+        },
+        {
+          "id": "manual-labour",
+          "name": "Manual Labour",
+          "details": "Rotating tap · ask your server",
+          "price": 9.0,
+          "signature": false
+        }
+      ]
+    },
+    {
+      "id": "bottled-beer-and-coolers",
+      "title": "Bottled Beer & Coolers",
+      "note": null,
+      "label": null,
+      "items": [
+        {
+          "id": "canadian-bud-light-kokanee",
+          "name": "Canadian · Bud Light · Kokanee",
+          "details": null,
+          "price": 8.0,
+          "signature": false,
+          "choices": [
+            "Canadian",
+            "Bud Light",
+            "Kokanee"
+          ]
+        },
+        {
+          "id": "heineken",
+          "name": "Heineken",
+          "details": null,
+          "price": 8.0,
+          "signature": false
+        },
+        {
+          "id": "corona",
+          "name": "Corona",
+          "details": null,
+          "price": 8.0,
+          "signature": false
+        },
+        {
+          "id": "miller-genuine-draft",
+          "name": "Miller Genuine Draft",
+          "details": null,
+          "price": 8.0,
+          "signature": false
+        },
+        {
+          "id": "daura-damm-gluten-free",
+          "name": "Daura Damm Gluten Free",
+          "details": "5.4% ABV",
+          "price": 8.0,
+          "signature": false
+        },
+        {
+          "id": "royal-jamaican-ginger-beer",
+          "name": "Royal Jamaican Ginger Beer",
+          "details": "4.4% ABV",
+          "price": 8.0,
+          "signature": false
+        },
+        {
+          "id": "strongbow-cider",
+          "name": "Strongbow Cider",
+          "details": null,
+          "price": 9.0,
+          "signature": false
+        },
+        {
+          "id": "vizzy",
+          "name": "Vizzy",
+          "details": "Ask your server",
+          "price": 9.0,
+          "signature": false
+        },
+        {
+          "id": "somersby-cider",
+          "name": "Somersby Cider",
+          "details": "Apple or blackberry",
+          "price": 11.0,
+          "signature": false
+        }
+      ]
+    },
+    {
+      "id": "no-worries",
+      "title": "No Worries",
+      "note": "Non-alcoholic",
+      "label": null,
+      "items": [
+        {
+          "id": "atypique-pre-mixed-cocktails",
+          "name": "Atypique Pre-Mixed Cocktails",
+          "description": "Amaretto Sour, Red Sangria or Mojito",
+          "price": 9.0,
+          "signature": false
+        },
+        {
+          "id": "no-worries-cosmopolitan",
+          "name": "No Worries Cosmopolitan",
+          "description": "Seedlip Non-Alcoholic Gin, cranberry and lime juice",
+          "price": 12.0,
+          "signature": false
+        },
+        {
+          "id": "no-worries-mule",
+          "name": "No Worries Mule",
+          "description": "Seedlip Non-Alcoholic Gin, lime",
+          "price": 12.0,
+          "signature": false
+        },
+        {
+          "id": "syc-brewing-phantom-buzz",
+          "name": "SYC Brewing Phantom Buzz",
+          "description": "Pale Ale 0.5% · India Pale Ale 0.5%",
+          "price": 10.0,
+          "signature": false
+        },
+        {
+          "id": "non-alcoholic-bottled-beer",
+          "name": "Non-Alcoholic Bottled Beer",
+          "description": "Heineken 0.0%, Bud 0.0%, Corona Cero",
+          "price": 8.0,
+          "signature": false
+        }
+      ]
+    },
+    {
+      "id": "white-wine",
+      "title": "White Wine",
+      "note": "By the glass or bottle",
+      "label": null,
+      "items": [
+        {
+          "id": "apothic-blend-white",
+          "name": "Apothic Blend",
+          "region": "California",
+          "prices": {
+            "6oz": 13.0,
+            "9oz": 15.0,
+            "bottle": 35.0
+          },
+          "signature": false,
+          "needs_review": "Listed under both White and Red Wine; confirm the white is a separate wine (e.g. Apothic White)."
+        },
+        {
+          "id": "oyster-bay-sauvignon-blanc",
+          "name": "Oyster Bay Sauvignon Blanc",
+          "region": "New Zealand",
+          "prices": {
+            "6oz": 15.0,
+            "9oz": 19.0,
+            "bottle": 45.0
+          },
+          "signature": false
+        },
+        {
+          "id": "smoky-bay-pinot-grigio",
+          "name": "Smoky Bay Pinot Grigio",
+          "region": "Australia",
+          "prices": {
+            "6oz": 13.0,
+            "9oz": 15.0,
+            "bottle": 35.0
+          },
+          "signature": false
+        },
+        {
+          "id": "lindemans-bin-65-chardonnay",
+          "name": "Lindemans Bin 65 Chardonnay",
+          "region": "Australia",
+          "prices": {
+            "6oz": 13.0,
+            "9oz": 15.0,
+            "bottle": 35.0
+          },
+          "signature": false
+        },
+        {
+          "id": "wolf-blass-chardonnay",
+          "name": "Wolf Blass Chardonnay",
+          "region": "Australia",
+          "prices": {
+            "6oz": 15.0,
+            "9oz": 19.0,
+            "bottle": 45.0
+          },
+          "signature": false
+        },
+        {
+          "id": "casa-viva-chardonnay",
+          "name": "Casa Viva Chardonnay",
+          "region": "Chile",
+          "prices": {
+            "6oz": null,
+            "9oz": null,
+            "bottle": 45.0
+          },
+          "signature": false
+        },
+        {
+          "id": "kim-crawford-sauvignon-blanc",
+          "name": "Kim Crawford Sauvignon Blanc",
+          "region": "New Zealand",
+          "prices": {
+            "6oz": null,
+            "9oz": null,
+            "bottle": 50.0
+          },
+          "signature": false
+        },
+        {
+          "id": "jacobs-creek-moscato",
+          "name": "Jacob's Creek Moscato",
+          "region": "Australia",
+          "prices": {
+            "6oz": 13.0,
+            "9oz": 15.0,
+            "bottle": 35.0
+          },
+          "signature": false
+        }
+      ],
+      "price_columns": [
+        "6oz",
+        "9oz",
+        "Bottle"
+      ]
+    },
+    {
+      "id": "rose-and-sparkling",
+      "title": "Rosé & Sparkling",
+      "note": null,
+      "label": null,
+      "items": [
+        {
+          "id": "perrin-la-vieille-ferme-rose",
+          "name": "Perrin La Vieille Ferme Rosé",
+          "region": "France",
+          "prices": {
+            "6oz": 13.0,
+            "9oz": 15.0,
+            "bottle": 35.0
+          },
+          "signature": false
+        },
+        {
+          "id": "kim-crawford-pansy-rose",
+          "name": "Kim Crawford Pansy Rosé",
+          "region": "New Zealand",
+          "prices": {
+            "6oz": 15.0,
+            "9oz": 19.0,
+            "bottle": 45.0
+          },
+          "signature": false
+        },
+        {
+          "id": "la-marca-prosecco-187ml",
+          "name": "La Marca Prosecco 187ml",
+          "region": "Italy",
+          "prices": {
+            "6oz": null,
+            "9oz": null,
+            "bottle": 13.0
+          },
+          "signature": false
+        }
+      ],
+      "price_columns": [
+        "6oz",
+        "9oz",
+        "Bottle"
+      ]
+    },
+    {
+      "id": "red-wine",
+      "title": "Red Wine",
+      "note": null,
+      "label": null,
+      "items": [
+        {
+          "id": "lindemans-bin-45-cabernet-sauvignon",
+          "name": "Lindemans Bin 45 Cabernet Sauvignon",
+          "region": "Australia",
+          "prices": {
+            "6oz": 13.0,
+            "9oz": 15.0,
+            "bottle": 35.0
+          },
+          "signature": false
+        },
+        {
+          "id": "smoky-bay-shiraz",
+          "name": "Smoky Bay Shiraz",
+          "region": "Australia",
+          "prices": {
+            "6oz": 13.0,
+            "9oz": 15.0,
+            "bottle": 35.0
+          },
+          "signature": false
+        },
+        {
+          "id": "barossa-valley-shiraz",
+          "name": "Barossa Valley Shiraz",
+          "region": "Australia",
+          "prices": {
+            "6oz": 15.0,
+            "9oz": 19.0,
+            "bottle": 45.0
+          },
+          "signature": false
+        },
+        {
+          "id": "apothic-blend-red",
+          "name": "Apothic Blend",
+          "region": "California",
+          "prices": {
+            "6oz": 13.0,
+            "9oz": 15.0,
+            "bottle": 45.0
+          },
+          "signature": false,
+          "needs_review": "Listed under both White and Red Wine; confirm the white is a separate wine (e.g. Apothic White)."
+        },
+        {
+          "id": "wolf-blass-cabernet-sauvignon",
+          "name": "Wolf Blass Cabernet Sauvignon",
+          "region": "Australia",
+          "prices": {
+            "6oz": 15.0,
+            "9oz": 19.0,
+            "bottle": 45.0
+          },
+          "signature": false
+        },
+        {
+          "id": "folonari-valpolicella",
+          "name": "Folonari Valpolicella",
+          "region": "Italy",
+          "prices": {
+            "6oz": null,
+            "9oz": null,
+            "bottle": 45.0
+          },
+          "signature": false
+        },
+        {
+          "id": "ant-moore-pinot-noir",
+          "name": "Ant Moore Pinot Noir",
+          "region": "New Zealand",
+          "prices": {
+            "6oz": null,
+            "9oz": null,
+            "bottle": 50.0
+          },
+          "signature": false
+        },
+        {
+          "id": "barossa-valley-cabernet-sauvignon",
+          "name": "Barossa Valley Cabernet Sauvignon",
+          "region": "Australia",
+          "prices": {
+            "6oz": null,
+            "9oz": null,
+            "bottle": 45.0
+          },
+          "signature": false
+        },
+        {
+          "id": "alamos-malbec",
+          "name": "Alamos Malbec",
+          "region": "Argentina",
+          "prices": {
+            "6oz": 15.0,
+            "9oz": 19.0,
+            "bottle": 45.0
+          },
+          "signature": false
+        },
+        {
+          "id": "mission-hill-reserve-cabernet-sauvignon",
+          "name": "Mission Hill Reserve Cabernet Sauvignon",
+          "region": "Canada",
+          "prices": {
+            "6oz": null,
+            "9oz": null,
+            "bottle": 60.0
+          },
+          "signature": false
+        },
+        {
+          "id": "masi-campofiorin",
+          "name": "Masi Campofiorin",
+          "region": "Italy",
+          "prices": {
+            "6oz": null,
+            "9oz": null,
+            "bottle": 70.0
+          },
+          "signature": false
+        }
+      ],
+      "price_columns": [
+        "6oz",
+        "9oz",
+        "Bottle"
+      ]
+    },
+    {
+      "id": "desserts",
+      "title": "Desserts",
+      "note": "The sweet finish",
+      "label": null,
+      "items": [
+        {
+          "id": "chocolate-caramel-brownie",
+          "name": "Chocolate Caramel Brownie",
+          "description": "Fudgy brownie layered with dulce de leche, finished with a Grand Marnier caramel drizzle.",
+          "price": 13.0,
+          "signature": true
+        },
+        {
+          "id": "sticky-toffee-pudding",
+          "name": "Sticky Toffee Pudding",
+          "description": "Warm date sponge cake drenched in rich toffee sauce.",
+          "price": 13.0,
+          "signature": false,
+          "badge": "NEW"
+        },
+        {
+          "id": "pecan-whiskey-tartlet",
+          "name": "Pecan Whiskey Tartlet",
+          "description": "Buttery pastry shell, whiskey caramel and toasted pecans.",
+          "price": 13.0,
+          "signature": false
+        },
+        {
+          "id": "banana-split-cheesecake",
+          "name": "Banana Split Cheesecake",
+          "description": "Banana cheesecake on a graham crust with pineapple swirl, strawberry mousse, chocolate drizzle and a maraschino cherry.",
+          "price": 13.0,
+          "signature": false,
+          "badge": "NEW"
+        },
+        {
+          "id": "vegan-chocolate-decadence-cake",
+          "name": "Vegan Chocolate Decadence Cake",
+          "description": "Plant-based dark chocolate cake under a glossy cocoa glaze.",
+          "price": 13.0,
+          "signature": false,
+          "dietary": [
+            "vegan",
+            "gluten-free"
+          ],
+          "dietary_text": "Vegan · gluten-free"
+        }
+      ]
+    }
+  ],
+  "footnotes": {
+    "pair_it": "Hungry? Ask for the Polos food menu — shareables, mains and weekend brunch.",
+    "play": {
+      "title": "Play While You Sip",
+      "text": "Table games: trivia, Menu Match and more.",
+      "url": "https://polos-games-fun-1631b2.netlify.app",
+      "optional": true
+    },
+    "responsibility": "✦ marks a Polos signature · Please enjoy responsibly."
+  }
+}

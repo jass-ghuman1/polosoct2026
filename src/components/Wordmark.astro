@@ -1,0 +1,14 @@
+---
+// The POLOS wordmark, traced from the supplied logo file (src/assets/brand). Inherits colour via currentColor.
+import wordmark from '../assets/brand/polos-wordmark.svg?raw';
+import lockup from '../assets/brand/polos-lockup.svg?raw';
+interface Props { variant?: 'wordmark' | 'lockup'; class?: string; label?: string; decorative?: boolean }
+const { variant = 'wordmark', class: cls = '', label = 'POLOS', decorative = false } = Astro.props;
+let svg = variant === 'lockup' ? lockup : wordmark;
+svg = svg.replace(/role="img" aria-label="[^"]*"/, decorative ? 'aria-hidden="true" focusable="false"' : `role="img" aria-label="${label}"`);
+---
+<span class={`wordmark ${cls}`} set:html={svg} />
+<style>
+  .wordmark { display: block; line-height: 0; }
+  .wordmark :global(svg) { width: 100%; height: auto; }
+</style>

@@ -1,0 +1,61 @@
+{
+  "source": "POLOS food menu v8, October 12, 2026 (text supplied by owner)",
+  "currency": "CAD",
+  "price_display": "no dollar sign, as printed",
+  "signature_marker": "✦ marks a Polos signature.",
+  "menu": "brunch",
+  "title": "Weekend Brunch",
+  "title_print": "WEEKEND BRUNCH",
+  "availability": {
+    "days": [
+      "Saturday",
+      "Sunday"
+    ],
+    "start": "11:00",
+    "end": "14:00",
+    "text": "Saturday & Sunday · 11am – 2pm"
+  },
+  "note": "choice of white or sourdough toast",
+  "items": [
+    {
+      "id": "eggs-benedict",
+      "name": "Eggs Benedict",
+      "description": "Two poached eggs, crispy bacon, house-made hollandaise, English muffin, hash browns, fresh fruit",
+      "price": 20.75,
+      "signature": false
+    },
+    {
+      "id": "omelette",
+      "name": "Omelette",
+      "description": "Two eggs, mushrooms, onions, mixed peppers, cheese, two slices crispy bacon, hash browns, fresh fruit, toast",
+      "price": 20.75,
+      "signature": false
+    },
+    {
+      "id": "fried-eggs",
+      "name": "Fried Eggs",
+      "description": "Two eggs sunny side up or over easy, hash browns, fresh fruit, toast",
+      "price": 15.75,
+      "signature": false
+    },
+    {
+      "id": "kids-pancakes-12-and-under",
+      "name": "Kids Pancakes (12 & under)",
+      "description": "Maple syrup, whipped cream",
+      "price": 10.75,
+      "signature": false
+    }
+  ],
+  "section_notes": [
+    {
+      "type": "addons",
+      "text": "Add crispy bacon 3",
+      "items": [
+        {
+          "label": "crispy bacon",
+          "price": 3.0
+        }
+      ]
+    }
+  ]
+}

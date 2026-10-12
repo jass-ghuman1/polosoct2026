@@ -1,0 +1,71 @@
+---
+import '../styles/base.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MobileBar from '../components/MobileBar.astro';
+import business from '../data/business.json';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  jsonLd?: Record<string, unknown>[];
+}
+const { title, description, image = '/assets/v1/social-share.png', jsonLd = [] } = Astro.props;
+const site = Astro.site ?? new URL(business.url);
+const canonical = new URL(Astro.url.pathname === '/' ? '/' : Astro.url.pathname.replace(/\/$/, ''), site).href;
+// Only production sends analytics and allows indexing. Staging/previews are noindex and silent.
+const isProd = import.meta.env.PUBLIC_DEPLOY_ENV === 'production';
+const ga = business.analytics.ga4;
+---
+<!doctype html>
+<html lang="en-CA">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content={isProd ? 'index, follow, max-image-preview:large' : 'noindex, nofollow'} />
+    <meta name="theme-color" content="#F7F2E8" />
+    <link rel="icon" href="/assets/v1/favicon-32.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/assets/v1/apple-touch-icon.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={business.name} />
+    <meta property="og:locale" content="en_CA" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(image, site).href} />
+    <meta property="og:image:alt" content="Polos Social Lounge — Sherwood Park, Alberta" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    {jsonLd.map((d) => <script type="application/ld+json" set:html={JSON.stringify(d)} />)}
+
+    <script is:inline>document.documentElement.classList.add('js');</script>
+    {isProd && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${ga}`}></script>
+        <script is:inline define:vars={{ ga }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date()); gtag('config', ga);
+        </script>
+      </>
+    )}
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+    <MobileBar />
+    <script>
+      import '../scripts/site';
+    </script>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+/* POLOS design tokens — values sampled from the printed drinks menu (Oct 2026) and the logo file.
+   See docs/DESIGN-SYSTEM.md. Change a value here and it updates everywhere. */
+:root {
+  /* Colour */
+  --ivory: #F7F2E8;          /* day page background */
+  --ivory-warm: #EEE5D4;     /* cards, menu bands */
+  --champagne-line: #D9C9A8; /* hairlines on ivory */
+  --gold: #B89A66;           /* rules/stars on ivory; text only on dark */
+  --bronze: #6D5533;         /* gold-toned text on ivory (6.3:1) */
+  --logo-gold: #8E7752;      /* logo only */
+  --charcoal: #2E2822;       /* body text by day (13:1 on ivory) */
+  --night: #1A1410;          /* evening sections */
+  --espresso: #140900;       /* footer, logo backdrop */
+  --stone: #6B625A;          /* secondary text on ivory (5.4:1) */
+  --stone-night: #A89C8E;    /* secondary text on night (6.8:1) */
+  --ivory-on-night: #F3EBDD;
+
+  /* Type */
+  --font-serif: "Cormorant Garamond", "Iowan Old Style", Georgia, serif;
+  --font-sans: "Josefin Sans", "Futura", "Avenir Next", system-ui, sans-serif;
+  --fs-display: clamp(3rem, 1.6rem + 6vw, 7rem);
+  --fs-h1: clamp(2.5rem, 1.7rem + 3.4vw, 4.5rem);
+  --fs-h2: clamp(2.1rem, 1.6rem + 2.2vw, 3.4rem);
+  --fs-h3: clamp(1.5rem, 1.3rem + 0.8vw, 1.95rem);
+  --fs-body: clamp(1.1875rem, 1.12rem + 0.3vw, 1.3125rem);
+  --fs-small: 1.0625rem;
+  --fs-eyebrow: 0.8125rem;
+  --fs-ui: 0.78rem;
+  --track-eyebrow: 0.28em;
+  --track-ui: 0.2em;
+  --track-item: 0.12em;
+
+  /* Space (4px base) */
+  --s-1: 0.25rem; --s-2: 0.5rem; --s-3: 0.75rem; --s-4: 1rem; --s-5: 1.5rem;
+  --s-6: 2rem; --s-7: 3rem; --s-8: 4rem; --s-9: 6rem; --s-10: 8rem; --s-11: 12rem;
+  --section-pad: clamp(6rem, 3rem + 9vw, 12rem);
+  --gutter: clamp(1rem, 0.5rem + 2vw, 1.5rem);
+  --content: 77.5rem;   /* 1240px */
+  --reading: 40rem;     /* 640px */
+  --side: max(1rem, calc((100vw - var(--content)) / 2));
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --t-hover: 200ms;
+  --t-ui: 450ms;
+  --t-reveal: 900ms;
+  --t-logo: 1200ms;
+
+  /* Lines — the double hairline echoes the logo's double strokes */
+  --hair: 1px;
+  --double-gap: 3px;
+}

@@ -1,0 +1,479 @@
+---
+import Base from '../layouts/Base.astro';
+import Wordmark from '../components/Wordmark.astro';
+import Photo from '../components/Photo.astro';
+import business from '../data/business.json';
+import food from '../data/menu-food.json';
+import drinks from '../data/menu-drinks.json';
+import happyHour from '../data/menu-happy-hour.json';
+
+import pinkMartini from '../assets/photos/pink-martini.jpg';
+import steakSalad from '../assets/photos/steak-salad.jpg';
+import seafoodPasta from '../assets/photos/seafood-pasta.jpg';
+import salmonPrawns from '../assets/photos/salmon-prawns.jpg';
+import caesar from '../assets/photos/caesar.jpg';
+import espressoMartini from '../assets/photos/espresso-martini.jpg';
+import oldFashioned from '../assets/photos/old-fashioned.jpg';
+import redWinePour from '../assets/photos/red-wine-pour.jpg';
+import wineInHand from '../assets/photos/red-wine-in-hand.jpg';
+import beerPour from '../assets/photos/draft-beer-pour.jpg';
+import martiniBrick from '../assets/photos/martini-brick.jpg';
+import sangria from '../assets/photos/sangria.jpg';
+import napkin from '../assets/photos/polos-napkin-cocktail.jpg';
+import wings from '../assets/photos/wings.jpg';
+
+const b = business;
+const price = (n: number) => (Number.isInteger(n) ? String(n) : n.toFixed(2));
+const findFood = (id: string) => food.categories.flatMap((c) => c.items).find((i) => i.id === id)!;
+const findDrink = (id: string) => drinks.categories.flatMap((c) => c.items).find((i) => i.id === id)! as any;
+
+// Photo ↔ dish pairings (confirm with the kitchen — see docs/PHOTO-NOTES.md)
+const dishes = [
+  { item: findFood('steak-salad'), img: steakSalad, alt: 'Steak Salad: sliced striploin over greens with blue cheese crumble and garlic toast' },
+  { item: findFood('seafood-linguine'), img: seafoodPasta, alt: 'Seafood Linguine with mussels in a creamy tomato sauce, served with garlic bread' },
+  { item: findFood('salmon-and-prawn-chardonnay'), img: salmonPrawns, alt: 'Salmon & Prawn Chardonnay: salmon fillet topped with prawns, asparagus and cream sauce' },
+];
+const signature = findDrink('polos-style-caesar');
+const taps = drinks.categories.find((c) => c.id === 'draft-beer')!.items.length;
+
+const hhBites = happyHour.categories.find((c) => c.id === 'bites')!.items;
+const hhSips = happyHour.categories.find((c) => c.id === 'sips')!.items;
+const hhPick = (list: any[], ids: string[]) => ids.map((id) => list.find((i) => i.id === id)!);
+const bites = hhPick(hhBites, ['hh-wings', 'hh-curry-chicken-poutine', 'hh-happy-pizza']);
+const sips = hhPick(hhSips, ['hh-house-draft', 'hh-cocktails', 'hh-house-wine']);
+const hhPrice = (i: any) => i.prices ? `${i.prices['6oz']} / ${i.prices['9oz']}` : i.deal_text ?? price(i.price);
+
+const story = happyHour.story; // renders only once the printed story text is supplied
+
+const todayCfg = JSON.stringify({ tz: b.timezone, hours: b.hours.weekly, hh: b.happyHour.windows });
+
+const jsonLd = [{
+  '@context': 'https://schema.org',
+  '@type': 'Restaurant',
+  '@id': `${b.url}/#restaurant`,
+  name: b.name,
+  url: `${b.url}/`,
+  telephone: b.phone.tel,
+  image: `${b.url}/assets/v1/social-share.png`,
+  logo: `${b.url}/assets/v1/logo.svg`,
+  priceRange: '$$',
+  servesCuisine: ['Canadian', 'American', 'Bar Food', 'Brunch'],
+  address: { '@type': 'PostalAddress', streetAddress: `${b.address.unit} - ${b.address.street}`, addressLocality: b.address.city, addressRegion: b.address.region, postalCode: b.address.postalCode, addressCountry: b.address.country },
+  openingHoursSpecification: b.hours.weekly.map((h) => ({ '@type': 'OpeningHoursSpecification', dayOfWeek: h.days, opens: h.opens, closes: h.closes })),
+  hasMenu: `${b.url}/menu`,
+  acceptsReservations: b.links.reserve,
+  potentialAction: { '@type': 'ReserveAction', target: b.links.reserve },
+  sameAs: [b.links.facebook, b.links.instagram, b.links.x],
+}];
+---
+<Base
+  title="Polos Social Lounge | Restaurant in Sherwood Park"
+  description="Polos Social Lounge on Emerald Drive in Sherwood Park: lunch, dinner, weekend brunch, cocktails and Happy Hour. Hotel guests welcome. Reserve your table."
+  jsonLd={jsonLd}
+>
+  <!-- 1 · HERO (day) -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-grid container">
+      <div class="hero-copy">
+        <h1 id="hero-title" class="visually-hidden">Polos Social Lounge, Sherwood Park</h1>
+        <div class="hero-mark" aria-hidden="true"><Wordmark decorative /></div>
+        <p class="hero-lockup" aria-hidden="true"><span class="dot"></span>Social Lounge<span class="dot"></span></p>
+        <p class="hero-place eyebrow">Sherwood Park</p>
+        <p class="hero-line">{b.tagline}</p>
+        <div class="btn-row hero-cta">
+          <a class="btn btn--primary" href="/menu" data-track="menu_view" data-track-location="hero">View Menu</a>
+          <a class="btn btn--secondary" href={b.links.reserve} data-track="reserve_click" data-track-location="hero">Reserve a Table</a>
+          <a class="btn btn--secondary" href={b.links.order} data-track="order_click" data-track-location="hero">Order Online</a>
+        </div>
+      </div>
+      <div class="hero-media">
+        <div class="frame hero-main"><Photo src={pinkMartini} priority alt="A pink cocktail on a wooden table in the sunlit POLOS dining room" sizes="(min-width: 960px) 34vw, 86vw" /></div>
+        <div class="hero-second"><Photo src={steakSalad} alt="" sizes="16vw" /></div>
+      </div>
+    </div>
+
+    <!-- 2 · TODAY AT POLOS -->
+    <div class="today container" data-today={todayCfg} role="status" aria-live="polite">
+      <span class="today-dot" aria-hidden="true"></span>
+      <span class="today-status eyebrow" data-today-status>Hours</span>
+      <span class="today-detail" data-today-detail>{b.hours.weekly.map((h) => `${h.label} ${h.text}`).join(' · ')}</span>
+      <a class="today-link text-link" href="#visit">Find us <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <!-- 3 · INTRODUCTION -->
+  <section class="section intro" aria-labelledby="intro-title">
+    <div class="container intro-grid">
+      <p class="eyebrow" data-reveal>Welcome to Polos</p>
+      <h2 id="intro-title" class="h1" data-reveal style="--i:1">A restaurant and a social room, <em>under one roof.</em></h2>
+      <div class="intro-body" data-reveal style="--i:2">
+        <p class="lede">Weekend brunch, long lunches, Happy Hour with friends and dinner that runs late. Polos is where Sherwood Park comes to eat, drink and catch up.</p>
+        <p class="muted">On Emerald Drive, near Emerald Hills Shopping Centre. Join us from across Strathcona County and East Edmonton.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · FOOD -->
+  <section class="section food" aria-labelledby="food-title">
+    <div class="container">
+      <div class="section-head reveal-rules">
+        <p class="rule-title eyebrow"><span>From the Kitchen</span></p>
+        <h2 id="food-title" class="h2" data-reveal>Shareables to steaks, <em>pizzas to pasta.</em></h2>
+      </div>
+      <ul class="dishes">
+        {dishes.map((d, i) => (
+          <li class="dish" style={`--i:${i}`}>
+            <div class="dish-img" data-reveal="mask" style={`--i:${i}`}><Photo src={d.img} alt={d.alt} sizes="(min-width: 900px) 30vw, 90vw" /></div>
+            <div class="dish-text" data-reveal style={`--i:${i}`}>
+              <h3 class="item-name">{d.item.signature && <span class="star" aria-label="Polos signature">✦ </span>}{d.item.name} <span class="price">{price(d.item.price!)}</span></h3>
+              <p class="item-desc">{d.item.description}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <div class="section-foot" data-reveal>
+        <a class="btn btn--primary" href="/menu/food" data-track="menu_view" data-track-location="home_food">Explore the Food Menu</a>
+        <a class="text-link" href="/menu/brunch">Weekend Brunch · Sat & Sun 11 – 2 <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · DRINKS — the day-to-night turn -->
+  <section class="turn" aria-labelledby="drinks-title">
+    <div class="turn-glow" aria-hidden="true"></div>
+    <div class="container turn-head">
+      <div class="section-head reveal-rules">
+        <p class="rule-title eyebrow"><span>The Bar</span></p>
+        <h2 id="drinks-title" class="h2" data-reveal>Cocktails, {taps} taps <em>and a proper wine list.</em></h2>
+      </div>
+    </div>
+    <div class="container turn-media">
+      <figure class="t1" data-reveal="mask"><Photo src={espressoMartini} alt="Salted caramel espresso martini topped with coffee beans" sizes="(min-width: 900px) 28vw, 60vw" /></figure>
+      <figure class="t2" data-reveal="mask" style="--i:1"><Photo src={oldFashioned} alt="Old fashioned over a large ice cube with a cherry and orange peel" sizes="(min-width: 900px) 24vw, 50vw" /></figure>
+      <figure class="t3" data-reveal="mask" style="--i:2"><Photo src={redWinePour} alt="Red wine being poured at a table by the window" sizes="(min-width: 900px) 26vw, 60vw" /></figure>
+    </div>
+    <div class="turn-night" data-theme="night">
+      <div class="container signature">
+        <div class="sig-img frame" data-reveal="mask"><Photo src={caesar} alt="The Polos Style Caesar with its signature rim and skewer" sizes="(min-width: 900px) 26vw, 80vw" /></div>
+        <div class="sig-card" data-reveal>
+          <p class="sig-tab">{signature.panel_label}</p>
+          <h3 class="h3"><span class="star" aria-label="Polos signature">✦</span> {signature.name} <span class="price">{price(signature.price)}</span></h3>
+          <p class="item-desc">{signature.description}</p>
+          {signature.modifiers?.[0] && <p class="muted mod">{signature.modifiers[0].text}</p>}
+          <ul class="drink-links">
+            <li><a class="text-link" href="/menu/drinks#signature-cocktails">Cocktails</a></li>
+            <li><a class="text-link" href="/menu/drinks#draft-beer">Beer</a></li>
+            <li><a class="text-link" href="/menu/drinks#white-wine">Wine</a></li>
+            <li><a class="text-link" href="/menu/drinks#no-worries">Zero proof</a></li>
+          </ul>
+          <a class="btn btn--primary" href="/menu/drinks" data-track="menu_view" data-track-location="home_drinks">See the Drink Menu</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · HAPPY HOUR (night) -->
+  <section class="section hh theme-night" data-theme="night" aria-labelledby="hh-title">
+    <div class="container">
+      <div class="hh-head">
+        <p class="eyebrow" data-reveal>Every weekday & all day Sunday</p>
+        <h2 id="hh-title" class="hh-title" data-reveal style="--i:1">Happy Hour</h2>
+        <dl class="hh-times" data-reveal style="--i:2">
+          {b.happyHour.lines.map((l) => (<div><dt>{l.label}</dt><dd>{l.text}</dd></div>))}
+        </dl>
+      </div>
+      <div class="double-rule" aria-hidden="true"></div>
+      <div class="hh-cols">
+        <div data-reveal>
+          <h3 class="rule-title eyebrow hh-col-title"><span>Bites</span></h3>
+          <ul class="hh-list">
+            {bites.map((i) => <li><span class="item-name">{i.name}</span>{i.detail && <span class="hh-detail muted">{i.detail}</span>}<span class="price">{hhPrice(i)}</span></li>)}
+          </ul>
+        </div>
+        <div data-reveal style="--i:1">
+          <h3 class="rule-title eyebrow hh-col-title"><span>Sips</span></h3>
+          <ul class="hh-list">
+            {sips.map((i) => <li><span class="item-name">{i.name}</span>{i.detail && <span class="hh-detail muted">{i.detail}</span>}<span class="price">{hhPrice(i)}</span></li>)}
+          </ul>
+        </div>
+        <figure class="hh-img" data-reveal="mask" style="--i:2"><Photo src={wings} alt="A pound of chicken wings with carrot and celery sticks and dip" sizes="(min-width: 900px) 24vw, 80vw" /></figure>
+      </div>
+      <div class="hh-foot">
+        <a class="btn btn--primary" href="/happy-hour" data-track="happy_hour_view" data-track-location="home">See all Happy Hour</a>
+        <a class="btn btn--secondary" href={b.links.reserve} data-track="reserve_click" data-track-location="home_hh">Reserve for Happy Hour</a>
+        <a class="text-link play-link" href={b.links.play} data-track="play_open" data-track-location="home_hh">Play at your table <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  {/* 7 · BEFORE IT WAS SHERWOOD PARK — renders once the printed story text is supplied */}
+  {story.body && (
+    <section class="section story theme-night" data-theme="night" aria-labelledby="story-title">
+      <div class="container story-inner">
+        <p class="eyebrow">Before it was Sherwood Park</p>
+        <h2 id="story-title" class="h1">{story.title}</h2>
+        <div class="story-body" set:html={story.body} />
+      </div>
+    </section>
+  )}
+
+  <!-- 8 · ATMOSPHERE -->
+  <section class="section atmos theme-night" data-theme="night" aria-labelledby="atmos-title">
+    <div class="container atmos-grid">
+      <div class="atmos-copy">
+        <p class="eyebrow" data-reveal>On the table tonight</p>
+        <h2 id="atmos-title" class="h2" data-reveal style="--i:1">Pour one more. <em>Stay a while.</em></h2>
+        <div class="btn-row" data-reveal style="--i:2">
+          <a class="btn btn--secondary" href="/gallery">View the Gallery</a>
+          <a class="text-link" href={b.links.instagram} rel="noopener">@poloslounge <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <figure class="a1" data-reveal="mask"><Photo src={wineInHand} alt="A guest holding a glass of red wine against the brick wall" sizes="(min-width: 900px) 30vw, 70vw" /></figure>
+      <figure class="a2" data-reveal="mask" style="--i:1"><Photo src={beerPour} alt="A freshly poured draft beer held under the taps" sizes="(min-width: 900px) 22vw, 45vw" /></figure>
+      <figure class="a3" data-reveal="mask" style="--i:2"><Photo src={martiniBrick} alt="A red cocktail in a martini glass beside exposed brick" sizes="(min-width: 900px) 20vw, 45vw" /></figure>
+      <figure class="a4" data-reveal="mask" style="--i:3"><Photo src={sangria} alt="Red sangria with fresh fruit in the dining room" sizes="(min-width: 900px) 22vw, 45vw" /></figure>
+    </div>
+  </section>
+
+  <!-- 9 · PRIVATE EVENTS -->
+  <section class="section events theme-night" data-theme="night" aria-labelledby="events-title">
+    <div class="container events-grid">
+      <div class="events-img frame" data-reveal="mask"><Photo src={napkin} alt="A cocktail beside a POLOS napkin" sizes="(min-width: 900px) 32vw, 80vw" /></div>
+      <div class="events-copy">
+        <p class="eyebrow" data-reveal>Private events & group dining</p>
+        <h2 id="events-title" class="h2" data-reveal style="--i:1">Bring people <em>together.</em></h2>
+        <p class="lede" data-reveal style="--i:2">Corporate events, Christmas parties, birthdays and business dinners. Tell us the occasion and we'll plan it with you.</p>
+        <ul class="occasions" data-reveal style="--i:3">
+          <li>Corporate events</li><li>Christmas parties</li><li>Birthdays & celebrations</li><li>Business dinners</li><li>Group dining</li>
+        </ul>
+        <div class="btn-row" data-reveal style="--i:4">
+          <a class="btn btn--primary" href={b.links.eventLead} data-track="event_enquiry_open" data-track-location="home">Plan Your Event</a>
+          <a class="btn btn--secondary" href="/private-events">Private Events</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 · VISIT -->
+  <section id="visit" class="section visit theme-night" data-theme="night" aria-labelledby="visit-title">
+    <div class="container visit-grid">
+      <div class="visit-copy">
+        <p class="eyebrow">Visit</p>
+        <h2 id="visit-title" class="h2">Find us on <em>Emerald Drive.</em></h2>
+        <address class="visit-address">
+          {b.address.line1}<br />{b.address.city}, {b.address.regionName} {b.address.postalCode}
+        </address>
+        <p><a class="visit-phone" href={`tel:${b.phone.tel}`} data-track="phone_click" data-track-location="home_visit">{b.phone.display}</a></p>
+        <dl class="visit-hours">
+          {b.hours.weekly.map((h) => (<div><dt>{h.label}</dt><dd>{h.text}</dd></div>))}
+        </dl>
+        <p class="muted">{b.hours.note}</p>
+        <p class="muted hotel">{b.hotelNote}</p>
+        <div class="btn-row">
+          <a class="btn btn--primary" href={b.links.directions} data-track="directions_click" data-track-location="home_visit">Get Directions</a>
+          <a class="btn btn--secondary" href={`tel:${b.phone.tel}`} data-track="phone_click" data-track-location="home_visit_btn">Call Us</a>
+        </div>
+      </div>
+      <div class="map frame">
+        <iframe src={b.links.mapEmbed} title="Map: Polos Social Lounge, 950 Emerald Drive, Sherwood Park" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 · CLOSING -->
+  <section class="closing theme-night" data-theme="night" aria-labelledby="closing-title">
+    <div class="container closing-inner">
+      <div class="double-rule" aria-hidden="true"></div>
+      <h2 id="closing-title" class="closing-title" data-reveal>Pull up a chair. <em>You're among neighbours.</em></h2>
+      <a class="btn btn--primary" href={b.links.reserve} data-reveal style="--i:1" data-track="reserve_click" data-track-location="home_closing">Reserve a Table</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* ---------- shared item styles (menu language from print) ---------- */
+  .item-name { font-family: var(--font-sans); font-weight: 600; font-size: 0.95rem; letter-spacing: var(--track-item); text-transform: uppercase; line-height: 1.45; }
+  .price { font-family: var(--font-serif); font-weight: 600; font-size: 1.15rem; color: var(--bronze); letter-spacing: 0; margin-left: 0.35em; white-space: nowrap; }
+  .theme-night .price, .turn-night .price { color: var(--gold); }
+  .item-desc { font-size: 1.1rem; line-height: 1.5; margin-top: var(--s-2); }
+  .section-head { display: grid; gap: var(--s-4); justify-items: center; text-align: center; margin-bottom: var(--s-8); }
+  .section-head .rule-title { width: min(100%, 26rem); }
+  .section-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--s-5); margin-top: var(--s-8); }
+
+  /* ---------- 1 · hero ---------- */
+  .hero { padding-top: clamp(6rem, 4rem + 6vw, 9rem); padding-bottom: var(--s-6); overflow: hidden; }
+  .hero-grid { display: grid; gap: var(--s-8); align-items: center; }
+  @media (min-width: 960px) { .hero-grid { grid-template-columns: 1.15fr 0.85fr; min-height: calc(100svh - 12rem); } }
+  .hero-copy { display: grid; justify-items: start; }
+  .hero-mark { color: var(--bronze); width: min(100%, 34rem); }
+  .hero-lockup { display: flex; align-items: center; gap: var(--s-3); width: min(100%, 34rem); margin-top: var(--s-5);
+    font-family: var(--font-sans); font-weight: 300; font-size: clamp(0.95rem, 0.8rem + 0.6vw, 1.35rem); letter-spacing: 0.32em; text-transform: uppercase; color: var(--bronze); }
+  .hero-lockup::before, .hero-lockup::after { content: ""; flex: 1; height: 1px; background: var(--gold); }
+  .hero-lockup .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+  .hero-place { margin-top: var(--s-4); letter-spacing: 0.5em; color: var(--stone); }
+  .hero-line { font-size: var(--fs-h2); line-height: 1.1; font-style: italic; margin-top: var(--s-7); max-width: 16ch; }
+  .hero-cta { margin-top: var(--s-6); }
+  @media (max-width: 599px) { .hero-cta { width: 100%; } .hero-cta .btn { flex: 1 1 auto; } .hero-cta .btn--primary { flex-basis: 100%; } }
+  .hero-media { position: relative; justify-self: center; width: min(100% - 1.5rem, 26rem); }
+  .hero-main { aspect-ratio: 4 / 5; overflow: visible; }
+  .hero-main :global(picture) { display: block; width: 100%; height: 100%; overflow: hidden; }
+  .hero-main :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .hero-main :global(img) { animation: push 14s var(--ease) both; }
+  .hero-second { position: absolute; width: 42%; aspect-ratio: 4 / 5; left: -30%; bottom: -8%; border: 6px solid var(--ivory); overflow: hidden; display: none; }
+  .hero-second :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  @media (min-width: 960px) { .hero-second { display: block; } }
+
+  /* hero entrance: the wordmark is revealed like ink drawn left to right; the rest follows */
+  .hero-mark { animation: draw var(--t-logo) var(--ease) both 150ms; }
+  .hero-lockup { animation: fade 800ms var(--ease) both 900ms; }
+  .hero-lockup::before { transform-origin: right; animation: rule 900ms var(--ease) both 1000ms; }
+  .hero-lockup::after { transform-origin: left; animation: rule 900ms var(--ease) both 1000ms; }
+  .hero-place { animation: fade 800ms var(--ease) both 1150ms; }
+  .hero-line { animation: rise 900ms var(--ease) both 1300ms; }
+  .hero-cta { animation: rise 900ms var(--ease) both 1450ms; }
+  .hero-main :global(picture) { animation: unmask 1400ms var(--ease) both 300ms; }
+  .hero-second { animation: unmask 1200ms var(--ease) both 1100ms; }
+  @keyframes draw { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+  @keyframes rule { from { transform: scaleX(0); } }
+  @keyframes fade { from { opacity: 0; } }
+  @keyframes rise { from { opacity: 0; transform: translateY(14px); } }
+  @keyframes unmask { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0 0 0 0); } }
+  @keyframes push { from { transform: scale(1.12); } to { transform: scale(1); } }
+
+  /* ---------- 2 · today ---------- */
+  .today { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2) var(--s-4); margin-top: var(--s-8); padding-block: var(--s-4);
+    border-block: 1px solid var(--champagne-line); font-size: var(--fs-small); animation: fade 800ms var(--ease) both 1700ms; }
+  .today-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); }
+  .today.is-hh .today-dot { background: #B5652E; box-shadow: 0 0 0 4px rgba(181,101,46,.18); }
+  .today-link { margin-left: auto; }
+
+  /* ---------- 3 · intro ---------- */
+  .intro-grid { display: grid; gap: var(--s-5); max-width: 62rem; }
+  .intro-body { display: grid; gap: var(--s-4); max-width: var(--reading); margin-left: auto; }
+  @media (min-width: 900px) { .intro-body { margin-top: var(--s-5); } }
+
+  /* ---------- 4 · food ---------- */
+  .food { padding-top: 0; }
+  .dishes { display: grid; gap: var(--s-8) var(--s-6); }
+  @media (min-width: 900px) {
+    .dishes { grid-template-columns: repeat(3, 1fr); align-items: start; }
+    .dish:nth-child(2) { margin-top: var(--s-9); }
+  }
+  .dish-img { aspect-ratio: 4 / 5; overflow: hidden; background: var(--ivory-warm); }
+  .dish-img :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+  .dish:hover .dish-img :global(img) { transform: scale(1.04); }
+  .dish-text { padding-top: var(--s-5); border-top: 1px solid var(--champagne-line); margin-top: var(--s-5); }
+
+  /* ---------- 5 · the turn: ivory → champagne → night ---------- */
+  .turn {
+    position: relative; padding-top: var(--section-pad); overflow: hidden;
+    background: linear-gradient(to bottom, var(--ivory) 0%, #EFE4CF 18%, #CDB892 34%, #6E5841 52%, #2A2019 66%, var(--night) 76%);
+  }
+  .turn-glow { position: absolute; inset: 40% -10% auto; height: 60%; background: radial-gradient(50% 50% at 50% 50%, rgba(214,170,102,.22), transparent 70%); pointer-events: none; }
+  .turn-media { position: relative; display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--gutter); align-items: start; }
+  .turn-media figure { margin: 0; overflow: hidden; aspect-ratio: 4 / 5; box-shadow: 0 30px 60px -30px rgba(20,9,0,.5); }
+  .turn-media :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .t1 { grid-column: 1 / span 5; }
+  .t2 { grid-column: 6 / span 3; margin-top: var(--s-10) !important; }
+  .t3 { grid-column: 9 / span 4; margin-top: var(--s-7) !important; }
+  @media (max-width: 899px) {
+    .t1 { grid-column: 1 / span 7; } .t2 { grid-column: 8 / span 5; margin-top: var(--s-8) !important; } .t3 { grid-column: 3 / span 8; margin-top: calc(-1 * var(--s-6)) !important; }
+  }
+  /* scroll-linked depth where supported (no JS) */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .t2, .t3 { animation: drift linear both; animation-timeline: view(); animation-range: entry 0% exit 100%; }
+      .t3 { animation-name: drift-slow; }
+      @keyframes drift { from { translate: 0 60px; } to { translate: 0 -60px; } }
+      @keyframes drift-slow { from { translate: 0 30px; } to { translate: 0 -30px; } }
+    }
+  }
+  .turn-night { color: var(--ivory-on-night); padding-block: var(--s-10) var(--section-pad); }
+  .turn-night .muted { color: var(--stone-night); }
+  .signature { display: grid; gap: var(--s-8); align-items: center; }
+  @media (min-width: 900px) { .signature { grid-template-columns: 0.8fr 1.2fr; } }
+  .sig-img { aspect-ratio: 4 / 5; max-width: 24rem; }
+  .sig-img :global(picture) { display: block; height: 100%; }
+  .sig-card { background: color-mix(in srgb, var(--charcoal) 70%, transparent); border: 1px solid rgba(184,154,102,.4); padding: var(--s-7) var(--s-6) var(--s-6); position: relative; max-width: 36rem; }
+  .sig-tab { position: absolute; top: 0; left: var(--s-6); transform: translateY(-50%); background: var(--gold); color: var(--espresso); padding: 0.45rem 0.8rem 0.3rem;
+    font-family: var(--font-sans); font-weight: 600; font-size: 0.72rem; letter-spacing: var(--track-ui); text-transform: uppercase; }
+  .sig-card .h3 { font-family: var(--font-sans); font-weight: 600; font-size: 1.15rem; letter-spacing: var(--track-item); text-transform: uppercase; }
+  .sig-card .mod { font-size: 1rem; margin-top: var(--s-2); font-style: italic; }
+  .drink-links { display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-5); margin-block: var(--s-6); }
+  .turn-night :global(.btn) { --btn-fg: var(--ivory-on-night); --btn-line: var(--gold); }
+  .turn-night :global(.btn--primary) { --btn-fg: var(--espresso); --btn-bg: var(--gold); }
+  .turn-night :global(.btn--primary::after) { border-color: var(--espresso); opacity: .35; }
+
+  /* ---------- 6 · happy hour ---------- */
+  .hh { padding-top: 0; padding-bottom: var(--s-9); }
+  .hh-head { display: grid; gap: var(--s-4); justify-items: center; text-align: center; margin-bottom: var(--s-7); }
+  .hh-title { font-size: var(--fs-display); line-height: 0.95; font-style: italic; color: var(--gold); }
+  .hh-times { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s-4) var(--s-8); margin: var(--s-4) 0 0; }
+  .hh-times div { display: grid; gap: var(--s-1); }
+  .hh-times dt { font-family: var(--font-sans); font-weight: 600; font-size: var(--fs-ui); letter-spacing: var(--track-ui); text-transform: uppercase; color: var(--stone-night); }
+  .hh-times dd { margin: 0; font-size: var(--fs-h3); }
+  .hh-cols { display: grid; gap: var(--s-8) var(--s-7); margin-top: var(--s-8); }
+  @media (min-width: 900px) { .hh-cols { grid-template-columns: 1fr 1fr 0.8fr; align-items: start; } }
+  .hh-col-title { margin-bottom: var(--s-5); color: var(--gold); }
+  .hh-list { display: grid; gap: var(--s-4); }
+  .hh-list li { display: grid; grid-template-columns: 1fr auto; column-gap: var(--s-4); align-items: baseline; padding-bottom: var(--s-4); border-bottom: 1px solid rgba(184,154,102,.18); }
+  .hh-detail { grid-column: 1; font-size: 1.05rem; }
+  .hh-list .price { grid-column: 2; grid-row: 1; font-size: 1.35rem; }
+  .hh-img { margin: 0; aspect-ratio: 4 / 5; overflow: hidden; }
+  .hh-img :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .hh-foot { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3) var(--s-4); margin-top: var(--s-8); }
+  .play-link { margin-left: auto; color: var(--stone-night); }
+
+  /* ---------- 7 · story (pending text) ---------- */
+  .story-inner { max-width: 48rem; display: grid; gap: var(--s-5); }
+
+  /* ---------- 8 · atmosphere ---------- */
+  .atmos { padding-top: var(--s-6); }
+  .atmos-grid { display: grid; gap: var(--gutter); grid-template-columns: repeat(12, 1fr); align-items: start; }
+  .atmos-grid figure { margin: 0; overflow: hidden; aspect-ratio: 4 / 5; }
+  .atmos-grid :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .atmos-copy { grid-column: 1 / -1; display: grid; gap: var(--s-4); margin-bottom: var(--s-6); }
+  .a1 { grid-column: 1 / span 7; } .a2 { grid-column: 8 / span 5; margin-top: var(--s-9) !important; }
+  .a3 { grid-column: 2 / span 5; margin-top: calc(-1 * var(--s-6)) !important; } .a4 { grid-column: 7 / span 5; margin-top: var(--s-6) !important; }
+  @media (min-width: 900px) {
+    .atmos-copy { grid-column: 1 / span 4; grid-row: 1 / span 2; align-self: center; margin: 0; }
+    .a1 { grid-column: 5 / span 4; grid-row: 1; } .a2 { grid-column: 9 / span 3; grid-row: 1; margin-top: var(--s-9) !important; }
+    .a3 { grid-column: 6 / span 3; grid-row: 2; margin-top: var(--s-5) !important; } .a4 { grid-column: 9 / span 4; grid-row: 2; margin-top: var(--s-10) !important; }
+  }
+
+  /* ---------- 9 · events ---------- */
+  .events { background: linear-gradient(to bottom, var(--night), #221A14); }
+  .events-grid { display: grid; gap: var(--s-8); align-items: center; }
+  @media (min-width: 900px) { .events-grid { grid-template-columns: 0.9fr 1.1fr; } }
+  .events-img { aspect-ratio: 4 / 5; max-width: 26rem; }
+  .events-img :global(picture) { display: block; height: 100%; }
+  .events-copy { display: grid; gap: var(--s-5); justify-items: start; }
+  .occasions { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+  .occasions li { border: 1px solid rgba(184,154,102,.45); padding: 0.5rem 0.9rem 0.35rem; font-family: var(--font-sans); font-weight: 600; font-size: 0.72rem; letter-spacing: var(--track-ui); text-transform: uppercase; }
+
+  /* ---------- 10 · visit ---------- */
+  .visit { background: #221A14; }
+  .visit-grid { display: grid; gap: var(--s-8); align-items: center; }
+  @media (min-width: 900px) { .visit-grid { grid-template-columns: 1fr 1fr; } }
+  .visit-copy { display: grid; gap: var(--s-4); justify-items: start; }
+  .visit-address { font-style: normal; font-size: var(--fs-h3); line-height: 1.3; }
+  .visit-phone { font-size: var(--fs-h3); text-decoration: none; border-bottom: 1px solid var(--gold); }
+  .visit-hours { display: grid; gap: var(--s-1); margin: 0; }
+  .visit-hours div { display: flex; gap: var(--s-4); }
+  .visit-hours dt { min-width: 11rem; font-family: var(--font-sans); font-weight: 600; font-size: var(--fs-ui); letter-spacing: var(--track-ui); text-transform: uppercase; color: var(--stone-night); padding-top: 0.35em; }
+  .visit-hours dd { margin: 0; }
+  .hotel { max-width: 34rem; font-size: 1.05rem; }
+  .map { aspect-ratio: 1; width: 100%; }
+  .map iframe { width: 100%; height: 100%; border: 0; filter: grayscale(0.85) sepia(0.25) contrast(0.95); }
+
+  /* ---------- 11 · closing ---------- */
+  .closing { background: #221A14; padding-bottom: var(--section-pad); }
+  .closing-inner { display: grid; justify-items: center; text-align: center; gap: var(--s-7); }
+  .closing .double-rule { width: 100%; }
+  .closing-title { font-size: var(--fs-h1); max-width: 18ch; margin-top: var(--s-6); }
+  .closing-title em { color: var(--gold); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-mark, .hero-lockup, .hero-place, .hero-line, .hero-cta, .hero-main :global(picture), .hero-second, .today, .hero-main :global(img) { animation: none !important; }
+  }
+</style>

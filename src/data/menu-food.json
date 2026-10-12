@@ -1,0 +1,566 @@
+{
+  "source": "POLOS food menu v8, October 12, 2026 (text supplied by owner)",
+  "currency": "CAD",
+  "price_display": "no dollar sign, as printed",
+  "signature_marker": "✦ marks a Polos signature.",
+  "menu": "food",
+  "title": "Food Menu",
+  "categories": [
+    {
+      "id": "shareables",
+      "title": "Shareables",
+      "title_print": "SHAREABLES",
+      "note": null,
+      "items": [
+        {
+          "id": "polos-shrimp-cocktail",
+          "name": "Polos Shrimp Cocktail",
+          "description": "Chilled shrimp, Polos cocktail sauce, crisp lettuce, avocado, cherry tomato, olive, fresh mint, lemon",
+          "price": 18.75,
+          "signature": true
+        },
+        {
+          "id": "zesty-nachos",
+          "name": "Zesty Nachos",
+          "description": "Melted cheese, jalapeños, mixed peppers, tomatoes, olives, green onion, salsa, sour cream",
+          "price": 17.75,
+          "signature": false,
+          "modifiers": [
+            {
+              "label": "Add taco-seasoned chicken or beef",
+              "price": 7.0
+            }
+          ]
+        },
+        {
+          "id": "signature-wings",
+          "name": "Signature Wings",
+          "description": "One pound, fried or oven-baked, naked or boneless. Choice of sauce",
+          "price": 19.75,
+          "signature": false,
+          "options": {
+            "label": "Choice of sauce",
+            "values": [
+              "Honey sriracha",
+              "teriyaki",
+              "sriracha lime",
+              "blazing hot",
+              "salt & pepper",
+              "lemon pepper",
+              "Singaporean",
+              "creamy chipotle",
+              "creamy habanero",
+              "BBQ",
+              "honey garlic",
+              "dry Cajun"
+            ]
+          }
+        },
+        {
+          "id": "premium-calamari",
+          "name": "Premium Calamari",
+          "description": "Crispy lemon-pepper calamari and zucchini, house-made tzatziki, fresh lemon",
+          "price": 19.75,
+          "signature": false
+        },
+        {
+          "id": "korean-fried-chicken",
+          "name": "Korean Fried Chicken",
+          "description": "Double-fried crispy chicken, sweet and spicy gochujang glaze, sesame, green onion",
+          "price": 17.75,
+          "signature": true,
+          "badge": "NEW"
+        },
+        {
+          "id": "ginger-sesame-beef",
+          "name": "Ginger Sesame Beef",
+          "description": "Crispy ginger beef, fried wontons, sesame, green onion, cucumber, pickled ginger",
+          "price": 17.75,
+          "signature": false
+        },
+        {
+          "id": "artichoke-and-three-cheese-dip",
+          "name": "Artichoke & Three Cheese Dip",
+          "description": "Warm spinach, artichoke hearts, cream cheese, parmesan, mozzarella, garlic crostini",
+          "price": 17.75,
+          "signature": false
+        },
+        {
+          "id": "truffle-parmesan-fries",
+          "name": "Truffle Parmesan Fries",
+          "description": "Truffle oil, parmesan, truffle aioli for dipping",
+          "price": 12.75,
+          "signature": false
+        }
+      ],
+      "section_notes": []
+    },
+    {
+      "id": "soup",
+      "title": "Soup",
+      "title_print": "SOUP",
+      "note": null,
+      "items": [
+        {
+          "id": "french-onion-soup",
+          "name": "French Onion Soup",
+          "description": "Clear beef broth, caramelized onions, melted French cheese toast",
+          "price": 13.75,
+          "signature": false
+        },
+        {
+          "id": "feature-soup",
+          "name": "Feature Soup",
+          "description": "Ask your server about today's creation",
+          "price": 9.75,
+          "signature": false
+        }
+      ],
+      "section_notes": []
+    },
+    {
+      "id": "salads",
+      "title": "Salads",
+      "title_print": "SALADS",
+      "note": "Served with regular or gluten-free toast",
+      "items": [
+        {
+          "id": "polos-caesar",
+          "name": "Polos Caesar",
+          "description": "Marinated grilled chicken breast, crisp romaine, herb croutons, bacon bits, parmesan, caesar dressing",
+          "price": 22.75,
+          "signature": true
+        },
+        {
+          "id": "steak-salad",
+          "name": "Steak Salad",
+          "description": "6oz AAA striploin, garlic butter, mixed greens, peppers, cherry tomatoes, red onion, blue cheese crumble, balsamic dressing",
+          "price": 26.75,
+          "signature": false
+        },
+        {
+          "id": "blue-cheese-wedge",
+          "name": "Blue Cheese Wedge",
+          "description": "Crisp iceberg wedge, blue cheese dressing, blue cheese crumble, bacon bits, cherry tomatoes, balsamic glaze",
+          "price": 13.75,
+          "signature": false
+        },
+        {
+          "id": "tostada-grande",
+          "name": "Tostada Grande",
+          "description": "Crispy corn tortilla, taco chicken, lettuce, mixed cheese, roasted corn + black bean salsa, cherry tomatoes, sour cream, chipotle mayo, cilantro",
+          "price": 21.75,
+          "signature": false,
+          "modifiers": [
+            {
+              "label": "Substitute prawns",
+              "price": 4.0
+            }
+          ]
+        },
+        {
+          "id": "citrus-ginger-chicken-salad",
+          "name": "Citrus Ginger Chicken Salad",
+          "description": "Grilled chicken, mixed greens, orange segments, cherry tomatoes, red pepper, roasted almonds, citrus ginger dressing",
+          "price": 22.75,
+          "signature": false
+        }
+      ],
+      "section_notes": [
+        {
+          "type": "addons",
+          "text": "Add chicken 7 · prawns 8 · 6oz AAA striploin 13",
+          "items": [
+            {
+              "label": "chicken",
+              "price": 7.0
+            },
+            {
+              "label": "prawns",
+              "price": 8.0
+            },
+            {
+              "label": "6oz AAA striploin",
+              "price": 13.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sandwiches-and-burgers",
+      "title": "Sandwiches & Burgers",
+      "title_print": "SANDWICHES & BURGERS",
+      "note": "Served with peppercorn fries · upgrade to salad, soup or yam fries 3 · truffle fries 4 · poutine 5",
+      "items": [
+        {
+          "id": "santa-cruz-smash-burger",
+          "name": "Santa Cruz Smash Burger",
+          "description": "Two smashed AAA beef patties, cheddar, lettuce, tomato, special spread, brioche bun",
+          "price": 23.75,
+          "signature": true,
+          "badge": "POLOS SIGNATURE"
+        },
+        {
+          "id": "crispy-honey-sriracha-chicken-burger",
+          "name": "Crispy Honey-Sriracha Chicken Burger",
+          "description": "Buttermilk fried chicken breast, honey sriracha glaze, Swiss cheese, caramelized onion, crisp lettuce, brioche bun",
+          "price": 22.75,
+          "signature": false
+        },
+        {
+          "id": "aaa-steak-sandwich",
+          "name": "AAA Steak Sandwich",
+          "description": "6oz AAA striploin, chimichurri mayo, crisp lettuce, onion rings, ciabatta",
+          "price": 27.75,
+          "signature": false
+        },
+        {
+          "id": "turkey-cranberry",
+          "name": "Turkey Cranberry",
+          "description": "Sous vide turkey breast, Swiss cheese, thick-cut bacon, cranberry sauce, lettuce, tomato, cranberry bread",
+          "price": 22.75,
+          "signature": false
+        },
+        {
+          "id": "philly-cheesesteak",
+          "name": "Philly Cheesesteak",
+          "description": "Thinly sliced prime rib, caramelized onions, mixed peppers, melted fontina, Amoroso-style roll",
+          "price": 23.75,
+          "signature": false
+        },
+        {
+          "id": "durango-wrap",
+          "name": "Durango Wrap",
+          "description": "Rice, sweet corn, guacamole, mixed cheese, shredded iceberg, sour cream, chipotle aioli, cilantro",
+          "price": 22.75,
+          "signature": false,
+          "modifiers": [
+            {
+              "label": "Add chicken or beef",
+              "price": 7.0
+            }
+          ]
+        }
+      ],
+      "section_notes": [
+        {
+          "type": "addons",
+          "text": "Add bacon 3 · sautéed mushrooms 3 · blue cheese crumble 3 · gluten-free bun 2",
+          "items": [
+            {
+              "label": "bacon",
+              "price": 3.0
+            },
+            {
+              "label": "sautéed mushrooms",
+              "price": 3.0
+            },
+            {
+              "label": "blue cheese crumble",
+              "price": 3.0
+            },
+            {
+              "label": "gluten-free bun",
+              "price": 2.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "entrees",
+      "title": "Entrées",
+      "title_print": "ENTRÉES",
+      "note": null,
+      "items": [
+        {
+          "id": "truffle-parmesan-chicken",
+          "name": "Truffle Parmesan Chicken",
+          "description": "Parmesan-crusted chicken breast, potato gnocchi, creamy truffle mushroom sauce, arugula, cherry tomatoes, balsamic glaze, shaved parmesan",
+          "price": 28.75,
+          "signature": true,
+          "badge": "CHEF'S PICK"
+        },
+        {
+          "id": "braised-short-ribs",
+          "name": "Braised Short Ribs",
+          "description": "Braised AAA beef short ribs, garlic mashed potato, seasonal vegetables",
+          "price": 32.75,
+          "signature": false
+        },
+        {
+          "id": "maharaja-chicken-curry",
+          "name": "Maharaja Chicken Curry",
+          "description": "Tender chicken breast, tomato, ginger, garam masala, cream, basmati rice, warm naan, mint chutney",
+          "price": 25.75,
+          "signature": false
+        },
+        {
+          "id": "sichuan-kung-pao",
+          "name": "Sichuan Kung Pao",
+          "description": "Wok-tossed onion, peppers, carrot, celery, mushrooms, broccoli, cauliflower, cashews, dried chilies, kung pao sauce, sticky rice or udon noodles",
+          "price": null,
+          "signature": false,
+          "variants": [
+            {
+              "label": "Vegetable",
+              "price": 19.75
+            },
+            {
+              "label": "crispy chicken",
+              "price": 24.75
+            },
+            {
+              "label": "prawns",
+              "price": 25.75
+            },
+            {
+              "label": "AAA steak",
+              "price": 28.75
+            }
+          ],
+          "note": "gluten-free rice noodles available"
+        },
+        {
+          "id": "pad-thai",
+          "name": "Pad Thai",
+          "description": "Thai rice noodles, carrots, peppers, celery, cauliflower, mushrooms, broccoli, bean sprouts, Asian chilies",
+          "price": null,
+          "signature": false,
+          "variants": [
+            {
+              "label": "Vegetable",
+              "price": 19.75
+            },
+            {
+              "label": "chicken",
+              "price": 24.75
+            },
+            {
+              "label": "prawns",
+              "price": 25.75
+            },
+            {
+              "label": "AAA steak",
+              "price": 28.75
+            }
+          ]
+        },
+        {
+          "id": "fish-and-chips",
+          "name": "Fish & Chips",
+          "description": "Beer-battered cod, Cajun spiced potato chips, fresh salad, tartar sauce, lemon",
+          "price": 24.75,
+          "signature": false
+        },
+        {
+          "id": "quesadilla-picante",
+          "name": "Quesadilla Picante",
+          "description": "Pesto or chipotle chicken, or seasoned beef, peppers, tomatoes, melted cheese, salsa, sour cream",
+          "price": 20.75,
+          "signature": false
+        },
+        {
+          "id": "smoked-cheddar-meatloaf",
+          "name": "Smoked Cheddar Meatloaf",
+          "description": "House-made AAA meatloaf, cognac demi, garlic mashed potato, seasonal vegetables",
+          "price": 26.75,
+          "signature": false
+        },
+        {
+          "id": "salmon-and-prawn-chardonnay",
+          "name": "Salmon & Prawn Chardonnay",
+          "description": "6oz salmon fillet, two tiger prawns, buttered gnocchi, broccoli, asparagus, creamy chardonnay sauce",
+          "price": 33.75,
+          "signature": true
+        }
+      ],
+      "section_notes": []
+    },
+    {
+      "id": "steaks",
+      "title": "Steaks",
+      "title_print": "STEAKS",
+      "note": "Garlic butter · choice of two sides",
+      "items": [
+        {
+          "id": "rib-eye",
+          "name": "Rib Eye",
+          "description": "10oz AAA ribeye",
+          "price": 42.75,
+          "signature": false
+        },
+        {
+          "id": "new-york",
+          "name": "New York",
+          "description": "8oz AAA striploin",
+          "price": 36.75,
+          "signature": false
+        },
+        {
+          "id": "sirloin",
+          "name": "Sirloin",
+          "description": "7oz AAA sirloin",
+          "price": 31.75,
+          "signature": false
+        }
+      ],
+      "section_notes": [
+        {
+          "type": "sides",
+          "text": "Garlic mashed potato · double-stuffed baked potato · seasonal vegetables · peppercorn fries · yam fries · Caesar salad · house salad · blue cheese wedge",
+          "items": [
+            "Garlic mashed potato",
+            "double-stuffed baked potato",
+            "seasonal vegetables",
+            "peppercorn fries",
+            "yam fries",
+            "Caesar salad",
+            "house salad",
+            "blue cheese wedge"
+          ]
+        },
+        {
+          "type": "addons",
+          "text": "Add tiger prawn skewer 9.75 · fondue mushroom sauce 5.75 · bourbon peppercorn sauce 3.75",
+          "items": [
+            {
+              "label": "tiger prawn skewer",
+              "price": 9.75
+            },
+            {
+              "label": "fondue mushroom sauce",
+              "price": 5.75
+            },
+            {
+              "label": "bourbon peppercorn sauce",
+              "price": 3.75
+            }
+          ]
+        },
+        {
+          "type": "upsell",
+          "text": "Start It Right: add a French onion soup or Caesar salad to any steak 7.75",
+          "price": 7.75
+        }
+      ]
+    },
+    {
+      "id": "pasta-and-bowls",
+      "title": "Pasta & Bowls",
+      "title_print": "PASTA & BOWLS",
+      "note": "Pastas served with garlic bread",
+      "items": [
+        {
+          "id": "cajun-blackened-alfredo",
+          "name": "Cajun Blackened Alfredo",
+          "description": "House-made alfredo, parmesan. Choice of blackened chicken or blackened shrimp",
+          "price": null,
+          "signature": true,
+          "badge": "POLOS CLASSIC",
+          "variants": [
+            {
+              "label": "Blackened chicken",
+              "price": 23.75
+            },
+            {
+              "label": "blackened shrimp",
+              "price": 25.75
+            }
+          ]
+        },
+        {
+          "id": "seafood-linguine",
+          "name": "Seafood Linguine",
+          "description": "Scallops, shrimp, PEI mussels, Atlantic salmon, creamy dill tomato sauce",
+          "price": 28.75,
+          "signature": false
+        },
+        {
+          "id": "ribeye-stroganoff",
+          "name": "Ribeye Stroganoff",
+          "description": "Seared AAA ribeye strips, sautéed mushrooms, rich creamy stroganoff sauce, fettuccine, fresh arugula",
+          "price": 25.75,
+          "signature": false
+        },
+        {
+          "id": "teriyaki-glazed-chicken-donburi",
+          "name": "Teriyaki Glazed Chicken Donburi",
+          "description": "Teriyaki-glazed chicken, jasmine rice, mixed vegetables, avocado, sweet potato crisps, green onion, sesame",
+          "price": 22.75,
+          "signature": false
+        },
+        {
+          "id": "hawaiian-ahi-poke",
+          "name": "Hawaiian Ahi Poke",
+          "description": "Ponzu-glazed ahi tuna, jasmine rice, avocado, cucumber, mango, seaweed, crab sauce, sweet potato crisps",
+          "price": 24.75,
+          "signature": false
+        },
+        {
+          "id": "ravioli-rose",
+          "name": "Ravioli Rosé",
+          "description": "Creamy tomato rosé sauce, mushrooms, basil pesto, arugula, cherry tomatoes, parmesan",
+          "price": 22.75,
+          "signature": false
+        }
+      ],
+      "section_notes": []
+    },
+    {
+      "id": "pizzas",
+      "title": "Pizzas",
+      "title_print": "PIZZAS",
+      "note": "12-inch · available on gluten-free crust",
+      "items": [
+        {
+          "id": "gilroy-garlic",
+          "name": "Gilroy Garlic",
+          "description": "Creamy garlic sauce, chicken, garlic, mushrooms, tomatoes, red onion, Italian herbs",
+          "price": 24.75,
+          "signature": true,
+          "badge": "HOUSE FAVOURITE"
+        },
+        {
+          "id": "maui-mango",
+          "name": "Maui Mango",
+          "description": "Aloha BBQ sauce, ham, grilled chicken, bacon, sweet mango, red onion, tomato, green onion",
+          "price": 24.75,
+          "signature": false
+        },
+        {
+          "id": "sonoma-margherita",
+          "name": "Sonoma Margherita",
+          "description": "Red sauce, mozzarella, bocconcini, fresh basil",
+          "price": 21.75,
+          "signature": false
+        },
+        {
+          "id": "napa-garden",
+          "name": "Napa Garden",
+          "description": "Red sauce, mozzarella, mushrooms, onions, bell peppers, olives, tomatoes",
+          "price": 22.75,
+          "signature": false
+        },
+        {
+          "id": "yosemite",
+          "name": "Yosemite",
+          "description": "Red sauce, pepperoni, Italian sausage, mushrooms, black olives, bell peppers, onions, tomatoes",
+          "price": 25.75,
+          "signature": false
+        }
+      ],
+      "section_notes": []
+    }
+  ],
+  "footnotes": {
+    "pair_it": "Ask your server about our signature cocktails, draft beer and wine by the glass. See the Polos drink menu.",
+    "gluten_free": "Gluten-free pizza crust, buns, rice noodles and toast are available.",
+    "allergy": "Please tell your server about any allergies before ordering.",
+    "gf_kids_menus": {
+      "text": "Scan the QR code for our full gluten-free menu and our kids menu.",
+      "url": "https://polosspeciality.netlify.app"
+    }
+  }
+}

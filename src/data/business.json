@@ -1,0 +1,56 @@
+{
+  "_note": "Single source of truth for name, address, phone, hours and external links. Edit here; the header, footer, Visit section, 'Today at POLOS' line and structured data all read from this file.",
+  "name": "Polos Social Lounge",
+  "shortName": "POLOS",
+  "tagline": "Sherwood Park's place to meet up.",
+  "url": "https://poloslounge.com",
+  "phone": { "display": "780-570-1550", "tel": "+17805701550" },
+  "address": {
+    "unit": "#150",
+    "street": "950 Emerald Drive",
+    "line1": "#150 – 950 Emerald Drive",
+    "city": "Sherwood Park",
+    "region": "AB",
+    "regionName": "Alberta",
+    "postalCode": "T8H 0W6",
+    "country": "CA"
+  },
+  "timezone": "America/Edmonton",
+  "hours": {
+    "_needs_review": "Taken from the current live website (Oct 2026). Confirm before launch.",
+    "weekly": [
+      { "days": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"], "opens": "11:00", "closes": "22:00", "label": "Sunday – Thursday", "text": "11 AM – 10 PM" },
+      { "days": ["Friday", "Saturday"], "opens": "11:00", "closes": "23:00", "label": "Friday – Saturday", "text": "11 AM – 11 PM" }
+    ],
+    "note": "Please call for holiday hours."
+  },
+  "happyHour": {
+    "_needs_review": "Taken from the current live website. Confirm against the printed Happy Hour menu.",
+    "windows": [
+      { "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "start": "14:00", "end": "17:00" },
+      { "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "start": "21:00", "end": "close" },
+      { "days": ["Sunday"], "start": "open", "end": "close" }
+    ],
+    "lines": [
+      { "label": "Monday – Friday", "text": "2 – 5 PM" },
+      { "label": "Monday – Friday", "text": "9 PM – Close" },
+      { "label": "Sunday", "text": "All Day" }
+    ]
+  },
+  "brunch": { "days": ["Saturday", "Sunday"], "start": "11:00", "end": "14:00", "text": "Saturday & Sunday · 11 AM – 2 PM" },
+  "liveMusic": { "_needs_review": "On the current website; confirm it is still running.", "text": "Live music every Tuesday night", "show": false },
+  "hotelNote": "Staying at the Hampton Inn by Hilton Edmonton/Sherwood Park? Find Polos at #150 – 950 Emerald Drive, the same street address as the hotel, near Emerald Hills Shopping Centre.",
+  "links": {
+    "reserve": "https://tables.toasttab.com/restaurants/54175e67-2287-4fa3-85fb-5f15d2dd9630/findTime",
+    "order": "https://order.toasttab.com/online/polos-social-lounge-950-emerald-dr",
+    "giftCards": "https://order.toasttab.com/egiftcards/polos-social-lounge-950-emerald-dr",
+    "eventLead": "https://www.toasttab.com/invoice/lead?rx=54175e67-2287-4fa3-85fb-5f15d2dd9630&ot=a59a1376-cd41-4707-8f6b-fcb332dc398f",
+    "directions": "https://www.google.com/maps/search/?api=1&query=Polos+Social+Lounge+950+Emerald+Drive+Sherwood+Park",
+    "mapEmbed": "https://www.google.com/maps?q=Polos+Social+Lounge+950+Emerald+Drive+Sherwood+Park&output=embed",
+    "instagram": "https://www.instagram.com/poloslounge/",
+    "facebook": "https://www.facebook.com/Poloslounge",
+    "x": "https://x.com/poloslounge780",
+    "play": "https://polos-games-fun-1631b2.netlify.app"
+  },
+  "analytics": { "ga4": "G-9T3EQWCEN8" }
+}

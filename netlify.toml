@@ -1,0 +1,40 @@
+# New POLOS site. This file is for the NEW Netlify project only.
+# Production (poloslounge.com) stays on the existing project until the owner approves the cut-over.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Only the production context indexes and sends analytics. Previews/branches are noindex + silent.
+[context.production.environment]
+  PUBLIC_DEPLOY_ENV = "production"
+
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# --- SEO migration (see docs/SEO-MIGRATION.md) ---
+[[redirects]]
+  from = "/gallery.html"
+  to = "/gallery"
+  status = 301
+
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/banquet"
+  to = "/private-events"
+  status = 301

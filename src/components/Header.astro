@@ -1,0 +1,109 @@
+---
+import Wordmark from './Wordmark.astro';
+import business from '../data/business.json';
+const nav = [
+  { href: '/menu', label: 'Menu' },
+  { href: '/happy-hour', label: 'Happy Hour' },
+  { href: '/private-events', label: 'Private Events' },
+  { href: '/gallery', label: 'Gallery' },
+  { href: '/about', label: 'About' },
+];
+const current = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isHome = current === '/';
+---
+<header class:list={["site-header", { "is-home": isHome }]} data-header>
+  <div class="bar">
+    <a class="brand" href="/" aria-label="Polos Social Lounge, home">
+      <Wordmark decorative class="brand-mark" />
+    </a>
+    <nav class="primary" aria-label="Main">
+      <ul>
+        {nav.map((n) => <li><a href={n.href} aria-current={current === n.href ? 'page' : undefined}>{n.label}</a></li>)}
+      </ul>
+    </nav>
+    <div class="actions">
+      <a class="btn btn--secondary btn--sm" href={business.links.reserve} data-track="reserve_click" data-track-location="header">Reserve</a>
+      <a class="btn btn--primary btn--sm" href={business.links.order} data-track="order_click" data-track-location="header">Order Online</a>
+    </div>
+    <button class="menu-toggle" type="button" aria-haspopup="dialog" aria-controls="mobile-nav" data-menu-open>
+      <span class="visually-hidden">Open menu</span>
+      <span class="lines" aria-hidden="true"><i></i><i></i></span>
+    </button>
+  </div>
+</header>
+
+<dialog id="mobile-nav" class="mobile-nav theme-night" aria-label="Site menu">
+  <div class="mn-top">
+    <Wordmark decorative class="mn-mark" />
+    <button class="mn-close" type="button" data-menu-close><span class="visually-hidden">Close menu</span><span aria-hidden="true">Close</span></button>
+  </div>
+  <nav aria-label="Mobile">
+    <ul>
+      {nav.map((n, i) => <li style={`--i:${i}`}><a href={n.href}>{n.label}</a></li>)}
+      <li style="--i:5"><a href="/contact">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="mn-actions">
+    <a class="btn btn--primary" href={business.links.reserve} data-track="reserve_click" data-track-location="mobile_nav">Reserve a Table</a>
+    <a class="btn btn--secondary" href={business.links.order} data-track="order_click" data-track-location="mobile_nav">Order Online</a>
+  </div>
+  <p class="mn-meta muted">
+    <a href={`tel:${business.phone.tel}`} data-track="phone_click">{business.phone.display}</a><br />
+    {business.address.line1}, {business.address.city}
+  </p>
+</dialog>
+
+<style>
+  .site-header {
+    position: fixed; inset: 0 0 auto; z-index: 50; color: var(--charcoal);
+    transition: background var(--t-ui) var(--ease), color var(--t-ui) var(--ease), box-shadow var(--t-ui) var(--ease), transform var(--t-ui) var(--ease);
+  }
+  .site-header.is-scrolled { background: color-mix(in srgb, var(--ivory) 92%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 1px 0 var(--champagne-line); }
+  .site-header.is-night { color: var(--ivory-on-night); }
+  .site-header.is-night.is-scrolled { background: color-mix(in srgb, var(--night) 90%, transparent); box-shadow: 0 1px 0 rgba(184,154,102,.25); }
+  .bar { display: flex; align-items: center; gap: var(--s-6); width: min(100% - 2rem, 90rem); margin-inline: auto; height: 4.5rem; }
+  .brand { color: var(--bronze); flex: none; transition: opacity var(--t-ui) var(--ease); }
+  .is-night .brand { color: var(--gold); }
+  .brand :global(.brand-mark) { width: 6.25rem; }
+  /* on the homepage the hero carries the full wordmark; the small one appears once you scroll */
+  .is-home:not(.is-scrolled) .brand { opacity: 0; pointer-events: none; }
+  .is-home:not(.is-scrolled) .brand:focus-visible { opacity: 1; }
+  .primary { margin-left: auto; }
+  .primary ul { display: flex; gap: clamp(1rem, 2vw, 2.25rem); }
+  .primary a {
+    font-family: var(--font-sans); font-weight: 600; font-size: var(--fs-ui); letter-spacing: var(--track-ui); text-transform: uppercase;
+    text-decoration: none; padding-block: var(--s-2);
+    background: linear-gradient(var(--gold), var(--gold)) left bottom / 0 var(--hair) no-repeat; transition: background-size var(--t-ui) var(--ease);
+  }
+  .primary a:hover, .primary a[aria-current="page"] { background-size: 100% var(--hair); }
+  .actions { display: flex; gap: var(--s-2); }
+  .site-header :global(.btn--sm) { min-height: 2.5rem; padding: 0.8rem 1.1rem 0.65rem; }
+  .is-night :global(.btn) { --btn-fg: var(--ivory-on-night); --btn-line: var(--gold); }
+  .is-night :global(.btn--primary) { --btn-fg: var(--espresso); --btn-bg: var(--gold); }
+  .is-night :global(.btn--primary::after) { border-color: var(--espresso); opacity: .35; }
+  .is-night :global(.btn--secondary:hover) { --btn-bg: var(--gold); --btn-fg: var(--espresso); }
+  .menu-toggle { display: none; margin-left: auto; width: 3rem; height: 3rem; background: none; border: 0; cursor: pointer; }
+  .lines { display: grid; gap: 7px; width: 26px; margin: auto; }
+  .lines i { display: block; height: 1px; background: currentColor; }
+  .lines i + i { width: 70%; justify-self: end; }
+
+  @media (max-width: 1080px) {
+    .primary, .actions { display: none; }
+    .menu-toggle { display: block; }
+    .bar { height: 4rem; }
+  }
+
+  .mobile-nav { inset: 0; width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; padding: var(--s-4) var(--s-5) var(--s-7); border: 0; overflow-y: auto; }
+  .mobile-nav[open] { display: flex; flex-direction: column; gap: var(--s-6); }
+  .mobile-nav::backdrop { background: var(--night); }
+  .mn-top { display: flex; justify-content: space-between; align-items: center; height: 3rem; color: var(--gold); }
+  .mn-top :global(.mn-mark) { width: 6rem; }
+  .mn-close { background: none; border: 0; cursor: pointer; font-family: var(--font-sans); font-weight: 600; font-size: var(--fs-ui); letter-spacing: var(--track-ui); text-transform: uppercase; min-height: 3rem; padding-inline: var(--s-3); }
+  .mobile-nav nav ul { display: grid; gap: var(--s-2); }
+  .mobile-nav nav a { display: block; font-size: clamp(2.2rem, 9vw, 3rem); line-height: 1.15; text-decoration: none; padding-block: var(--s-1); }
+  .mobile-nav[open] nav li { animation: mn-in var(--t-ui) var(--ease) both; animation-delay: calc(var(--i) * 45ms + 80ms); }
+  @keyframes mn-in { from { opacity: 0; transform: translateY(10px); } }
+  .mn-actions { display: grid; gap: var(--s-3); margin-top: auto; }
+  .mn-meta { font-size: var(--fs-small); }
+  .mn-meta a { text-decoration: none; }
+</style>
