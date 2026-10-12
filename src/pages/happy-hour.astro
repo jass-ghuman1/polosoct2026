@@ -1,0 +1,63 @@
+---
+import MenuLayout from '../layouts/MenuLayout.astro';
+import MenuItem from '../components/menu/MenuItem.astro';
+import Photo from '../components/Photo.astro';
+import hh from '../data/menu-happy-hour.json';
+import business from '../data/business.json';
+import { menuJsonLd } from '../lib/menu';
+import wings from '../assets/photos/wings.jpg';
+import caesar from '../assets/photos/caesar.jpg';
+const cats = hh.categories;
+const jsonLd = [menuJsonLd({ name: 'Polos Social Lounge — Happy Hour', url: `${business.url}/happy-hour`, sections: cats })];
+const imgs: Record<string, { src: any; alt: string }> = {
+  bites: { src: wings, alt: 'A pound of chicken wings with carrot and celery sticks and dip' },
+  sips: { src: caesar, alt: 'The Polos Caesar with its signature rim and skewer' },
+};
+---
+<MenuLayout
+  title="Happy Hour in Sherwood Park | Polos Social Lounge"
+  description="Happy Hour at Polos Social Lounge, Sherwood Park: Monday to Friday 2–5 PM and 9 PM to close, Sunday all day. $5 drafts and highballs, $9 cocktails, bites from $8."
+  heading="Happy Hour"
+  eyebrow="Polos · Sherwood Park"
+  current="happy-hour"
+  theme="night"
+  categories={cats.map((c) => ({ id: c.id, title: c.title }))}
+  jsonLd={jsonLd}
+  path="/happy-hour"
+  crumb="Happy Hour"
+>
+  <dl class="hh-times" slot="hero">
+    {business.happyHour.lines.map((l) => (<div><dt>{l.label}</dt><dd>{l.text}</dd></div>))}
+  </dl>
+
+  {cats.map((c) => (
+    <section class="hh-sec" id={c.id} aria-labelledby={`${c.id}-h`} data-menu-section>
+      <div class="hh-copy">
+        <h2 id={`${c.id}-h`} class="rule-title hh-h"><span>{c.title}</span></h2>
+        <ul>{c.items.map((i: any) => <MenuItem item={{ ...i, links_to: undefined }} />)}</ul>
+      </div>
+      {imgs[c.id] && <figure class="hh-img frame" data-reveal="mask"><Photo src={imgs[c.id].src} alt={imgs[c.id].alt} sizes="(min-width: 900px) 28vw, 80vw" /></figure>}
+    </section>
+  ))}
+
+  <section class="hh-more" aria-label="More">
+    <div class="btn-row">
+      <a class="btn btn--primary" href={business.links.reserve} data-track="reserve_click" data-track-location="happy_hour">Reserve for Happy Hour</a>
+      <a class="btn btn--secondary" href="/menu/drinks">Full Drink Menu</a>
+      <a class="btn btn--secondary" href="/menu/food">Full Food Menu</a>
+    </div>
+    <p class="muted">Waiting on friends? <a href={business.links.play} rel="noopener" data-track="play_open" data-track-location="happy_hour">Play at your table</a> with Sherwood Park trivia, Menu Match and more.</p>
+  </section>
+</MenuLayout>
+
+<style>
+  .hh-times { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s-4) var(--s-8); margin: var(--s-3) 0 0; }
+  .hh-times div { display: grid; gap: var(--s-1); }
+  .hh-times dt { font-family: var(--font-sans); font-weight: 600; font-size: var(--fs-ui); letter-spacing: var(--track-ui); text-transform: uppercase; color: var(--stone-night); }
+  .hh-times dd { margin: 0; font-size: var(--fs-h3); }
+  .hh-sec { display: grid; gap: var(--s-7); align-items: start; padding-top: var(--s-8); scroll-margin-top: 8.5rem; }
+  @media (min-width: 900px) { .hh-sec { grid-template-columns: 1.4fr 0.8fr; } .hh-sec:nth-of-type(even) .hh-img { order: -1; } .hh-sec:nth-of-type(even) { grid-template-columns: 0.8fr 1.4fr; } }
+  .hh-h { font-family: var(--font-sans); font-weight: 600; font-size: 1.05rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold); margin-bottom: var(--s-4); }
+  .hh-img { margin: var(--s-3); aspect-ratio: 4 / 5; position: sticky; top: 9rem; }
+  .hh-more { margin-top: var(--s-9); display: grid; gap: var(--s-5); justify-items: center; text-align: center; }
+</style>

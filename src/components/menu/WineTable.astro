@@ -1,0 +1,33 @@
+---
+// Wine list: a real table (screen readers announce the 6 oz / 9 oz / bottle columns), styled like the printed list.
+import { price } from '../../lib/menu';
+interface Props { items: any[]; caption: string }
+const { items, caption } = Astro.props;
+---
+<div class="wine-wrap">
+  <table class="wine">
+    <caption class="visually-hidden">{caption}, prices by 6 oz glass, 9 oz glass and bottle</caption>
+    <thead>
+      <tr><th scope="col"><span class="visually-hidden">Wine</span></th><th scope="col">6 oz</th><th scope="col">9 oz</th><th scope="col">Btl</th></tr>
+    </thead>
+    <tbody>
+      {items.map((w) => (
+        <tr id={`item-${w.id}`}>
+          <th scope="row"><span class="w-name">{w.name}</span><span class="w-region">{w.region}</span></th>
+          <td>{w.prices['6oz'] != null ? price(w.prices['6oz']) : <span aria-label="not by the glass">—</span>}</td>
+          <td>{w.prices['9oz'] != null ? price(w.prices['9oz']) : <span aria-label="not by the glass">—</span>}</td>
+          <td>{price(w.prices.bottle)}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+<style>
+  .wine { width: 100%; border-collapse: collapse; }
+  .wine thead th { font-family: var(--font-sans); font-weight: 600; font-size: 0.7rem; letter-spacing: var(--track-ui); text-transform: uppercase; color: var(--muted, var(--stone)); text-align: right; padding: 0 0 var(--s-2) var(--s-3); white-space: nowrap; }
+  .wine tbody th { text-align: left; font-weight: 500; padding: var(--s-3) var(--s-3) var(--s-3) 0; }
+  .wine tbody tr { border-bottom: 1px solid var(--line, var(--champagne-line)); scroll-margin-top: 9rem; }
+  .wine td { text-align: right; padding: var(--s-3) 0 var(--s-3) var(--s-3); font-weight: 600; font-size: 1.15rem; color: var(--price, var(--bronze)); font-variant-numeric: lining-nums tabular-nums; width: 3.5rem; vertical-align: top; }
+  .w-name { display: block; font-family: var(--font-sans); font-weight: 600; font-size: 0.9rem; letter-spacing: var(--track-item); text-transform: uppercase; line-height: 1.45; }
+  .w-region { display: block; font-style: italic; font-size: 1.02rem; color: var(--muted, var(--stone)); }
+</style>

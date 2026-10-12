@@ -5,7 +5,7 @@ New website for Polos Social Lounge, Sherwood Park. Built with [Astro](https://a
 
 ## Status
 - Phase 4 — homepage prototype ✅
-- Phase 5 — native menu pages (Food, Drinks, Happy Hour, Brunch) — next
+- Phase 5 — native menu pages ✅ `/menu`, `/menu/food`, `/menu/drinks`, `/happy-hour`, `/menu/brunch`
 - Phase 6 — Private Events, Gallery, About, Contact, Polos Play
 
 ## Run it

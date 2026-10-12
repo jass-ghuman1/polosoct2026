@@ -1,0 +1,54 @@
+---
+// One menu item, rendered in the printed menu's language: caps name, gold price, serif description.
+import { price } from '../../lib/menu';
+interface Props { item: any }
+const { item: i } = Astro.props;
+const sub = i.detail ?? i.details ?? null;
+---
+<li class:list={["mi", { "mi--panel": i.panel_label }]} id={`item-${i.id}`}>
+  {i.panel_label && <p class="mi-tab">{i.panel_label}</p>}
+  <div class="mi-head">
+    <h3 class="mi-name">
+      {i.signature && <span class="star" aria-hidden="true">✦ </span>}
+      {i.name}
+      {i.signature && <span class="visually-hidden"> (Polos signature)</span>}
+    </h3>
+    {i.badge && <span class="mi-badge">{i.badge === 'NEW' ? 'New' : i.badge.toLowerCase().replace(/(^|\s)\S/g, (m: string) => m.toUpperCase())}</span>}
+    {typeof i.price === 'number' && <span class="mi-price">{price(i.price)}</span>}
+    {i.deal_text && <span class="mi-price">{i.deal_text}</span>}
+    {i.prices && !i.region && <span class="mi-price">{Object.values(i.prices).map((v) => price(v as number)).join(' / ')}</span>}
+  </div>
+  {sub && <p class="mi-sub">{sub}</p>}
+  {i.description && <p class="mi-desc">{i.description}</p>}
+  {i.options && (
+    <p class="mi-extra"><span class="mi-label">{i.options.label}:</span> {i.options.values.join(' · ')}</p>
+  )}
+  {i.variants && (
+    <ul class="mi-variants">
+      {i.variants.map((v: any) => <li>{v.label} <span class="mi-price sm">{price(v.price)}</span></li>)}
+    </ul>
+  )}
+  {i.note && <p class="mi-extra">{i.note}</p>}
+  {i.modifiers && (
+    <p class="mi-extra">{i.modifiers.map((m: any) => m.text ?? `${m.label} ${price(m.price)}`).join(' · ')}</p>
+  )}
+  {i.dietary_text && <p class="mi-diet">{i.dietary_text}</p>}
+</li>
+
+<style>
+  .mi { padding-block: var(--s-4) var(--s-5); border-bottom: 1px solid var(--line, var(--champagne-line)); break-inside: avoid; scroll-margin-top: 9rem; }
+  .mi-head { display: flex; align-items: baseline; gap: var(--s-2) var(--s-3); flex-wrap: wrap; }
+  .mi-name { font-family: var(--font-sans); font-weight: 600; font-size: 0.95rem; letter-spacing: var(--track-item); text-transform: uppercase; line-height: 1.45; margin: 0; }
+  .mi-badge { font-family: var(--font-sans); font-weight: 600; font-size: 0.66rem; letter-spacing: var(--track-ui); text-transform: uppercase;
+    border: 1px solid var(--gold); color: var(--price, var(--bronze)); padding: 0.28rem 0.5rem 0.18rem; line-height: 1; }
+  .mi-price { margin-left: auto; font-weight: 600; font-size: 1.2rem; color: var(--price, var(--bronze)); white-space: nowrap; font-variant-numeric: lining-nums tabular-nums; }
+  .mi-price.sm { margin-left: 0.25em; font-size: 1.05rem; }
+  .mi-sub { font-size: 1.02rem; color: var(--muted, var(--stone)); margin-top: var(--s-1); }
+  .mi-desc { font-size: 1.1rem; line-height: 1.5; margin-top: var(--s-1); }
+  .mi-extra, .mi-variants { font-size: 1.02rem; color: var(--muted, var(--stone)); margin-top: var(--s-2); line-height: 1.5; }
+  .mi-label { font-style: italic; }
+  .mi-variants { display: flex; flex-wrap: wrap; gap: var(--s-1) var(--s-4); }
+  .mi-diet { margin-top: var(--s-2); font-family: var(--font-sans); font-weight: 600; font-size: 0.7rem; letter-spacing: var(--track-ui); text-transform: uppercase; color: var(--price, var(--bronze)); }
+  .mi--panel { position: relative; background: var(--charcoal); color: var(--ivory-on-night); --price: var(--gold); --muted: var(--stone-night); padding: var(--s-6) var(--s-5) var(--s-5); margin: var(--s-4) 0 var(--s-5); border: 1px solid var(--gold); }
+  .mi-tab { position: absolute; top: 0; left: var(--s-5); transform: translateY(-50%); background: var(--gold); color: var(--espresso); padding: 0.4rem 0.7rem 0.28rem; font-family: var(--font-sans); font-weight: 600; font-size: 0.68rem; letter-spacing: var(--track-ui); text-transform: uppercase; }
+</style>

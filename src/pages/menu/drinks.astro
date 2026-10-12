@@ -1,0 +1,32 @@
+---
+import MenuLayout from '../../layouts/MenuLayout.astro';
+import MenuSection from '../../components/menu/MenuSection.astro';
+import drinks from '../../data/menu-drinks.json';
+import business from '../../data/business.json';
+import { menuJsonLd } from '../../lib/menu';
+const cats = drinks.categories;
+const jsonLd = [menuJsonLd({ name: 'Polos Social Lounge — Drink Menu', url: `${business.url}/menu/drinks`, sections: cats })];
+const fn = drinks.footnotes;
+---
+<MenuLayout
+  title="Drink Menu | Cocktails, Draft Beer & Wine | Polos Social Lounge, Sherwood Park"
+  description="Signature cocktails, 16 draft beers, wine by the glass or bottle, zero-proof drinks, coffees and desserts at Polos Social Lounge in Sherwood Park."
+  heading="Drinks"
+  eyebrow="Cocktails · Beer · Wine"
+  intro="✦ marks a Polos signature. Please enjoy responsibly."
+  current="drinks"
+  theme="night"
+  categories={cats.map((c) => ({ id: c.id, title: c.title }))}
+  jsonLd={jsonLd}
+  path="/menu/drinks"
+  crumb="Drinks"
+>
+  {cats.map((c) => <MenuSection cat={c} />)}
+  <section class="footnotes" aria-label="Good to know">
+    <p>{fn.pair_it.replace('Ask for the Polos food menu', 'See the')} <a href="/menu/food">Polos food menu</a>.</p>
+    <p class="muted">{fn.play.title}: {fn.play.text} <a href={fn.play.url} rel="noopener" data-track="play_open" data-track-location="drinks_menu">Play at your table</a></p>
+  </section>
+</MenuLayout>
+<style>
+  .footnotes { margin-top: var(--s-8); padding-top: var(--s-5); border-top: 1px solid rgba(184,154,102,.25); display: grid; gap: var(--s-3); font-size: 1.05rem; max-width: 46rem; }
+</style>

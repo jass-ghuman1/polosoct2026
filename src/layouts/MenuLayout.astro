@@ -1,0 +1,130 @@
+---
+import Base from './Base.astro';
+import business from '../data/business.json';
+import { breadcrumbJsonLd } from '../lib/menu';
+interface Props {
+  title: string;            // <title>
+  description: string;      // meta description
+  heading: string;          // visible H1
+  eyebrow: string;
+  intro?: string;
+  current: 'food' | 'drinks' | 'happy-hour' | 'brunch';
+  theme?: 'day' | 'night';
+  categories?: { id: string; title: string }[];
+  jsonLd?: Record<string, unknown>[];
+  path: string;
+  crumb: string;
+}
+const { title, description, heading, eyebrow, intro, current, theme = 'day', categories = [], jsonLd = [], path, crumb } = Astro.props;
+const menus = [
+  { id: 'food', href: '/menu/food', label: 'Food' },
+  { id: 'drinks', href: '/menu/drinks', label: 'Drinks' },
+  { id: 'happy-hour', href: '/happy-hour', label: 'Happy Hour' },
+  { id: 'brunch', href: '/menu/brunch', label: 'Weekend Brunch' },
+];
+const crumbs = breadcrumbJsonLd([
+  { name: 'Home', url: `${business.url}/` },
+  ...(current === 'happy-hour' ? [] : [{ name: 'Menu', url: `${business.url}/menu` }]),
+  { name: crumb, url: `${business.url}${path}` },
+]);
+const night = theme === 'night';
+---
+<Base title={title} description={description} jsonLd={[...jsonLd, crumbs]}>
+  <div class:list={['menu-page', { 'theme-night': night }]} data-theme={night ? 'night' : undefined}>
+    <header class="mp-hero container">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="/">Home</a></li>
+          {current !== 'happy-hour' && <li><a href="/menu">Menu</a></li>}
+          <li aria-current="page">{crumb}</li>
+        </ol>
+      </nav>
+      <p class="eyebrow">{eyebrow}</p>
+      <h1 class="h1 mp-title">{heading}</h1>
+      {intro && <p class="lede mp-intro">{intro}</p>}
+      <slot name="hero" />
+      <nav class="menu-switch" aria-label="Menus">
+        <ul>
+          {menus.map((m) => <li><a href={m.href} aria-current={m.id === current ? 'page' : undefined}>{m.label}</a></li>)}
+        </ul>
+      </nav>
+    </header>
+
+    {categories.length > 1 && (
+      <nav class="cat-nav" aria-label={`${crumb} sections`} data-cat-nav>
+        <ul class="container">
+          {categories.map((c) => <li><a href={`#${c.id}`} data-cat-link={c.id}>{c.title}</a></li>)}
+        </ul>
+      </nav>
+    )}
+
+    <div class="container mp-body">
+      <slot />
+    </div>
+
+    <aside class="mp-cta container" aria-label="Reserve or order">
+      <div class="double-rule" aria-hidden="true"></div>
+      <div class="mp-cta-row">
+        <p class="mp-cta-text">Hungry already?</p>
+        <div class="btn-row">
+          <a class="btn btn--primary" href={business.links.reserve} data-track="reserve_click" data-track-location={`menu_${current}`}>Reserve a Table</a>
+          <a class="btn btn--secondary" href={business.links.order} data-track="order_click" data-track-location={`menu_${current}`}>Order Online</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</Base>
+
+<script>
+  // Highlight the category you are reading; keep the active chip in view on phones.
+  const nav = document.querySelector<HTMLElement>('[data-cat-nav]');
+  if (nav && 'IntersectionObserver' in window) {
+    const links = new Map(Array.from(nav.querySelectorAll<HTMLAnchorElement>('[data-cat-link]')).map((a) => [a.dataset.catLink!, a]));
+    let active = '';
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        const id = e.target.id; if (id === active) return; active = id;
+        links.forEach((a, k) => a.toggleAttribute('aria-current', k === id));
+        const a = links.get(id);
+        if (a) nav.querySelector('ul')!.scrollTo({ left: a.offsetLeft - 16, behavior: 'smooth' });
+      });
+    }, { rootMargin: '-35% 0px -60% 0px' });
+    document.querySelectorAll('[data-menu-section]').forEach((s) => io.observe(s));
+  }
+</script>
+
+<style>
+  .menu-page { --line: var(--champagne-line); --muted: var(--stone); --price: var(--bronze); }
+  .menu-page.theme-night { --line: rgba(184,154,102,.2); --muted: var(--stone-night); --price: var(--gold); }
+  .mp-hero { padding-top: clamp(7rem, 5rem + 5vw, 10rem); padding-bottom: var(--s-6); display: grid; justify-items: center; text-align: center; gap: var(--s-4); }
+  .crumbs ol { display: flex; gap: var(--s-2); font-family: var(--font-sans); font-weight: 600; font-size: 0.7rem; letter-spacing: var(--track-ui); text-transform: uppercase; color: var(--muted); }
+  .crumbs li + li::before { content: "·"; margin-right: var(--s-2); }
+  .crumbs a { text-decoration: none; }
+  .crumbs a:hover { text-decoration: underline; }
+  .mp-title { font-size: var(--fs-display); line-height: 0.98; }
+  .theme-night .mp-title { font-style: italic; color: var(--gold); }
+  .mp-intro { max-width: 38rem; }
+  .menu-switch { margin-top: var(--s-5); width: 100%; }
+  .menu-switch ul { display: flex; justify-content: center; flex-wrap: wrap; gap: var(--s-2); }
+  .menu-switch a { display: inline-block; padding: 0.75rem 1.1rem 0.6rem; border: 1px solid var(--line); text-decoration: none;
+    font-family: var(--font-sans); font-weight: 600; font-size: var(--fs-ui); letter-spacing: var(--track-ui); text-transform: uppercase; transition: background var(--t-hover) var(--ease), color var(--t-hover) var(--ease); }
+  .menu-switch a:hover { border-color: var(--gold); }
+  .menu-switch a[aria-current="page"] { background: var(--charcoal); color: var(--ivory); border-color: var(--charcoal); }
+  .theme-night .menu-switch a[aria-current="page"] { background: var(--gold); color: var(--espresso); border-color: var(--gold); }
+
+  .cat-nav { position: sticky; top: 4.5rem; z-index: 30; background: color-mix(in srgb, var(--ivory) 94%, transparent); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-block: 1px solid var(--line); }
+  .theme-night .cat-nav { background: color-mix(in srgb, var(--night) 94%, transparent); }
+  .cat-nav ul { display: flex; gap: var(--s-5); overflow-x: auto; scrollbar-width: none; padding-block: var(--s-3); justify-content: safe center; }
+  .cat-nav ul::-webkit-scrollbar { display: none; }
+  .cat-nav a { white-space: nowrap; text-decoration: none; font-family: var(--font-sans); font-weight: 600; font-size: 0.74rem; letter-spacing: var(--track-ui); text-transform: uppercase; padding-block: var(--s-2); color: var(--muted);
+    background: linear-gradient(var(--gold), var(--gold)) left bottom / 0 1px no-repeat; transition: background-size var(--t-ui) var(--ease), color var(--t-hover); }
+  .cat-nav a:hover, .cat-nav a[aria-current] { color: inherit; background-size: 100% 1px; }
+  .theme-night .cat-nav a:hover, .theme-night .cat-nav a[aria-current] { color: var(--ivory-on-night); }
+  @media (max-width: 1080px) { .cat-nav { top: 4rem; } }
+
+  .mp-body { max-width: 68rem; padding-bottom: var(--s-8); }
+  .mp-cta { padding-bottom: var(--section-pad); }
+  .mp-cta-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s-5); padding-top: var(--s-6); }
+  .mp-cta-text { font-size: var(--fs-h2); font-style: italic; }
+</style>

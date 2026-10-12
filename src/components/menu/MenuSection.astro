@@ -1,0 +1,36 @@
+---
+import MenuItem from './MenuItem.astro';
+import WineTable from './WineTable.astro';
+interface Props { cat: any; columns?: 1 | 2 }
+const { cat, columns = 2 } = Astro.props;
+const isWine = cat.items.some((i: any) => i.region);
+const sectionNotes: string[] = (cat.section_notes ?? []).map((n: any) => (typeof n === 'string' ? n : n.text));
+---
+<section class="ms" id={cat.id} aria-labelledby={`${cat.id}-h`} data-menu-section>
+  <header class="ms-head reveal-rules">
+    <h2 id={`${cat.id}-h`} class="rule-title ms-title"><span>{cat.title}</span></h2>
+    {cat.note && <p class="ms-note">{cat.note}</p>}
+    {cat.label && !cat.items[0]?.panel_label && <p class="ms-note">{cat.label}</p>}
+  </header>
+  {isWine ? (
+    <WineTable items={cat.items} caption={cat.title} />
+  ) : (
+    <ul class:list={['ms-items', { 'two-col': columns === 2 && cat.items.length > 3 }]}>
+      {cat.items.map((item: any) => <MenuItem item={item} />)}
+    </ul>
+  )}
+  {sectionNotes.length > 0 && (
+    <div class="ms-extras">
+      {sectionNotes.map((t) => <p>{t}</p>)}
+    </div>
+  )}
+</section>
+<style>
+  .ms { padding-block: var(--s-8) var(--s-4); scroll-margin-top: 8.5rem; }
+  .ms-head { display: grid; justify-items: center; gap: var(--s-3); margin-bottom: var(--s-5); text-align: center; }
+  .ms-title { width: min(100%, 34rem); font-family: var(--font-sans); font-weight: 600; font-size: clamp(0.95rem, 0.85rem + 0.4vw, 1.15rem); letter-spacing: 0.32em; text-transform: uppercase; }
+  .ms-note { font-style: italic; color: var(--muted, var(--stone)); font-size: 1.1rem; max-width: 40rem; }
+  @media (max-width: 599px) { .ms-title { letter-spacing: 0.18em; gap: var(--s-3); } }
+  .ms-items.two-col { columns: 2 22rem; column-gap: var(--s-8); }
+  .ms-extras { margin-top: var(--s-5); padding: var(--s-4) var(--s-5); border: 1px solid var(--line, var(--champagne-line)); display: grid; gap: var(--s-2); font-size: 1.05rem; color: var(--muted, var(--stone)); text-align: center; }
+</style>

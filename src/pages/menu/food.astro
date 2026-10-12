@@ -1,0 +1,49 @@
+---
+import MenuLayout from '../../layouts/MenuLayout.astro';
+import MenuSection from '../../components/menu/MenuSection.astro';
+import food from '../../data/menu-food.json';
+import drinks from '../../data/menu-drinks.json';
+import business from '../../data/business.json';
+import { menuJsonLd } from '../../lib/menu';
+
+// Desserts live on the printed drinks menu; they are shown here too, from the same data.
+const desserts = drinks.categories.find((c) => c.id === 'desserts')!;
+const categories = [...food.categories, desserts];
+const brunch = { id: 'weekend-brunch-link', title: 'Weekend Brunch' };
+const jsonLd = [menuJsonLd({ name: 'Polos Social Lounge — Food Menu', url: `${business.url}/menu/food`, sections: categories })];
+const fn = food.footnotes;
+---
+<MenuLayout
+  title="Food Menu | Polos Social Lounge, Sherwood Park"
+  description="The full Polos food menu: shareables, salads, burgers, entrées, AAA steaks, pasta, pizzas and desserts. Restaurant on Emerald Drive, Sherwood Park."
+  heading="Food"
+  eyebrow="Polos · Sherwood Park"
+  intro="Shareables to steaks, pizzas to pasta. ✦ marks a Polos signature."
+  current="food"
+  categories={[...categories.map((c) => ({ id: c.id, title: c.title })), brunch]}
+  jsonLd={jsonLd}
+  path="/menu/food"
+  crumb="Food"
+>
+  {categories.map((c) => <MenuSection cat={c} />)}
+
+  <section class="ms-link" id="weekend-brunch-link" data-menu-section aria-labelledby="wb-h">
+    <h2 id="wb-h" class="rule-title"><span>Weekend Brunch</span></h2>
+    <p>Saturday & Sunday · 11am – 2pm</p>
+    <a class="btn btn--secondary" href="/menu/brunch">See the Brunch Menu</a>
+  </section>
+
+  <section class="footnotes" aria-label="Good to know">
+    <p><strong>Good to know.</strong> {fn.gluten_free} {fn.allergy}</p>
+    <p>{fn.gf_kids_menus.text.replace('Scan the QR code for', 'See')} <a href={fn.gf_kids_menus.url} rel="noopener">Gluten-free & kids menus</a></p>
+    <p class="muted">{fn.pair_it.replace('See the Polos drink menu.', '')} <a href="/menu/drinks">See the drink menu</a>.</p>
+  </section>
+</MenuLayout>
+
+<style>
+  .ms-link { display: grid; justify-items: center; gap: var(--s-4); text-align: center; padding-block: var(--s-8) var(--s-4); scroll-margin-top: 8.5rem; }
+  .ms-link .rule-title { width: min(100%, 34rem); font-family: var(--font-sans); font-weight: 600; font-size: clamp(0.95rem, 0.85rem + 0.4vw, 1.15rem); letter-spacing: 0.32em; text-transform: uppercase; }
+  .ms-link p { font-style: italic; color: var(--stone); }
+  .footnotes { margin-top: var(--s-8); padding-top: var(--s-5); border-top: 1px solid var(--champagne-line); display: grid; gap: var(--s-3); font-size: 1.05rem; max-width: 46rem; }
+  .footnotes strong { font-weight: 600; }
+</style>

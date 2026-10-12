@@ -1,0 +1,32 @@
+---
+import MenuLayout from '../../layouts/MenuLayout.astro';
+import MenuItem from '../../components/menu/MenuItem.astro';
+import brunch from '../../data/menu-brunch.json';
+import business from '../../data/business.json';
+import { menuJsonLd } from '../../lib/menu';
+const jsonLd = [menuJsonLd({ name: 'Polos Social Lounge — Weekend Brunch', url: `${business.url}/menu/brunch`, sections: [{ title: 'Weekend Brunch', items: brunch.items }] })];
+---
+<MenuLayout
+  title="Weekend Brunch in Sherwood Park | Polos Social Lounge"
+  description="Weekend brunch at Polos Social Lounge, Sherwood Park: eggs benedict, omelettes and more, Saturday & Sunday 11am – 2pm on Emerald Drive."
+  heading="Weekend Brunch"
+  eyebrow={brunch.availability.text}
+  intro={`Saturdays and Sundays on Emerald Drive. ${brunch.note.charAt(0).toUpperCase()}${brunch.note.slice(1)}.`}
+  current="brunch"
+  jsonLd={jsonLd}
+  path="/menu/brunch"
+  crumb="Weekend Brunch"
+>
+  <section class="brunch" id="weekend-brunch" aria-labelledby="brunch-h" data-menu-section>
+    <h2 id="brunch-h" class="rule-title"><span>Weekend Brunch</span></h2>
+    <ul class="items">{brunch.items.map((i) => <MenuItem item={i} />)}</ul>
+    {brunch.section_notes.map((n) => <p class="extra">{n.text}</p>)}
+  </section>
+  <p class="more">See also the <a href="/menu/food">food menu</a> and the <a href="/menu/drinks">drink menu</a>.</p>
+</MenuLayout>
+<style>
+  .brunch { padding-top: var(--s-8); max-width: 44rem; margin-inline: auto; }
+  .brunch .rule-title { font-family: var(--font-sans); font-weight: 600; font-size: 1.05rem; letter-spacing: 0.32em; text-transform: uppercase; margin-bottom: var(--s-5); }
+  .extra { margin-top: var(--s-5); text-align: center; font-style: italic; color: var(--stone); }
+  .more { text-align: center; margin-top: var(--s-8); color: var(--stone); }
+</style>

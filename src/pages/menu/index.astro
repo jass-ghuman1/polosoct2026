@@ -1,0 +1,54 @@
+---
+import Base from '../../layouts/Base.astro';
+import Photo from '../../components/Photo.astro';
+import business from '../../data/business.json';
+import food from '../../data/menu-food.json';
+import { breadcrumbJsonLd } from '../../lib/menu';
+import steak from '../../assets/photos/steak-yam-fries.jpg';
+import espresso from '../../assets/photos/espresso-martini.jpg';
+import wings from '../../assets/photos/wings.jpg';
+import daylight from '../../assets/photos/pink-martini.jpg';
+const b = business;
+const cards = [
+  { href: '/menu/food', title: 'Food', line: 'Shareables, salads, burgers, entrées, AAA steaks, pasta and pizzas', img: steak, alt: 'Grilled steak with yam fries and vegetables', track: 'food' },
+  { href: '/menu/drinks', title: 'Drinks', line: 'Signature cocktails, 16 draft beers, wine, zero proof and desserts', img: espresso, alt: 'Espresso martini topped with coffee beans', track: 'drinks' },
+  { href: '/happy-hour', title: 'Happy Hour', line: b.happyHour.lines.map((l) => `${l.label} ${l.text}`).join(' · '), img: wings, alt: 'Chicken wings with carrot and celery sticks', track: 'happy_hour' },
+  { href: '/menu/brunch', title: 'Weekend Brunch', line: b.brunch.text, img: daylight, alt: 'A cocktail in the sunlit POLOS dining room', track: 'brunch' },
+];
+const jsonLd = [breadcrumbJsonLd([{ name: 'Home', url: `${b.url}/` }, { name: 'Menu', url: `${b.url}/menu` }])];
+---
+<Base title="Menu | Polos Social Lounge, Sherwood Park" description="Browse the Polos Social Lounge menus: food, drinks, Happy Hour and weekend brunch at our restaurant on Emerald Drive in Sherwood Park." jsonLd={jsonLd}>
+  <section class="menu-hub container" aria-labelledby="menu-h">
+    <p class="eyebrow">Polos · Sherwood Park</p>
+    <h1 id="menu-h" class="h1 hub-title">Our Menus</h1>
+    <ul class="cards">
+      {cards.map((c, i) => (
+        <li>
+          <a class="card" href={c.href} data-track="menu_view" data-track-location={`menu_hub_${c.track}`}>
+            <span class="card-img" data-reveal="mask" style={`--i:${i}`}><Photo src={c.img} alt={c.alt} sizes="(min-width: 900px) 22vw, 45vw" /></span>
+            <span class="card-title">{c.title}</span>
+            <span class="card-line">{c.line}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <p class="hub-more">
+      <a class="text-link" href={food.footnotes.gf_kids_menus.url} rel="noopener">Gluten-free & kids menus <span class="arrow" aria-hidden="true">→</span></a>
+      <a class="text-link" href={b.links.order} data-track="order_click" data-track-location="menu_hub">Order online for pickup <span class="arrow" aria-hidden="true">→</span></a>
+    </p>
+  </section>
+</Base>
+<style>
+  .menu-hub { padding-top: clamp(7rem, 5rem + 5vw, 10rem); padding-bottom: var(--section-pad); display: grid; justify-items: center; text-align: center; gap: var(--s-4); }
+  .hub-title { font-size: var(--fs-display); }
+  .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-7) var(--gutter); width: 100%; margin-top: var(--s-7); text-align: left; }
+  @media (min-width: 960px) { .cards { grid-template-columns: repeat(4, 1fr); } .cards li:nth-child(even) { margin-top: var(--s-8); } }
+  .card { display: grid; gap: var(--s-2); text-decoration: none; }
+  .card-img { display: block; aspect-ratio: 4 / 5; overflow: hidden; margin-bottom: var(--s-3); }
+  .card-img :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+  .card:hover .card-img :global(img) { transform: scale(1.05); }
+  .card-title { font-size: var(--fs-h3); line-height: 1.1; }
+  .card:hover .card-title { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px; text-decoration-color: var(--gold); }
+  .card-line { font-size: 1rem; color: var(--stone); }
+  .hub-more { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s-3) var(--s-6); margin-top: var(--s-8); }
+</style>
