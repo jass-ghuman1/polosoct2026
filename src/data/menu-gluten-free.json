@@ -5,7 +5,6 @@
   "menu": "gluten-free",
   "title": "Gluten-Free Menu",
   "intro": "Gluten-free buns, bread and toast at no extra charge. Our fries, wings and nachos are oven-baked, never fried.",
-  "needs_review": "Food menu v8 lists \"gluten-free bun 2\" as an add-on, which conflicts with \"no extra charge\" here. Confirm which is correct.",
   "categories": [
     {
       "id": "shareables",

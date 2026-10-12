@@ -1,7 +1,7 @@
 {
   "menu": "happy-hour",
   "title": "Happy Hour",
-  "source": "Happy Hour item list supplied by owner, 12 Oct 2026 (see source/2026-10-12-happy-hour-source.txt)",
+  "source": "Printed Happy Hour menu 2026-10-10 (front/back, 8.5x11) — authoritative; item list also supplied by owner 12 Oct 2026",
   "currency": "CAD",
   "price_display": "no dollar sign, as on the other printed menus",
   "schedule": {
@@ -42,83 +42,137 @@
     "confirmed": "Confirmed by owner 12 Oct 2026"
   },
   "story": {
-    "needs_review": "Not yet supplied. The Campbelltown / Sherwood Park story must be provided word for word before the story section is built.",
-    "title": null,
-    "body": null,
-    "closing": "Pull up a chair. You're among neighbours."
+    "title": "Before it was Sherwood Park",
+    "source": "Strathcona County History",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "In the mid-1950s, two developers, John Campbell and John Mitchell, had a modest idea: a little satellite town of about 100 houses at the edge of the prairie, for families working at the plants east of Edmonton."
+      },
+      {
+        "type": "statement",
+        "text": "They called it Campbelltown.",
+        "em": "Campbelltown"
+      },
+      {
+        "type": "p",
+        "text": "In December 1955, the first family moved into a model home on Birch Avenue. Houses sold for $10,459 to $14,100, and neighbours knew each other by name."
+      },
+      {
+        "type": "streets",
+        "items": [
+          "Cottonwood",
+          "Conifer",
+          "Birch",
+          "Alder",
+          "Fir"
+        ]
+      },
+      {
+        "type": "p",
+        "text": "There was just one problem. Canada Post wouldn't accept the name, because too many places were called something similar. One early resident even had a cheque from Edmonton arrive by way of Campbeltown, Scotland.",
+        "em": "Campbeltown, Scotland"
+      },
+      {
+        "type": "statement",
+        "text": "So in 1956, Campbelltown became Sherwood Park.",
+        "em": "Sherwood Park"
+      },
+      {
+        "type": "p",
+        "text": "The houses got bigger and the streets kept going, but the idea never changed: a place where neighbours meet at the end of the day."
+      },
+      {
+        "type": "closing",
+        "text": "Pull up a chair. You're among neighbours."
+      }
+    ]
   },
   "categories": [
     {
       "id": "bites",
       "title": "Bites",
-      "needs_review": "Heading inferred: the first table arrived without a title.",
       "items": [
         {
           "id": "hh-wings",
           "name": "Wings",
-          "detail": "1 lb, salt and pepper",
+          "detail": null,
           "price": 15,
-          "links_to": "signature-wings"
+          "links_to": "signature-wings",
+          "description": "One pound, salt and pepper",
+          "modifiers": [
+            {
+              "text": "Other flavours +1 · dip +2"
+            }
+          ]
         },
         {
           "id": "hh-korean-fried-chicken",
           "name": "Korean Fried Chicken",
-          "detail": "snack",
+          "detail": null,
           "price": 12,
-          "links_to": "korean-fried-chicken"
+          "links_to": "korean-fried-chicken",
+          "description": "Snack size, sweet and spicy gochujang glaze, sesame, green onion"
         },
         {
           "id": "hh-mini-zesty-nachos",
           "name": "Mini Zesty Nachos",
           "detail": null,
           "price": 12,
-          "links_to": "zesty-nachos"
+          "links_to": "zesty-nachos",
+          "description": "Melted cheese, jalapeños, mixed peppers, tomatoes, salsa, sour cream"
         },
         {
           "id": "hh-personal-quesadilla",
           "name": "Personal Quesadilla",
           "detail": null,
           "price": 12,
-          "links_to": null
+          "links_to": null,
+          "description": "Chicken or beef, peppers, tomatoes, melted cheese, salsa, sour cream"
         },
         {
           "id": "hh-curry-chicken-poutine",
           "name": "Curry Chicken Poutine",
           "detail": null,
           "price": 14,
-          "links_to": null
+          "links_to": null,
+          "description": "Fries, cheese curds, Maharaja curry chicken"
         },
         {
           "id": "hh-crispy-prawns",
           "name": "Crispy Prawns",
           "detail": null,
           "price": 12,
-          "links_to": null
+          "links_to": null,
+          "description": "Beer-battered prawns, lemon, house dip"
         },
         {
           "id": "hh-taco-chicken-tacos",
           "name": "Taco Chicken Tacos (2)",
           "detail": null,
           "price": 12,
-          "links_to": null
+          "links_to": null,
+          "description": "Taco chicken, lettuce, cheese, salsa, sour cream"
         },
         {
           "id": "hh-happy-pizza",
           "name": "Happy Pizza",
-          "detail": "personal Sonoma Margherita or Yosemite",
+          "detail": null,
           "price": 11,
           "choices": [
             "Sonoma Margherita",
             "Yosemite"
           ],
-          "links_to": null
+          "links_to": null,
+          "description": "Personal Sonoma Margherita or Yosemite"
         },
         {
           "id": "hh-truffle-parmesan-fries",
           "name": "Truffle Parmesan Fries",
           "detail": null,
           "price": 8,
-          "links_to": "truffle-parmesan-fries"
+          "links_to": "truffle-parmesan-fries",
+          "description": "Truffle oil, parmesan, truffle aioli"
         }
       ]
     },
@@ -128,62 +182,74 @@
       "items": [
         {
           "id": "hh-house-draft",
-          "name": "House draft",
-          "detail": "16 oz",
-          "price": 5
+          "name": "House Draft",
+          "detail": null,
+          "price": 5,
+          "description": "16 oz"
         },
         {
           "id": "hh-well-highball",
-          "name": "Well highball",
-          "detail": "1 oz",
-          "price": 5
+          "name": "Well Highball",
+          "detail": null,
+          "price": 5,
+          "description": "1 oz"
         },
         {
           "id": "hh-house-wine",
-          "name": "House wine",
-          "detail": "6 oz / 9 oz",
+          "name": "House Wine",
+          "detail": null,
           "prices": {
             "6oz": 7,
             "9oz": 10
-          }
+          },
+          "description": "Red or white, 6 oz | 9 oz"
         },
         {
           "id": "hh-wine-bottles",
-          "name": "Wine bottles",
+          "name": "Wine Bottles",
           "detail": null,
           "price": null,
           "deal_text": "$10 off",
-          "discount": 10
+          "discount": 10,
+          "description": "Any bottle on our list"
         },
         {
           "id": "hh-cocktails",
           "name": "Cocktails",
-          "detail": "Polos Caesar, Spicy Margarita, Mojito, Whisky Sour",
+          "detail": null,
           "price": 9,
           "choices": [
             "Polos Caesar",
             "Spicy Margarita",
             "Mojito",
             "Whisky Sour"
-          ]
+          ],
+          "description": "Polos Caesar · Spicy Margarita · Mojito · Whisky Sour"
         },
         {
           "id": "hh-sangria",
           "name": "Sangria",
-          "detail": "red or white",
+          "detail": null,
           "price": 11,
           "choices": [
             "red",
             "white"
-          ]
+          ],
+          "description": "Red or white"
         },
         {
           "id": "hh-zero-proof-cocktail",
-          "name": "Zero-proof cocktail",
+          "name": "Zero-Proof Cocktail",
           "detail": null,
-          "price": 5
+          "price": 5,
+          "description": "Ask your server"
         }
       ]
     }
-  ]
+  ],
+  "conditions": {
+    "location": "Lounge and patio · dine-in only",
+    "fine_print": "Happy hour pricing is for dine-in guests only. Please drink responsibly; guests must be 18+ with valid ID.",
+    "allergy": "Tell your server about any allergies before ordering."
+  }
 }

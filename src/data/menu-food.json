@@ -246,7 +246,7 @@
       "section_notes": [
         {
           "type": "addons",
-          "text": "Add bacon 3 · sautéed mushrooms 3 · blue cheese crumble 3 · gluten-free bun 2",
+          "text": "Add bacon 3 · sautéed mushrooms 3 · blue cheese crumble 3 · gluten-free bun at no extra charge",
           "items": [
             {
               "label": "bacon",
@@ -259,10 +259,6 @@
             {
               "label": "blue cheese crumble",
               "price": 3.0
-            },
-            {
-              "label": "gluten-free bun",
-              "price": 2.0
             }
           ]
         }
@@ -562,5 +558,8 @@
       "text": "Scan the QR code for our full gluten-free menu and our kids menu.",
       "url": "https://polosspeciality.netlify.app"
     }
-  }
+  },
+  "corrections": [
+    "12 Oct 2026: gluten-free bun is no charge (owner). Printed food menu v8 still shows \"gluten-free bun 2\"."
+  ]
 }

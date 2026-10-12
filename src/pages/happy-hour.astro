@@ -26,6 +26,7 @@ const imgs: Record<string, { src: any; alt: string }> = {
   path="/happy-hour"
   crumb="Happy Hour"
 >
+  <p class="hh-where eyebrow" slot="hero">{hh.conditions.location}</p>
   <dl class="hh-times" slot="hero">
     {business.happyHour.lines.map((l) => (<div><dt>{l.label}</dt><dd>{l.text}</dd></div>))}
   </dl>
@@ -46,6 +47,7 @@ const imgs: Record<string, { src: any; alt: string }> = {
       <a class="btn btn--secondary" href="/menu/drinks">Full Drink Menu</a>
       <a class="btn btn--secondary" href="/menu/food">Full Food Menu</a>
     </div>
+    <p class="muted fine">{hh.conditions.fine_print} {hh.conditions.allergy}</p>
     <p class="muted">Waiting on friends? <a href={business.links.play} rel="noopener" data-track="play_open" data-track-location="happy_hour">Play at your table</a> with Sherwood Park trivia, Menu Match and more.</p>
   </section>
 </MenuLayout>
@@ -59,5 +61,7 @@ const imgs: Record<string, { src: any; alt: string }> = {
   @media (min-width: 900px) { .hh-sec { grid-template-columns: 1.4fr 0.8fr; } .hh-sec:nth-of-type(even) .hh-img { order: -1; } .hh-sec:nth-of-type(even) { grid-template-columns: 0.8fr 1.4fr; } }
   .hh-h { font-family: var(--font-sans); font-weight: 600; font-size: 1.05rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold); margin-bottom: var(--s-4); }
   .hh-img { margin: var(--s-3); aspect-ratio: 4 / 5; position: sticky; top: 9rem; }
+  .hh-where { color: var(--gold); }
+  .fine { font-size: 1rem; max-width: 40rem; }
   .hh-more { margin-top: var(--s-9); display: grid; gap: var(--s-5); justify-items: center; text-align: center; }
 </style>
