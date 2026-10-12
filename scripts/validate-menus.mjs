@@ -1,6 +1,6 @@
 // Fails the build if menu data is malformed, so a broken price can never go live.
 import { readFileSync } from 'node:fs';
-const files = ['menu-food', 'menu-drinks', 'menu-brunch', 'menu-happy-hour'];
+const files = ['menu-food', 'menu-drinks', 'menu-brunch', 'menu-happy-hour', 'menu-gluten-free', 'menu-kids'];
 let errors = 0;
 const err = (f, m) => { console.error(`✗ ${f}: ${m}`); errors++; };
 for (const f of files) {

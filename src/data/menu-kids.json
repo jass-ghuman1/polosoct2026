@@ -1,0 +1,38 @@
+{
+  "source": "https://polosspeciality.netlify.app (captured 12 Oct 2026; see source/2026-10-12-gluten-free-kids-source.txt)",
+  "currency": "CAD",
+  "price_display": "no dollar sign, as printed",
+  "menu": "kids",
+  "title": "Kids Menu",
+  "items": [
+    {
+      "id": "mac-and-cheese",
+      "name": "Mac & Cheese",
+      "description": "With garlic toast",
+      "price": 14.0,
+      "signature": false
+    },
+    {
+      "id": "chicken-tenders-and-fries",
+      "name": "Chicken Tenders & Fries",
+      "description": "With plum sauce",
+      "price": 13.0,
+      "signature": false
+    },
+    {
+      "id": "grilled-cheese",
+      "name": "Grilled Cheese",
+      "description": "With a side of fries",
+      "price": 13.0,
+      "signature": false
+    },
+    {
+      "id": "simple-burger",
+      "name": "Simple Burger",
+      "description": "With a side of fries",
+      "price": 13.0,
+      "signature": false
+    }
+  ],
+  "notice": "Please tell your server about any allergies before ordering."
+}

@@ -1,0 +1,245 @@
+{
+  "source": "https://polosspeciality.netlify.app (captured 12 Oct 2026; see source/2026-10-12-gluten-free-kids-source.txt)",
+  "currency": "CAD",
+  "price_display": "no dollar sign, as printed",
+  "menu": "gluten-free",
+  "title": "Gluten-Free Menu",
+  "intro": "Gluten-free buns, bread and toast at no extra charge. Our fries, wings and nachos are oven-baked, never fried.",
+  "needs_review": "Food menu v8 lists \"gluten-free bun 2\" as an add-on, which conflicts with \"no extra charge\" here. Confirm which is correct.",
+  "categories": [
+    {
+      "id": "shareables",
+      "title": "Shareables",
+      "note": null,
+      "items": [
+        {
+          "id": "polos-shrimp-cocktail",
+          "name": "Polos Shrimp Cocktail",
+          "description": "Chilled shrimp, Polos cocktail sauce, crisp lettuce, cherry tomatoes, avocado, olives, fresh mint, lemon",
+          "price": 18.75,
+          "signature": false
+        },
+        {
+          "id": "zesty-nachos",
+          "name": "Zesty Nachos",
+          "description": "Melted cheese, tomatoes, bell peppers, green onion, olives, jalapeños, salsa, sour cream",
+          "price": 17.75,
+          "signature": false,
+          "modifiers": [
+            {
+              "label": "Add taco-seasoned chicken or beef",
+              "price": 7.0
+            }
+          ]
+        },
+        {
+          "id": "signature-wings",
+          "name": "Signature Wings",
+          "description": "One pound, oven-baked, never fried",
+          "price": 19.75,
+          "signature": false,
+          "options": {
+            "label": "Choice of sauce",
+            "values": [
+              "Salt & pepper",
+              "lemon pepper",
+              "blazing hot",
+              "dry Cajun",
+              "honey garlic",
+              "honey sriracha",
+              "sriracha lime"
+            ]
+          }
+        },
+        {
+          "id": "truffle-parmesan-fries",
+          "name": "Truffle Parmesan Fries",
+          "description": "Oven-baked fries, truffle oil, parmesan, truffle aioli",
+          "price": 12.75,
+          "signature": false
+        }
+      ],
+      "section_notes": []
+    },
+    {
+      "id": "salads",
+      "title": "Salads",
+      "note": "Served with gluten-free toast",
+      "items": [
+        {
+          "id": "polos-caesar",
+          "name": "Polos Caesar",
+          "description": "Marinated grilled chicken breast, crisp romaine, bacon bits, parmesan, caesar dressing, no croutons",
+          "price": 22.75,
+          "signature": false
+        },
+        {
+          "id": "steak-salad",
+          "name": "Steak Salad",
+          "description": "6oz AAA striploin, garlic butter, mixed greens, bell peppers, cherry tomatoes, red onion, blue cheese crumble, balsamic dressing",
+          "price": 26.75,
+          "signature": false
+        },
+        {
+          "id": "blue-cheese-wedge",
+          "name": "Blue Cheese Wedge",
+          "description": "Crisp iceberg wedge, blue cheese crumble, blue cheese dressing, balsamic glaze",
+          "price": 13.75,
+          "signature": false
+        }
+      ],
+      "section_notes": []
+    },
+    {
+      "id": "sandwiches-and-burgers",
+      "title": "Sandwiches & Burgers",
+      "note": "Gluten-free bun or bread · served with oven-baked peppercorn fries",
+      "items": [
+        {
+          "id": "santa-cruz-smash-burger",
+          "name": "Santa Cruz Smash Burger",
+          "description": "Two smashed AAA beef patties, cheddar, lettuce, tomato, special spread, gluten-free bun",
+          "price": 23.75,
+          "signature": false
+        },
+        {
+          "id": "aaa-steak-sandwich",
+          "name": "AAA Steak Sandwich",
+          "description": "6oz AAA striploin, gluten-free garlic bread, crisp lettuce, horseradish aioli",
+          "price": 27.75,
+          "signature": false
+        },
+        {
+          "id": "turkey-cranberry",
+          "name": "Turkey Cranberry",
+          "description": "Sous vide turkey breast, Swiss cheese, thick-cut bacon, cranberry sauce, gluten-free bun",
+          "price": 22.75,
+          "signature": false
+        }
+      ],
+      "section_notes": []
+    },
+    {
+      "id": "entrees",
+      "title": "Entrées",
+      "note": null,
+      "items": [
+        {
+          "id": "salmon-and-prawn-chardonnay",
+          "name": "Salmon & Prawn Chardonnay",
+          "description": "6oz salmon fillet, two tiger prawns, rice or garlic mashed potato, broccoli, asparagus, creamy chardonnay sauce",
+          "price": 33.75,
+          "signature": false
+        },
+        {
+          "id": "maharaja-chicken-curry",
+          "name": "Maharaja Chicken Curry",
+          "description": "Tender chicken breast, tomato, ginger, garam masala, cream, basmati rice, mint chutney",
+          "price": 25.75,
+          "signature": false
+        },
+        {
+          "id": "pad-thai",
+          "name": "Pad Thai",
+          "description": "Thai rice noodles, carrots, peppers, cauliflower, mushrooms, broccoli, bean sprouts, celery, Asian chilies, Thai chili sauce",
+          "price": null,
+          "signature": false,
+          "variants": [
+            {
+              "label": "Vegetable",
+              "price": 19.75
+            },
+            {
+              "label": "chicken",
+              "price": 24.75
+            },
+            {
+              "label": "prawns",
+              "price": 25.75
+            },
+            {
+              "label": "AAA steak",
+              "price": 28.75
+            }
+          ]
+        }
+      ],
+      "section_notes": []
+    },
+    {
+      "id": "steaks",
+      "title": "Steaks",
+      "note": "Garlic butter · choice of two sides",
+      "items": [
+        {
+          "id": "rib-eye",
+          "name": "Rib Eye",
+          "description": "10oz AAA ribeye",
+          "price": 42.75,
+          "signature": false
+        },
+        {
+          "id": "new-york",
+          "name": "New York",
+          "description": "8oz AAA striploin",
+          "price": 36.75,
+          "signature": false
+        },
+        {
+          "id": "sirloin",
+          "name": "Sirloin",
+          "description": "7oz AAA sirloin",
+          "price": 31.75,
+          "signature": false
+        }
+      ],
+      "section_notes": [
+        "Garlic mashed potato · double-stuffed baked potato · rice · seasonal vegetables · house salad · Caesar salad · blue cheese wedge · peppercorn fries · yam fries"
+      ]
+    },
+    {
+      "id": "pizzas",
+      "title": "Pizzas",
+      "note": "12-inch gluten-free crust",
+      "items": [
+        {
+          "id": "gilroy-garlic",
+          "name": "Gilroy Garlic",
+          "description": "Creamy garlic sauce, chicken, garlic, mushrooms, Italian herbs",
+          "price": 24.75,
+          "signature": false
+        },
+        {
+          "id": "maui-mango",
+          "name": "Maui Mango",
+          "description": "Aloha BBQ sauce, ham, chicken, bacon, sweet mango, red onion, tomato, green onion",
+          "price": 24.75,
+          "signature": false
+        },
+        {
+          "id": "sonoma-margherita",
+          "name": "Sonoma Margherita",
+          "description": "Red sauce, mozzarella, bocconcini, fresh basil",
+          "price": 21.75,
+          "signature": false
+        },
+        {
+          "id": "napa-garden",
+          "name": "Napa Garden",
+          "description": "Red sauce, mozzarella, mushrooms, red onion, tomato, black olives, bell peppers",
+          "price": 22.75,
+          "signature": false
+        },
+        {
+          "id": "yosemite",
+          "name": "Yosemite",
+          "description": "Red sauce, pepperoni, Italian sausage, mushrooms, black olives, bell peppers, red onion, tomato",
+          "price": 25.75,
+          "signature": false
+        }
+      ],
+      "section_notes": []
+    }
+  ],
+  "notice": "Our kitchen also handles wheat. We take every care, but we cannot guarantee a gluten-free environment. Please tell your server about any allergies before ordering."
+}

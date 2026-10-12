@@ -1,0 +1,27 @@
+---
+import MenuLayout from '../../layouts/MenuLayout.astro';
+import MenuSection from '../../components/menu/MenuSection.astro';
+import gf from '../../data/menu-gluten-free.json';
+import business from '../../data/business.json';
+import { menuJsonLd } from '../../lib/menu';
+const cats = gf.categories;
+const jsonLd = [menuJsonLd({ name: 'Polos Social Lounge — Gluten-Free Menu', url: `${business.url}/menu/gluten-free`, sections: cats })];
+---
+<MenuLayout
+  title="Gluten-Free Menu | Polos Social Lounge, Sherwood Park"
+  description="Gluten-free dining at Polos Social Lounge in Sherwood Park: gluten-free pizza crust, buns, bread and toast, oven-baked fries, wings and nachos."
+  heading="Gluten-Free"
+  eyebrow="Polos · Sherwood Park"
+  intro={gf.intro}
+  current="gluten-free"
+  categories={cats.map((c) => ({ id: c.id, title: c.title }))}
+  jsonLd={jsonLd}
+  path="/menu/gluten-free"
+  crumb="Gluten-Free"
+>
+  {cats.map((c) => <MenuSection cat={c} />)}
+  <p class="notice">{gf.notice}</p>
+</MenuLayout>
+<style>
+  .notice { margin-top: var(--s-8); padding: var(--s-5); border: 1px solid var(--champagne-line); font-size: 1.05rem; max-width: 46rem; margin-inline: auto; text-align: center; }
+</style>

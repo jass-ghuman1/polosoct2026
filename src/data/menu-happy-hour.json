@@ -5,7 +5,6 @@
   "currency": "CAD",
   "price_display": "no dollar sign, as on the other printed menus",
   "schedule": {
-    "needs_review": "Times taken from the current live website; not yet confirmed against the printed Happy Hour menu.",
     "windows": [
       {
         "days": [
@@ -39,7 +38,8 @@
         "end": "close",
         "text": "Sunday · All Day"
       }
-    ]
+    ],
+    "confirmed": "Confirmed by owner 12 Oct 2026"
   },
   "story": {
     "needs_review": "Not yet supplied. The Campbelltown / Sherwood Park story must be provided word for word before the story section is built.",

@@ -1,0 +1,29 @@
+---
+import MenuLayout from '../../layouts/MenuLayout.astro';
+import MenuItem from '../../components/menu/MenuItem.astro';
+import kids from '../../data/menu-kids.json';
+import business from '../../data/business.json';
+import { menuJsonLd } from '../../lib/menu';
+const jsonLd = [menuJsonLd({ name: 'Polos Social Lounge — Kids Menu', url: `${business.url}/menu/kids`, sections: [{ title: 'Kids', items: kids.items }] })];
+---
+<MenuLayout
+  title="Kids Menu | Polos Social Lounge, Sherwood Park"
+  description="The Polos kids menu: mac & cheese, chicken tenders, grilled cheese and a simple burger. Family dining on Emerald Drive, Sherwood Park."
+  heading="Kids"
+  eyebrow="Polos · Sherwood Park"
+  current="kids"
+  jsonLd={jsonLd}
+  path="/menu/kids"
+  crumb="Kids"
+>
+  <section class="kids" id="kids" aria-labelledby="kids-h" data-menu-section>
+    <h2 id="kids-h" class="rule-title"><span>Kids Menu</span></h2>
+    <ul>{kids.items.map((i) => <MenuItem item={i} />)}</ul>
+    <p class="notice">{kids.notice}</p>
+  </section>
+</MenuLayout>
+<style>
+  .kids { padding-top: var(--s-8); max-width: 40rem; margin-inline: auto; }
+  .kids .rule-title { font-family: var(--font-sans); font-weight: 600; font-size: 1.05rem; letter-spacing: 0.32em; text-transform: uppercase; margin-bottom: var(--s-5); }
+  .notice { margin-top: var(--s-6); text-align: center; font-style: italic; color: var(--stone); }
+</style>

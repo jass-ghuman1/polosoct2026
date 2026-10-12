@@ -8,7 +8,7 @@ interface Props {
   heading: string;          // visible H1
   eyebrow: string;
   intro?: string;
-  current: 'food' | 'drinks' | 'happy-hour' | 'brunch';
+  current: 'food' | 'drinks' | 'happy-hour' | 'brunch' | 'gluten-free' | 'kids';
   theme?: 'day' | 'night';
   categories?: { id: string; title: string }[];
   jsonLd?: Record<string, unknown>[];
@@ -21,6 +21,8 @@ const menus = [
   { id: 'drinks', href: '/menu/drinks', label: 'Drinks' },
   { id: 'happy-hour', href: '/happy-hour', label: 'Happy Hour' },
   { id: 'brunch', href: '/menu/brunch', label: 'Weekend Brunch' },
+  { id: 'gluten-free', href: '/menu/gluten-free', label: 'Gluten-Free' },
+  { id: 'kids', href: '/menu/kids', label: 'Kids' },
 ];
 const crumbs = breadcrumbJsonLd([
   { name: 'Home', url: `${business.url}/` },
