@@ -8,9 +8,9 @@
 [build.environment]
   NODE_VERSION = "22"
 
-# Only the production context indexes and sends analytics. Previews/branches are noindex + silent.
-[context.production.environment]
-  PUBLIC_DEPLOY_ENV = "production"
+# Indexing + GA4 are OFF unless the environment variable PUBLIC_DEPLOY_ENV=production is set
+# in the Netlify UI. Set it ONLY on the project that serves poloslounge.com, at cut-over.
+# The preview project (polos-oct2026-preview) must never have it.
 
 [[headers]]
   for = "/_astro/*"
