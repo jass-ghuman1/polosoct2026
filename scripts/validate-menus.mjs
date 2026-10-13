@@ -19,4 +19,13 @@ for (const f of files) {
   }
   console.log(`✓ ${f}: ${items.length} items`);
 }
+// Contest rules must be complete before a production build (preview builds only warn)
+const biz = JSON.parse(readFileSync(new URL('../src/data/business.json', import.meta.url), 'utf8'));
+if (biz.giveaway?.enabled) {
+  const missing = Object.entries(biz.giveaway.rules).filter(([k, v]) => k.startsWith('REQUIRED_') && !v).map(([k]) => k.replace('REQUIRED_', ''));
+  if (missing.length) {
+    const msg = `giveaway rules incomplete: ${missing.join(', ')}`;
+    if (process.env.PUBLIC_DEPLOY_ENV === 'production') err('business', msg); else console.warn(`! ${msg} (allowed on preview builds)`);
+  }
+}
 if (errors) { console.error(`\n${errors} menu data error(s). Fix them before deploying.`); process.exit(1); }

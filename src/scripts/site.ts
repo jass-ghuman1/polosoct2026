@@ -43,16 +43,28 @@ if (dialog && opener) {
   dialog.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => dialog.close()));
 }
 
-// 4. Conversion tracking: any element with data-track sends a GA4 event (only when gtag is loaded, i.e. production)
+// 4. Conversion tracking. Every [data-track] click (and custom polos:track events) goes to
+//    GA4/Google Ads (gtag), GTM (dataLayer) and Meta Pixel (fbq) — whichever are loaded (production only).
+type Track = { event: string; location?: string; url?: string };
+const conv = (window as any).__polosConversions as { adsSignup?: string; adsReserve?: string } | undefined;
+const metaMap: Record<string, string> = { reserve_click: 'Schedule', order_click: 'InitiateCheckout', email_signup: 'Lead', phone_click: 'Contact', event_enquiry_open: 'Contact', directions_click: 'FindLocation' };
+export function track({ event, location = 'body', url }: Track) {
+  const w = window as any;
+  const params = { link_location: location, link_url: url };
+  w.gtag?.('event', event, params);
+  if (w.dataLayer && !w.gtag) w.dataLayer.push({ event, ...params });
+  else if (w.dataLayer) w.dataLayer.push({ event: `polos_${event}`, ...params });
+  if (w.fbq && metaMap[event]) w.fbq('track', metaMap[event]);
+  if (w.gtag && conv) {
+    if (event === 'email_signup' && conv.adsSignup) w.gtag('event', 'conversion', { send_to: conv.adsSignup });
+    if (event === 'reserve_click' && conv.adsReserve) w.gtag('event', 'conversion', { send_to: conv.adsReserve });
+  }
+}
 document.addEventListener('click', (ev) => {
   const el = (ev.target as Element).closest<HTMLElement>('[data-track]');
-  const gtag = (window as unknown as { gtag?: (...a: unknown[]) => void }).gtag;
-  if (!el || !gtag) return;
-  gtag('event', el.dataset.track, {
-    link_location: el.dataset.trackLocation ?? 'body',
-    link_url: (el as HTMLAnchorElement).href ?? undefined,
-  });
+  if (el) track({ event: el.dataset.track!, location: el.dataset.trackLocation, url: (el as HTMLAnchorElement).href });
 });
+document.addEventListener('polos:track', (ev) => track((ev as CustomEvent<Track>).detail));
 
 // 5. "Today at POLOS" — live open/Happy Hour status in Sherwood Park time
 type Win = { days: string[]; start: string; end: string };

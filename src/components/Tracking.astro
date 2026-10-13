@@ -1,0 +1,45 @@
+---
+// All marketing/analytics tags live here and load ONLY in production (PUBLIC_DEPLOY_ENV=production).
+// IDs come from src/data/business.json → analytics. A null ID means that tag stays off.
+import business from '../data/business.json';
+const a = business.analytics as any;
+const isProd = import.meta.env.PUBLIC_DEPLOY_ENV === 'production';
+const gtm: string | null = a.gtm;
+const ga4: string | null = a.ga4ViaGtm ? null : a.ga4;
+const ads: string | null = a.googleAds?.id ?? null;
+const pixel: string | null = a.metaPixel;
+const needGtag = !!(ga4 || ads);
+const firstGtagId = ga4 ?? ads;
+// Conversion map read by src/scripts/site.ts
+const conversions = {
+  adsSignup: ads && a.googleAds.signupLabel ? `${ads}/${a.googleAds.signupLabel}` : null,
+  adsReserve: ads && a.googleAds.reserveLabel ? `${ads}/${a.googleAds.reserveLabel}` : null,
+};
+---
+{isProd && (
+  <>
+    {gtm && (
+      <script is:inline define:vars={{ gtm }}>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer',gtm);
+      </script>
+    )}
+    {needGtag && <script async src={`https://www.googletagmanager.com/gtag/js?id=${firstGtagId}`}></script>}
+    {needGtag && (
+      <script is:inline define:vars={{ ga4, ads }}>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        window.gtag = gtag;
+        gtag('js', new Date());
+        if (ga4) gtag('config', ga4);
+        if (ads) gtag('config', ads);
+      </script>
+    )}
+    {pixel && (
+      <script is:inline define:vars={{ pixel }}>
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', pixel); fbq('track', 'PageView');
+      </script>
+    )}
+    <script is:inline define:vars={{ conversions }}>window.__polosConversions = conversions;</script>
+  </>
+)}

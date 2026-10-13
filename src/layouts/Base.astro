@@ -3,6 +3,8 @@ import '../styles/base.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import MobileBar from '../components/MobileBar.astro';
+import Tracking from '../components/Tracking.astro';
+import GiftCardPopup from '../components/GiftCardPopup.astro';
 import business from '../data/business.json';
 
 interface Props {
@@ -16,7 +18,7 @@ const site = Astro.site ?? new URL(business.url);
 const canonical = new URL(Astro.url.pathname === '/' ? '/' : Astro.url.pathname.replace(/\/$/, ''), site).href;
 // Only production sends analytics and allows indexing. Staging/previews are noindex and silent.
 const isProd = import.meta.env.PUBLIC_DEPLOY_ENV === 'production';
-const ga = business.analytics.ga4;
+const gtm = (business.analytics as any).gtm;
 ---
 <!doctype html>
 <html lang="en-CA">
@@ -44,19 +46,11 @@ const ga = business.analytics.ga4;
     {jsonLd.map((d) => <script type="application/ld+json" set:html={JSON.stringify(d)} />)}
 
     <script is:inline>document.documentElement.classList.add('js');</script>
-    {isProd && (
-      <>
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${ga}`}></script>
-        <script is:inline define:vars={{ ga }}>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date()); gtag('config', ga);
-        </script>
-      </>
-    )}
+    <Tracking />
     <slot name="head" />
   </head>
   <body>
+    {isProd && gtm && <noscript><iframe src={`https://www.googletagmanager.com/ns.html?id=${gtm}`} height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>}
     <a class="skip-link" href="#main">Skip to content</a>
     <Header />
     <main id="main" tabindex="-1">
@@ -64,6 +58,7 @@ const ga = business.analytics.ga4;
     </main>
     <Footer />
     <MobileBar />
+    {!Astro.url.pathname.startsWith('/giveaway') && <GiftCardPopup />}
     <script>
       import '../scripts/site';
     </script>

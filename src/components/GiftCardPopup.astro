@@ -1,0 +1,83 @@
+---
+// "Win a $200 gift card" email sign-up via Toast guest marketing. Shown on arrival, once per visitor (hidden 30 days after
+// closing, for good after joining). Accessible native <dialog>; bottom sheet on phones.
+import Wordmark from './Wordmark.astro';
+import business from '../data/business.json';
+const g = (business as any).giveaway;
+const toastUrl: string = g.signup.toastSignupUrl;
+---
+{g.enabled && (
+  <dialog id="giveaway" class="gv theme-night" aria-labelledby="gv-title" aria-describedby="gv-desc">
+    <div class="gv-frame">
+      <button class="gv-close" type="button" data-gv-close aria-label="Close">×</button>
+      <div class="gv-mark" aria-hidden="true"><Wordmark decorative /></div>
+      <p class="eyebrow gv-eyebrow">Join the Polos list</p>
+      <h2 id="gv-title" class="gv-title">Win a <em>$200</em> gift card.</h2>
+      <p id="gv-desc" class="gv-desc">Sign up for news, events and offers from Polos. Each quarter we draw one subscriber to win a {g.prize}.</p>
+
+      <a class="btn btn--primary gv-submit" href={toastUrl} target="_blank" rel="noopener" data-gv-join autofocus>Enter to Win</a>
+      <p class="gv-note">Opens our Toast sign-up page. Enter your email there to join the list.</p>
+
+      <p class="gv-fine">No purchase necessary. Skill-testing question required. <a href="/giveaway">Full contest rules</a>.</p>
+      <button class="gv-skip" type="button" data-gv-close>No thanks</button>
+    </div>
+  </dialog>
+)}
+
+<script>
+  import { track } from '../scripts/site';
+  const dlg = document.getElementById('giveaway') as HTMLDialogElement | null;
+  const KEY = 'polos-giveaway';
+  const read = () => { try { return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch { return null; } };
+  const save = (state: string) => { try { localStorage.setItem(KEY, JSON.stringify({ state, at: Date.now() })); } catch { /* private mode */ } };
+  const seen = read();
+  const suppressed = seen && (seen.state === 'joined' || Date.now() - seen.at < 30 * 864e5);
+
+  if (dlg && !suppressed) {
+    // "Immediately on arrival", but after the page has painted so it never delays the menu or hurts LCP
+    const open = () => { if (!dlg.open && !document.querySelector('dialog[open]')) { dlg.showModal(); track({ event: 'giveaway_view' }); } };
+    if (document.readyState === 'complete') setTimeout(open, 600); else addEventListener('load', () => setTimeout(open, 600), { once: true });
+  }
+  dlg?.querySelectorAll('[data-gv-close]').forEach((b) => b.addEventListener('click', () => dlg.close()));
+  dlg?.addEventListener('close', () => { if (read()?.state !== 'joined') save('closed'); });
+  dlg?.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); }); // click on backdrop
+
+  // Footer / anywhere: <a data-gv-open> reopens it
+  document.querySelectorAll('[data-gv-open]').forEach((a) => a.addEventListener('click', (e) => { e.preventDefault(); dlg?.showModal(); }));
+
+  dlg?.querySelector('[data-gv-join]')?.addEventListener('click', () => {
+    save('joined');
+    track({ event: 'email_signup', location: 'giveaway_popup' });
+    setTimeout(() => dlg.close(), 300);
+  });
+</script>
+
+<style>
+  .gv { width: min(100% - 2rem, 34rem); max-height: calc(100dvh - 2rem); padding: 0; border: 0; background: var(--espresso); color: var(--ivory-on-night); overflow: auto; }
+  .gv::backdrop { background: rgba(20, 9, 0, 0.62); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); }
+  .gv[open] { animation: gv-in 500ms var(--ease) both; }
+  @keyframes gv-in { from { opacity: 0; transform: translateY(16px) scale(0.98); } }
+  .gv-frame { position: relative; margin: var(--s-3); padding: var(--s-7) var(--s-6) var(--s-5); border: 1px solid var(--gold); outline: 1px solid rgba(184,154,102,.45); outline-offset: -5px; text-align: center; display: grid; gap: var(--s-4); justify-items: center; }
+  .gv-close { position: absolute; top: var(--s-2); right: var(--s-2); width: 2.75rem; height: 2.75rem; background: none; border: 0; color: var(--stone-night); font-size: 1.8rem; line-height: 1; cursor: pointer; }
+  .gv-close:hover { color: var(--gold); }
+  .gv-mark { width: 7.5rem; color: var(--gold); }
+  .gv-eyebrow { color: var(--gold); }
+  .gv-title { font-size: clamp(2.2rem, 1.6rem + 2.4vw, 3.2rem); line-height: 1.05; }
+  .gv-title em { color: var(--gold); }
+  .gv-title-sm { font-size: var(--fs-h3); }
+  .gv-desc { font-size: 1.1rem; color: var(--ivory-on-night); max-width: 26rem; }
+  .gv-submit { width: 100%; }
+  .gv-note { font-size: 0.95rem; color: var(--stone-night); }
+  .gv-fine { font-size: 0.9rem; color: var(--stone-night); }
+  .gv-fine a { color: var(--ivory-on-night); }
+  .gv-skip { background: none; border: 0; cursor: pointer; font-family: var(--font-sans); font-weight: 600; font-size: 0.7rem; letter-spacing: var(--track-ui); text-transform: uppercase; color: var(--stone-night); min-height: 2.75rem; text-decoration: underline; text-underline-offset: 4px; }
+
+  /* Phones: a bottom sheet rather than a full-screen takeover, so the page stays visible behind it */
+  @media (max-width: 599px) {
+    .gv { width: 100%; max-width: none; margin: auto 0 0; max-height: 88dvh; }
+    .gv[open] { animation: gv-up 450ms var(--ease) both; }
+    .gv-frame { padding: var(--s-6) var(--s-4) var(--s-4); gap: var(--s-3); }
+    .gv-mark { width: 5.5rem; }
+    @keyframes gv-up { from { transform: translateY(100%); } }
+  }
+</style>

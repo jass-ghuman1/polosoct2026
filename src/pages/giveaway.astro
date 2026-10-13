@@ -1,0 +1,45 @@
+---
+// Contest rules for the "Win a $200 gift card" sign-up. All facts come from business.json → giveaway.rules.
+// Production builds fail while any REQUIRED_ field is empty (scripts/validate-menus.mjs).
+import Base from '../layouts/Base.astro';
+import business from '../data/business.json';
+const g = (business as any).giveaway;
+const r = g.rules;
+const tbc = (v: string | null) => v ?? 'To be confirmed';
+const rows = [
+  ['Prize', g.prize],
+  ['Draws', `${g.frequency}. ${tbc(r.REQUIRED_drawDates)}`],
+  ['Entry deadlines', tbc(r.REQUIRED_entryDeadlines)],
+  ['How to enter', 'Sign up for the Polos email list through our Toast sign-up page. One entry per person per draw.'],
+  ['Purchase', r.REQUIRED_noPurchase],
+  ['Eligibility', tbc(r.REQUIRED_eligibility)],
+  ['Odds', r.oddsStatement],
+  ['Skill-testing question', r.REQUIRED_skillTestingQuestion],
+  ['Winner notification', tbc(r.REQUIRED_winnerNotification)],
+  ['Promoter', tbc(r.REQUIRED_promoter)],
+  ['Questions', tbc(r.REQUIRED_contactEmail)],
+];
+---
+<Base title="Win a $200 Gift Card | Contest Rules | Polos Social Lounge" description="Join the Polos Social Lounge email list for a chance to win a $200 gift card. Contest rules and eligibility.">
+  <section class="gv-page container">
+    <p class="eyebrow">Join the Polos list</p>
+    <h1 class="h1">Win a <em>$200</em> gift card</h1>
+    <p class="lede">Sign up for news, events and offers from Polos. Each quarter we draw one subscriber to win a {g.prize}.</p>
+    <a class="btn btn--primary" href={g.signup.toastSignupUrl} target="_blank" rel="noopener" data-track="email_signup" data-track-location="giveaway_page">Sign Up & Enter</a>
+    <h2 class="rule-title rules-h"><span>Contest rules</span></h2>
+    <dl class="rules">
+      {rows.map(([k, v]) => <div><dt>{k}</dt><dd class:list={{ tbc: v.includes('To be confirmed') }}>{v}</dd></div>)}
+    </dl>
+  </section>
+</Base>
+<style>
+  .gv-page { padding-top: clamp(7rem, 5rem + 5vw, 10rem); padding-bottom: var(--section-pad); display: grid; gap: var(--s-5); justify-items: center; text-align: center; max-width: 46rem; }
+  .gv-page em { color: var(--bronze); }
+  .rules-h { width: 100%; margin-top: var(--s-7); font-family: var(--font-sans); font-weight: 600; font-size: 1rem; letter-spacing: 0.3em; text-transform: uppercase; }
+  .rules { width: 100%; text-align: left; margin: 0; }
+  .rules div { display: grid; grid-template-columns: 12rem 1fr; gap: var(--s-4); padding-block: var(--s-3); border-bottom: 1px solid var(--champagne-line); }
+  .rules dt { font-family: var(--font-sans); font-weight: 600; font-size: 0.75rem; letter-spacing: var(--track-ui); text-transform: uppercase; color: var(--stone); padding-top: 0.3em; }
+  .rules dd { margin: 0; }
+  .rules .tbc { color: #9A3B1C; font-style: italic; }
+  @media (max-width: 599px) { .rules div { grid-template-columns: 1fr; gap: var(--s-1); } }
+</style>

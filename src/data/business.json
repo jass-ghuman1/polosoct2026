@@ -124,6 +124,37 @@
     "play": "https://polos-games-fun-1631b2.netlify.app"
   },
   "analytics": {
-    "ga4": "G-9T3EQWCEN8"
+    "_note": "Tags load ONLY on production (PUBLIC_DEPLOY_ENV=production). Leave an ID as null to keep that tag off. If GTM is used to fire GA4, set ga4ViaGtm=true so GA4 is not loaded twice.",
+    "ga4": "G-9T3EQWCEN8",
+    "gtm": null,
+    "ga4ViaGtm": false,
+    "metaPixel": null,
+    "googleAds": {
+      "id": null,
+      "signupLabel": null,
+      "reserveLabel": null
+    }
+  },
+  "giveaway": {
+    "_note": "Email sign-up popup: 'Win a $200 gift card'. Production build refuses to run while any field marked REQUIRED is null.",
+    "enabled": true,
+    "prize": "$200 Polos gift card",
+    "frequency": "Quarterly draw",
+    "signup": {
+      "provider": "toast",
+      "toastSignupUrl": "https://www.toasttab.com/polos-social-lounge-950-emerald-dr/marketing-signup",
+      "_note": "Toast's sign-up page uses reCAPTCHA, so guests complete it on Toast (opens in a new tab). Emails land directly in Toast guest marketing; the website stores nothing."
+    },
+    "rules": {
+      "REQUIRED_promoter": null,
+      "REQUIRED_eligibility": null,
+      "REQUIRED_drawDates": null,
+      "REQUIRED_entryDeadlines": null,
+      "REQUIRED_winnerNotification": null,
+      "REQUIRED_skillTestingQuestion": "Winner must correctly answer a mathematical skill-testing question.",
+      "REQUIRED_noPurchase": "No purchase necessary.",
+      "REQUIRED_contactEmail": null,
+      "oddsStatement": "Odds of winning depend on the number of eligible entries received for that draw."
+    }
   }
 }
