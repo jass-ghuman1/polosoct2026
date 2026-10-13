@@ -28,7 +28,7 @@ const logo = lockup.replace(/role="img" aria-label="[^"]*"/, 'role="img" aria-la
     <header class="top no-print">
       <p class="eyebrow">POLOS Social Lounge · Staff</p>
       <h1>Banquet Invoice</h1>
-      <p class="muted">Fill in the event details. The invoice is emailed to Raj when you press <strong>Create &amp; Send</strong>.</p>
+      <p class="muted">Fill in the event details. The invoice is emailed to Raj and the GM when you press <strong>Create &amp; Send</strong>.</p>
     </header>
 
     <div class="grid">
@@ -64,6 +64,10 @@ const logo = lockup.replace(/role="img" aria-label="[^"]*"/, 'role="img" aria-la
         <fieldset>
           <legend>Drinks &amp; Charges</legend>
           <label>Drinks total ($)<input name="drinks_total" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00" /></label>
+          <div class="row">
+            <label>Misc. description<input name="misc_description" placeholder="e.g. Room fee, cake cutting" autocomplete="off" /></label>
+            <label>Misc. charges ($)<input name="misc_total" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00" /></label>
+          </div>
           <div class="row">
             <label>Gratuity
               <select name="gratuity_rate">
@@ -135,6 +139,12 @@ const logo = lockup.replace(/role="img" aria-label="[^"]*"/, 'role="img" aria-la
               <td class="num" data-o="drinks_total">$0.00</td>
               <td class="num" data-o="drinks_total2">$0.00</td>
             </tr>
+            <tr id="misc-row" hidden>
+              <td>Misc. Charges<small data-o="misc_description"></small></td>
+              <td class="num">1</td>
+              <td class="num" data-o="misc_total">$0.00</td>
+              <td class="num" data-o="misc_total2">$0.00</td>
+            </tr>
           </tbody>
         </table>
 
@@ -154,7 +164,7 @@ const logo = lockup.replace(/role="img" aria-label="[^"]*"/, 'role="img" aria-la
 
     <div id="done" class="done no-print" hidden>
       <p class="eyebrow">Sent</p>
-      <p>Invoice <b id="done-no"></b> was emailed to Raj.</p>
+      <p>Invoice <b id="done-no"></b> was emailed to Raj and the GM.</p>
       <div class="done-btns">
         <button type="button" class="btn" id="print">Print / Save PDF</button>
         <button type="button" class="btn ghost" id="new">New Invoice</button>
@@ -181,8 +191,9 @@ const logo = lockup.replace(/role="img" aria-label="[^"]*"/, 'role="img" aria-la
       const drinks = r2(num('drinks_total'));
       const rate = Number($('gratuity_rate').value);
       const food = r2(pp * g);
-      const sub = r2(food + drinks);
-      const grat = r2(sub * rate / 100);
+      const misc = r2(num('misc_total'));
+      const sub = r2(food + drinks + misc);
+      const grat = r2((food + drinks) * rate / 100); // gratuity on food + drinks only, not misc charges
       const gst = r2((sub + grat) * 0.05); // GST applies to the mandatory gratuity
       const total = r2(sub + grat + gst);
 
@@ -207,6 +218,10 @@ const logo = lockup.replace(/role="img" aria-label="[^"]*"/, 'role="img" aria-la
       out('food_total', money(food));
       out('drinks_total', money(drinks));
       out('drinks_total2', money(drinks));
+      out('misc_total', money(misc));
+      out('misc_total2', money(misc));
+      out('misc_description', $('misc_description').value);
+      document.getElementById('misc-row').hidden = !misc;
       out('subtotal', money(sub));
       out('gratuity_rate', rate);
       out('gratuity_amount', money(grat));
@@ -221,6 +236,7 @@ const logo = lockup.replace(/role="img" aria-label="[^"]*"/, 'role="img" aria-la
         'Event date: ' + fmtDate($('event_date').value) + '\n' +
         'Catering: ' + $('catering_type').value + ' — ' + g + ' guests x ' + money(pp) + ' = ' + money(food) + '\n' +
         'Drinks: ' + money(drinks) + '\n' +
+        (misc ? 'Misc. charges' + ($('misc_description').value ? ' (' + $('misc_description').value + ')' : '') + ': ' + money(misc) + '\n' : '') +
         'Subtotal: ' + money(sub) + '\n' +
         'Gratuity ' + rate + '%: ' + money(grat) + '\n' +
         'GST 5%: ' + money(gst) + '\n' +
