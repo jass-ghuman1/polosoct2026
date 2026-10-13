@@ -1,0 +1,350 @@
+---
+// Staff tool: Banquet invoice creator. Not linked anywhere on the site, never indexed, not in the sitemap.
+// On "Create & Send" the invoice is submitted to the Netlify form "banquet-invoice".
+// Netlify emails every submission to raj@poloslounge.com (set in Netlify → Forms → Form notifications).
+import '@fontsource/josefin-sans/latin-300.css';
+import '@fontsource/josefin-sans/latin-600.css';
+import '@fontsource/cormorant-garamond/latin-500.css';
+import '@fontsource/cormorant-garamond/latin-600.css';
+import '../styles/tokens.css';
+import lockup from '../assets/brand/polos-lockup.svg?raw';
+import business from '../data/business.json';
+
+// Add the GST registration number here to print it on every invoice (leave '' to hide the line).
+const GST_NUMBER = '';
+const logo = lockup.replace(/role="img" aria-label="[^"]*"/, 'role="img" aria-label="POLOS Social Lounge"');
+---
+<!doctype html>
+<html lang="en-CA">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Banquet Invoice · POLOS</title>
+  <link rel="icon" href="/assets/v1/favicon-32.png" sizes="32x32" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="top no-print">
+      <p class="eyebrow">POLOS Social Lounge · Staff</p>
+      <h1>Banquet Invoice</h1>
+      <p class="muted">Fill in the event details. The invoice is emailed to Raj when you press <strong>Create &amp; Send</strong>.</p>
+    </header>
+
+    <div class="grid">
+      <!-- FORM -->
+      <form id="inv-form" name="banquet-invoice" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="card no-print" novalidate>
+        <input type="hidden" name="form-name" value="banquet-invoice" />
+        <p class="hidden"><label>Leave blank <input name="bot-field" /></label></p>
+
+        <fieldset>
+          <legend>Guest &amp; Event</legend>
+          <label>Guest / Host name *<input name="guest_name" required autocomplete="off" /></label>
+          <label>Company / Organization<input name="company" autocomplete="off" /></label>
+          <div class="row">
+            <label>Phone<input name="phone" type="tel" autocomplete="off" /></label>
+            <label>Email<input name="guest_email" type="email" autocomplete="off" /></label>
+          </div>
+          <div class="row">
+            <label>Event date *<input name="event_date" type="date" required /></label>
+            <label>Invoice date<input name="invoice_date" type="date" required /></label>
+          </div>
+          <label>Event / Occasion<input name="occasion" placeholder="e.g. Birthday, Corporate lunch" autocomplete="off" /></label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Catering</legend>
+          <label>Type of catering *<input name="catering_type" required placeholder="e.g. Buffet 3 – Prime Rib, Custom menu" autocomplete="off" /></label>
+          <div class="row">
+            <label>Price per person ($) *<input name="price_per_person" type="number" inputmode="decimal" min="0" step="0.01" required /></label>
+            <label>Number of guests *<input name="guests" type="number" inputmode="numeric" min="1" step="1" required /></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Drinks &amp; Charges</legend>
+          <label>Drinks total ($)<input name="drinks_total" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00" /></label>
+          <div class="row">
+            <label>Gratuity
+              <select name="gratuity_rate">
+                <option value="15">15%</option>
+                <option value="18" selected>18%</option>
+              </select>
+            </label>
+            <label>GST<input value="5%" readonly tabindex="-1" class="locked" /></label>
+          </div>
+          <label>Notes<textarea name="notes" rows="3" placeholder="Deposit received, dietary notes, room, etc."></textarea></label>
+          <label>Prepared by (server) *<input name="prepared_by" required autocomplete="off" /></label>
+        </fieldset>
+
+        <!-- Calculated values, sent with the email -->
+        <input type="hidden" name="invoice_number" />
+        <input type="hidden" name="food_total" />
+        <input type="hidden" name="subtotal" />
+        <input type="hidden" name="gratuity_amount" />
+        <input type="hidden" name="gst_amount" />
+        <input type="hidden" name="invoice_total" />
+        <input type="hidden" name="summary" />
+
+        <p id="err" class="err" role="alert"></p>
+        <button type="submit" id="send" class="btn">Create &amp; Send Invoice</button>
+      </form>
+
+      <!-- INVOICE PREVIEW (this is what prints) -->
+      <section class="invoice" id="invoice" aria-label="Invoice preview">
+        <div class="inv-head">
+          <div class="logo" set:html={logo} />
+          <div class="inv-meta">
+            <p class="inv-title">Invoice</p>
+            <p><span>No.</span> <b data-o="invoice_number">—</b></p>
+            <p><span>Date</span> <b data-o="invoice_date">—</b></p>
+          </div>
+        </div>
+        <p class="biz">{business.name} · {business.address.line1}, {business.address.city}, {business.address.region} {business.address.postalCode} · {business.phone.display}{GST_NUMBER && <> · GST # {GST_NUMBER}</>}</p>
+
+        <div class="double-rule"></div>
+
+        <div class="bill">
+          <div>
+            <p class="lbl">Billed to</p>
+            <p class="big" data-o="guest_name">Guest name</p>
+            <p data-o="company"></p>
+            <p data-o="phone"></p>
+            <p data-o="guest_email"></p>
+          </div>
+          <div>
+            <p class="lbl">Event</p>
+            <p class="big" data-o="event_date">Event date</p>
+            <p data-o="occasion"></p>
+            <p data-o="guests_line"></p>
+          </div>
+        </div>
+
+        <table class="lines">
+          <thead><tr><th>Description</th><th class="num">Qty</th><th class="num">Rate</th><th class="num">Amount</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><span data-o="catering_type">Catering</span><small>Banquet catering, per person</small></td>
+              <td class="num" data-o="guests">0</td>
+              <td class="num" data-o="price_per_person">$0.00</td>
+              <td class="num" data-o="food_total">$0.00</td>
+            </tr>
+            <tr>
+              <td>Beverages<small>Bar tab, all drinks on one bill</small></td>
+              <td class="num">1</td>
+              <td class="num" data-o="drinks_total">$0.00</td>
+              <td class="num" data-o="drinks_total2">$0.00</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="totals">
+          <tr><td>Subtotal</td><td class="num" data-o="subtotal">$0.00</td></tr>
+          <tr><td>Gratuity (<span data-o="gratuity_rate">18</span>%)</td><td class="num" data-o="gratuity_amount">$0.00</td></tr>
+          <tr><td>GST (5%)</td><td class="num" data-o="gst_amount">$0.00</td></tr>
+          <tr class="grand"><td>Total Due</td><td class="num" data-o="invoice_total">$0.00</td></tr>
+        </table>
+
+        <p class="notes" data-o="notes"></p>
+
+        <div class="double-rule"></div>
+        <p class="foot">Thank you for celebrating with us. <span class="muted">Prepared by <span data-o="prepared_by">—</span></span></p>
+      </section>
+    </div>
+
+    <div id="done" class="done no-print" hidden>
+      <p class="eyebrow">Sent</p>
+      <p>Invoice <b id="done-no"></b> was emailed to Raj.</p>
+      <div class="done-btns">
+        <button type="button" class="btn" id="print">Print / Save PDF</button>
+        <button type="button" class="btn ghost" id="new">New Invoice</button>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+  (function () {
+    const f = document.getElementById('inv-form');
+    const $ = (n) => f.elements[n];
+    const money = (n) => new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' }).format(n || 0);
+    const r2 = (n) => Math.round((n + Number.EPSILON) * 100) / 100;
+    const num = (n) => { const v = parseFloat($(n).value); return isFinite(v) && v > 0 ? v : 0; };
+    const fmtDate = (s) => { if (!s) return ''; const [y, m, d] = s.split('-').map(Number); return new Date(y, m - 1, d).toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' }); };
+    const out = (k, v) => document.querySelectorAll('[data-o="' + k + '"]').forEach((el) => { el.textContent = v; });
+    const pad = (n) => String(n).padStart(2, '0');
+    const today = () => { const d = new Date(); return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); };
+    const newNo = () => { const d = new Date(); return 'PB-' + d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()) + '-' + pad(d.getHours()) + pad(d.getMinutes()) + pad(d.getSeconds()); };
+
+    function calc() {
+      const pp = num('price_per_person');
+      const g = Math.floor(num('guests'));
+      const drinks = r2(num('drinks_total'));
+      const rate = Number($('gratuity_rate').value);
+      const food = r2(pp * g);
+      const sub = r2(food + drinks);
+      const grat = r2(sub * rate / 100);
+      const gst = r2((sub + grat) * 0.05); // GST applies to the mandatory gratuity
+      const total = r2(sub + grat + gst);
+
+      $('food_total').value = food.toFixed(2);
+      $('subtotal').value = sub.toFixed(2);
+      $('gratuity_amount').value = grat.toFixed(2);
+      $('gst_amount').value = gst.toFixed(2);
+      $('invoice_total').value = total.toFixed(2);
+
+      out('invoice_number', $('invoice_number').value);
+      out('invoice_date', fmtDate($('invoice_date').value) || '—');
+      out('guest_name', $('guest_name').value || 'Guest name');
+      out('company', $('company').value);
+      out('phone', $('phone').value);
+      out('guest_email', $('guest_email').value);
+      out('event_date', fmtDate($('event_date').value) || 'Event date');
+      out('occasion', $('occasion').value);
+      out('guests_line', g ? g + ' guests' : '');
+      out('catering_type', $('catering_type').value || 'Catering');
+      out('guests', g);
+      out('price_per_person', money(pp));
+      out('food_total', money(food));
+      out('drinks_total', money(drinks));
+      out('drinks_total2', money(drinks));
+      out('subtotal', money(sub));
+      out('gratuity_rate', rate);
+      out('gratuity_amount', money(grat));
+      out('gst_amount', money(gst));
+      out('invoice_total', money(total));
+      out('notes', $('notes').value);
+      out('prepared_by', $('prepared_by').value || '—');
+
+      $('summary').value =
+        'POLOS BANQUET INVOICE ' + $('invoice_number').value + '\n' +
+        'Guest: ' + $('guest_name').value + ($('company').value ? ' (' + $('company').value + ')' : '') + '\n' +
+        'Event date: ' + fmtDate($('event_date').value) + '\n' +
+        'Catering: ' + $('catering_type').value + ' — ' + g + ' guests x ' + money(pp) + ' = ' + money(food) + '\n' +
+        'Drinks: ' + money(drinks) + '\n' +
+        'Subtotal: ' + money(sub) + '\n' +
+        'Gratuity ' + rate + '%: ' + money(grat) + '\n' +
+        'GST 5%: ' + money(gst) + '\n' +
+        'TOTAL DUE: ' + money(total) + '\n' +
+        'Prepared by: ' + $('prepared_by').value;
+    }
+
+    function reset() {
+      f.reset();
+      $('invoice_date').value = today();
+      $('invoice_number').value = newNo();
+      document.getElementById('done').hidden = true;
+      f.hidden = false;
+      document.getElementById('err').textContent = '';
+      calc();
+    }
+
+    f.addEventListener('input', calc);
+    f.addEventListener('change', calc);
+
+    f.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      calc();
+      const err = document.getElementById('err');
+      const missing = [...f.querySelectorAll('[required]')].filter((el) => !String(el.value).trim()).map((el) => el.closest('label').firstChild.textContent.replace('*', '').trim());
+      if (num('guests') < 1) missing.push('Number of guests');
+      if (missing.length) { err.textContent = 'Please fill in: ' + [...new Set(missing)].join(', '); return; }
+      err.textContent = '';
+      const btn = document.getElementById('send');
+      btn.disabled = true; btn.textContent = 'Sending…';
+      try {
+        const res = await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(new FormData(f)).toString() });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        document.getElementById('done-no').textContent = $('invoice_number').value;
+        f.hidden = true;
+        document.getElementById('done').hidden = false;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } catch (x) {
+        err.textContent = 'Could not send. Check the internet connection and try again. (' + x.message + ')';
+      } finally {
+        btn.disabled = false; btn.textContent = 'Create & Send Invoice';
+      }
+    });
+
+    document.getElementById('print').addEventListener('click', () => window.print());
+    document.getElementById('new').addEventListener('click', reset);
+    reset();
+  })();
+  </script>
+
+  <style is:global>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; background: var(--ivory); color: var(--charcoal); font-family: var(--font-serif); font-weight: 500; font-size: 1.125rem; line-height: 1.5; -webkit-font-smoothing: antialiased; font-variant-numeric: lining-nums; }
+    p { margin: 0; }
+    .wrap { width: min(100% - 2rem, 76rem); margin: 0 auto; padding: 2rem 0 4rem; }
+    .eyebrow { font-family: var(--font-sans); font-weight: 600; font-size: .78rem; letter-spacing: .28em; text-transform: uppercase; color: var(--bronze); }
+    .muted { color: var(--stone); }
+    .top { margin-bottom: 1.75rem; }
+    .top h1 { font-size: clamp(2.2rem, 1.6rem + 2.5vw, 3.4rem); font-weight: 500; margin: .25rem 0 .5rem; line-height: 1.05; }
+    .hidden, [hidden] { display: none !important; }
+
+    .grid { display: grid; grid-template-columns: minmax(0, 26rem) minmax(0, 1fr); gap: 2rem; align-items: start; }
+    @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+
+    .card { background: #fff; border: 1px solid var(--champagne-line); padding: 1.5rem; }
+    fieldset { border: 0; padding: 0; margin: 0 0 1.5rem; display: grid; gap: .9rem; }
+    legend { font-family: var(--font-sans); font-weight: 600; font-size: .75rem; letter-spacing: .24em; text-transform: uppercase; color: var(--bronze); padding: 0 0 .6rem; border-bottom: 1px solid var(--gold); width: 100%; margin-bottom: .9rem; }
+    label { display: grid; gap: .3rem; font-family: var(--font-sans); font-weight: 300; font-size: .85rem; letter-spacing: .04em; color: var(--charcoal); }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: .9rem; }
+    @media (max-width: 420px) { .row { grid-template-columns: 1fr; } }
+    input, select, textarea { font: 500 1.05rem/1.3 var(--font-serif); color: var(--charcoal); background: var(--ivory); border: 1px solid var(--champagne-line); border-radius: 0; padding: .65rem .75rem; width: 100%; min-height: 2.9rem; }
+    input:focus, select:focus, textarea:focus { outline: 2px solid var(--gold); outline-offset: 0; border-color: var(--gold); background: #fff; }
+    .locked { color: var(--stone); background: var(--ivory-warm); }
+    .err { color: #9B2C1F; font-family: var(--font-sans); font-size: .85rem; min-height: 1.2em; margin-bottom: .6rem; }
+    .btn { font-family: var(--font-sans); font-weight: 600; font-size: .82rem; letter-spacing: .2em; text-transform: uppercase; background: var(--espresso); color: var(--ivory); border: 1px solid var(--espresso); padding: 1rem 1.5rem; width: 100%; cursor: pointer; transition: background .2s, color .2s; }
+    .btn:hover { background: var(--bronze); border-color: var(--bronze); }
+    .btn:disabled { opacity: .6; cursor: wait; }
+    .btn.ghost { background: transparent; color: var(--espresso); }
+    .btn.ghost:hover { background: var(--ivory-warm); color: var(--espresso); }
+
+    .done { background: #fff; border: 1px solid var(--gold); padding: 1.5rem; margin-top: 1.5rem; display: grid; gap: .6rem; }
+    .done-btns { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; margin-top: .5rem; }
+    .grid:has(+ .done:not([hidden])) { grid-template-columns: 1fr; }
+
+    /* Invoice */
+    .invoice { background: #fff; border: 1px solid var(--champagne-line); padding: clamp(1.25rem, 1rem + 2vw, 2.75rem); box-shadow: 0 1px 0 var(--champagne-line), 0 20px 40px -30px rgba(46,40,34,.35); }
+    .inv-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
+    .logo { width: clamp(9rem, 7rem + 8vw, 13rem); color: var(--logo-gold); line-height: 0; }
+    .logo svg { width: 100%; height: auto; display: block; }
+    .inv-meta { text-align: right; font-family: var(--font-sans); font-size: .8rem; letter-spacing: .06em; }
+    .inv-meta span { color: var(--stone); text-transform: uppercase; letter-spacing: .18em; font-size: .7rem; margin-right: .4rem; }
+    .inv-meta b { font-weight: 600; }
+    .inv-title { font-family: var(--font-serif); font-size: 2.2rem; color: var(--bronze); letter-spacing: .04em; line-height: 1; margin-bottom: .6rem; }
+    .biz { font-family: var(--font-sans); font-weight: 300; font-size: .74rem; letter-spacing: .06em; color: var(--stone); margin-top: 1rem; }
+    .double-rule { height: 4px; border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); margin: 1.25rem 0; }
+    .bill { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+    .lbl { font-family: var(--font-sans); font-weight: 600; font-size: .7rem; letter-spacing: .24em; text-transform: uppercase; color: var(--bronze); margin-bottom: .3rem; }
+    .big { font-size: 1.35rem; font-weight: 600; }
+    .bill p:empty { display: none; }
+    table { width: 100%; border-collapse: collapse; }
+    .lines th { font-family: var(--font-sans); font-weight: 600; font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: var(--bronze); text-align: left; padding: .5rem .4rem; border-bottom: 1px solid var(--gold); }
+    .lines td { padding: .75rem .4rem; border-bottom: 1px solid var(--champagne-line); vertical-align: top; }
+    .lines small { display: block; font-family: var(--font-sans); font-weight: 300; font-size: .72rem; color: var(--stone); letter-spacing: .04em; }
+    .num { text-align: right; white-space: nowrap; }
+    .lines th.num { text-align: right; }
+    .totals { width: min(100%, 20rem); margin: 1rem 0 0 auto; }
+    .totals td { padding: .35rem .4rem; }
+    .totals .grand td { border-top: 1px solid var(--gold); border-bottom: 3px double var(--gold); padding: .7rem .4rem; font-size: 1.4rem; font-weight: 600; }
+    .totals .grand td:first-child { font-family: var(--font-sans); font-size: .78rem; letter-spacing: .22em; text-transform: uppercase; color: var(--bronze); vertical-align: middle; }
+    .notes { margin-top: 1.25rem; font-style: italic; white-space: pre-wrap; color: var(--stone); }
+    .notes:empty { display: none; }
+    .foot { text-align: center; font-style: italic; }
+    .foot .muted { display: block; font-style: normal; font-family: var(--font-sans); font-size: .72rem; letter-spacing: .08em; margin-top: .3rem; }
+    @media (max-width: 520px) { .bill { grid-template-columns: 1fr; } .lines th:nth-child(2), .lines td:nth-child(2) { display: none; } }
+
+    @media print {
+      @page { size: letter; margin: 14mm; }
+      body { background: #fff; }
+      .no-print { display: none !important; }
+      .wrap { width: 100%; padding: 0; }
+      .grid { display: block; }
+      .invoice { border: 0; box-shadow: none; padding: 0; }
+      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</body>
+</html>
