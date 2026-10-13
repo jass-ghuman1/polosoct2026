@@ -11,13 +11,13 @@ const b = business;
 const occasions = ['Corporate events', 'Christmas parties', 'Birthdays & celebrations', 'Business dinners', 'Group dining'];
 const jsonLd = [breadcrumbJsonLd([{ name: 'Home', url: `${b.url}/` }, { name: 'Private Events', url: `${b.url}/private-events` }])];
 ---
-<Base title="Private Events & Banquets in Sherwood Park | Polos Social Lounge" description="Corporate events, Christmas parties, birthdays and group dining at Polos Social Lounge in Sherwood Park. Banquet packages from $30 per person, full bar service with 16 beers on tap." jsonLd={jsonLd}>
+<Base title="Private Events, Banquets & Catering in Sherwood Park | Polos Social Lounge" description="Banquet and catering buffets at Polos Social Lounge in Sherwood Park for corporate lunches, holiday parties, birthdays and private gatherings. Packages from $33 per guest." jsonLd={jsonLd}>
   <div class="theme-night" data-theme="night">
     <header class="page-hero container">
       <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li aria-current="page">Private Events</li></ol></nav>
-      <p class="eyebrow">Private events & banquets · Sherwood Park</p>
-      <h1 class="h1">{ev.title}</h1>
-      <p class="lede">{ev.intro}</p>
+      <p class="eyebrow">{ev.title} · Sherwood Park</p>
+      <h1 class="h1">{ev.tagline}</h1>
+      {ev.intro.map((t) => <p class="lede">{t}</p>)}
       <ul class="occasions">{occasions.map((o) => <li>{o}</li>)}</ul>
       <div class="btn-row">
         <a class="btn btn--primary" href={b.links.eventLead} data-track="event_enquiry_open" data-track-location="events_hero">Plan Your Event</a>
@@ -32,38 +32,64 @@ const jsonLd = [breadcrumbJsonLd([{ name: 'Home', url: `${b.url}/` }, { name: 'P
     </div>
 
     <section class="container packages" aria-labelledby="pk-h">
-      <h2 id="pk-h" class="rule-title section-title" style="color: var(--gold)"><span>Banquet packages</span></h2>
+      <h2 id="pk-h" class="rule-title section-title gold"><span>Buffet packages</span></h2>
       <ul class="pk-grid">
         {ev.packages.map((p, i) => (
-          <li class="pk" data-reveal style={`--i:${i % 3}`}>
-            <div class="pk-head"><h3 class="pk-name">{p.name}</h3><p class="pk-price">${p.price}<span>/{p.unit}</span></p></div>
+          <li class:list={['pk', { 'pk--wide': p.sections.length > 2 }]} id={p.id} data-reveal style={`--i:${i % 2}`}>
+            <div class="pk-head">
+              <h3 class="pk-name">{p.name}</h3>
+              <p class="pk-price">${p.price}<span> per guest</span></p>
+            </div>
             <p class="pk-desc">{p.description}</p>
-            {p.choices?.map((c) => <p class="pk-choice"><span>{c.label}:</span> {c.options}</p>)}
+            <div class="pk-sections">
+              {p.sections.map((sec) => (
+                <div class="pk-sec">
+                  <h4 class="pk-sec-title">{sec.title}</h4>
+                  <ul>
+                    {sec.items.map((it: any) => (
+                      <li>
+                        {it.name}
+                        {it.note && <span class="pk-note">{it.note}</span>}
+                        {it.choices && <span class="pk-note">{it.choices.join(' or ')}</span>}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
           </li>
         ))}
       </ul>
+      <p class="fine muted">{ev.fine_print}</p>
     </section>
 
     <section class="container ev-info">
       <div class="ev-card">
+        <h2 class="section-title gold">{ev.extras.title}</h2>
+        <p class="ev-lead">{ev.extras.lead}</p>
+        <p>{ev.extras.text}</p>
+      </div>
+      <div class="ev-card">
         <h2 class="section-title gold">{ev.bar.title}</h2>
-        <p>{ev.bar.text}</p>
+        <p>{ev.bar.lead}</p>
+        <ul class="bar-list">{ev.bar.options.map((o) => <li>{o}</li>)}</ul>
         <p class="muted">{ev.bar.note}</p>
       </div>
       <div class="ev-card">
-        <h2 class="section-title gold">Booking</h2>
-        <p>{ev.booking_fee}</p>
+        <h2 class="section-title gold">{ev.dietary.title}</h2>
+        {ev.dietary.text.map((t, i) => <p class:list={{ muted: i === 2 }}>{t}</p>)}
       </div>
-      <p class="muted ev-allergy">{ev.allergy}</p>
     </section>
 
     <section class="container ev-cta">
       <div class="double-rule" aria-hidden="true"></div>
-      <h2 class="h2">Bring people <em>together.</em></h2>
+      <h2 class="h2">{ev.plan.title}</h2>
+      <p class="lede">{ev.plan.text}</p>
       <div class="btn-row">
         <a class="btn btn--primary" href={b.links.eventLead} data-track="event_enquiry_open" data-track-location="events_footer">Plan Your Event</a>
-        <a class="btn btn--secondary" href="/menu">See Our Menus</a>
+        <a class="btn btn--secondary" href={`tel:${b.phone.tel}`} data-track="phone_click" data-track-location="events_footer">Call {b.phone.display}</a>
       </div>
+      <p class="signoff">{ev.signoff}</p>
     </section>
   </div>
 </Base>
@@ -77,19 +103,26 @@ const jsonLd = [breadcrumbJsonLd([{ name: 'Home', url: `${b.url}/` }, { name: 'P
   .ev-photos :global(img) { width: 100%; height: 100%; object-fit: cover; }
   @media (max-width: 599px) { .ev-photos { grid-template-columns: 1fr 1fr; } .ev-photos figure:nth-child(3) { display: none; } }
   .packages { display: grid; gap: var(--s-7); }
-  .pk-grid { display: grid; gap: var(--gutter); grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr)); }
-  .pk { border: 1px solid rgba(184,154,102,.35); padding: var(--s-6) var(--s-5); display: grid; gap: var(--s-3); align-content: start; }
+  .pk-grid { display: grid; gap: var(--gutter); grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr)); }
+  .pk { border: 1px solid rgba(184,154,102,.35); padding: var(--s-6) var(--s-5); display: grid; gap: var(--s-4); align-content: start; scroll-margin-top: 6rem; }
+  .pk--wide { grid-column: 1 / -1; }
   .pk-head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s-3); border-bottom: 1px solid rgba(184,154,102,.25); padding-bottom: var(--s-3); }
-  .pk-name { font-family: var(--font-sans); font-weight: 600; font-size: 0.95rem; letter-spacing: var(--track-item); text-transform: uppercase; }
-  .pk-price { font-size: 1.6rem; color: var(--gold); font-weight: 600; white-space: nowrap; }
-  .pk-price span { font-size: 1rem; color: var(--stone-night); font-weight: 500; }
-  .pk-desc { font-size: 1.08rem; }
-  .pk-choice { font-size: 1rem; color: var(--stone-night); }
-  .pk-choice span { font-style: italic; color: var(--ivory-on-night); }
-  .ev-info { display: grid; gap: var(--gutter); grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); margin-top: var(--s-8); }
+  .pk-name { font-family: var(--font-sans); font-weight: 600; font-size: 1rem; letter-spacing: var(--track-item); text-transform: uppercase; }
+  .pk-price { font-size: 1.7rem; color: var(--gold); font-weight: 600; white-space: nowrap; }
+  .pk-price span { font-size: 0.95rem; color: var(--stone-night); font-weight: 500; font-style: italic; }
+  .pk-desc { font-size: 1.12rem; font-style: italic; }
+  .pk-sections { display: grid; gap: var(--s-5) var(--s-6); grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); }
+  .pk-sec-title { font-family: var(--font-sans); font-weight: 600; font-size: 0.72rem; letter-spacing: var(--track-ui); text-transform: uppercase; color: var(--gold); margin-bottom: var(--s-2); }
+  .pk-sec li { font-size: 1.05rem; line-height: 1.35; padding-block: 0.28rem; }
+  .pk-note { display: block; font-size: 0.95rem; font-style: italic; color: var(--stone-night); }
+  .fine { font-size: 0.98rem; text-align: center; max-width: 46rem; justify-self: center; }
+  .ev-info { display: grid; gap: var(--gutter); grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); margin-top: var(--s-8); }
   .ev-card { border: 1px solid rgba(184,154,102,.35); padding: var(--s-6) var(--s-5); display: grid; gap: var(--s-3); align-content: start; }
+  .ev-lead { font-style: italic; font-size: 1.15rem; }
+  .bar-list { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+  .bar-list li { border: 1px solid rgba(184,154,102,.45); padding: 0.45rem 0.8rem 0.3rem; font-family: var(--font-sans); font-weight: 600; font-size: 0.7rem; letter-spacing: var(--track-ui); text-transform: uppercase; }
   .gold { color: var(--gold); }
-  .ev-allergy { grid-column: 1 / -1; font-size: 1rem; text-align: center; }
+  .signoff { font-style: italic; color: var(--gold); font-size: 1.2rem; }
   .ev-cta { display: grid; justify-items: center; text-align: center; gap: var(--s-6); margin-top: var(--s-9); }
   .ev-cta .double-rule { width: 100%; }
   .ev-cta em { color: var(--gold); }

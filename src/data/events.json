@@ -1,27 +1,448 @@
 {
-  "_source": "Copied word for word from the live poloslounge.com #banquet section on 13 Oct 2026. Owner to confirm packages and prices are current.",
-  "title": "Celebrate With Us",
-  "intro": "Elevate your occasion with Polos Social Lounge Banquet & Catering. Offering a diverse selection of cuisines, exceptional service, and customizable menu options.",
-  "booking_fee": "A $250 non-refundable reservation fee is required to secure your booking. The $250 will be applied toward your banquet room rental fee. In the event of a cancellation, the reservation fee is non-refundable.",
-  "packages": [
-    { "id": "appetizer-buffet", "name": "Appetizer Buffet", "price": 31, "unit": "person", "description": "Premium Chicken Wings with hot & honey garlic sauces, Loaded Cheesy Nachos with sour cream and salsa, Thai Chilli Chicken Bites, Assorted Pizzas, Bruschetta, Mixed Green Salad and soft drinks." },
-    { "id": "soup-and-sandwiches", "name": "Soup & Sandwiches", "price": 31, "unit": "person", "description": "Assorted Sandwiches & Wraps (Deli Meat, Chicken Salad, Egg Salad, Tuna Salad, Vegetarian), Chef's Daily Soup, Classic Caesar or Mixed Greens, Assorted Dessert Squares and soft drinks." },
-    { "id": "build-your-burger", "name": "Build Your Burger", "price": 30, "unit": "person", "description": "Homemade Beef Burger Patties, Kaiser Buns, French Fries, Cheese, Lettuce, Tomatoes, Onions, Pickles, Mayonnaise, Mustard, Assorted Dessert Squares and soft drinks." },
-    { "id": "hot-pasta-lunch", "name": "Hot Pasta Lunch", "price": 38, "unit": "person", "description": "Penne Alfredo with roasted chicken & Spaghetti Meatballs, Garlic Toast, Classic Caesar or Mixed Greens, Assorted Dessert Squares and soft drinks." },
-    { "id": "lunch-package", "name": "Lunch Package", "price": 41, "unit": "person", "description": "Freshly Baked Rolls, Caesar or Mixed Greens, Dessert Squares, soft drinks. Choose one starch, one chicken dish and one beef dish.",
-      "choices": [
-        { "label": "Chicken (choose one)", "options": "Chicken Breast (tomato or mushroom sauce), Italian Roasted, Cajun Baked, Chicken Parmesan, Chicken Alfredo, Butter Chicken, Chicken Stir Fry" },
-        { "label": "Beef (choose one)", "options": "Roasted Beef with gravy, English Cut Roasted Beef Au Jus, Beer-Braised Brisket, Beef Stroganoff, Beef Stir Fry" } ] },
-    { "id": "dinner-package", "name": "Dinner Package", "price": 53, "unit": "person", "description": "Dinner Rolls, Mixed Greens, Classic Caesar Salad, Vegetable Platter, Cheese Platter, Seasonal Vegetables, Fruit Platter, Dessert Squares, soft drinks. Choose one starch, one chicken and one beef dish.",
-      "choices": [
-        { "label": "Chicken (choose one)", "options": "Chicken Breast (tomato or mushroom sauce), Italian Roasted, Cajun Baked, Chicken Parmesan, Chicken Alfredo, Coq Au Vin, Butter Chicken, Chicken Stir Fry" },
-        { "label": "Beef (choose one)", "options": "Roasted Beef with gravy, English Cut Roasted Beef Au Jus, Beer-Braised Brisket, Beef Stroganoff, Beef Stir Fry" } ] }
+  "_source": "Owner's updated banquet & catering menu text, 13 Oct 2026 (source/2026-10-13-banquet-menu-source.txt). Replaces the old website packages.",
+  "brand": "POLO’S SOCIAL LOUNGE",
+  "title": "Banquet & Catering",
+  "tagline": "Gather. Celebrate. Enjoy.",
+  "intro": [
+    "From corporate lunches and holiday parties to birthdays, celebrations and private gatherings, Polo’s makes hosting easy.",
+    "Choose from our thoughtfully prepared buffet packages, with flexible options to suit your event."
   ],
-  "bar": {
-    "title": "Bar Service",
-    "text": "Standard and premium alcohol options including full bar service with 16 beers on tap. Cash bar, all-on-one-tab, or ticket service available.",
-    "note": "Ask your event coordinator for further information on beverage packages."
+  "packages": [
+    {
+      "id": "social-bites",
+      "name": "Social Bites",
+      "name_print": "SOCIAL BITES",
+      "price": 34,
+      "unit": "guest",
+      "description": "Perfect for casual gatherings, receptions and social events.",
+      "sections": [
+        {
+          "title": "Includes",
+          "title_print": "INCLUDES",
+          "items": [
+            {
+              "name": "Premium Chicken Wings",
+              "note": "Hot & honey garlic sauces served on the side"
+            },
+            {
+              "name": "Loaded Cheesy Nachos",
+              "note": "Served with sour cream & salsa"
+            },
+            {
+              "name": "Thai Chilli Chicken Bites"
+            },
+            {
+              "name": "Assorted Pizzas"
+            },
+            {
+              "name": "Fresh Bruschetta"
+            },
+            {
+              "name": "Seasonal Mixed Greens"
+            },
+            {
+              "name": "Soft Drinks"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "soup-sandwich-lunch",
+      "name": "Soup & Sandwich Lunch",
+      "name_print": "SOUP & SANDWICH LUNCH",
+      "price": 33,
+      "unit": "guest",
+      "description": "A fresh and easy choice for meetings, team lunches and daytime gatherings.",
+      "sections": [
+        {
+          "title": "Assorted Sandwiches & Wraps",
+          "title_print": "ASSORTED SANDWICHES & WRAPS",
+          "items": [
+            {
+              "name": "Deli Meat"
+            },
+            {
+              "name": "Chicken Salad"
+            },
+            {
+              "name": "Egg Salad"
+            },
+            {
+              "name": "Tuna Salad"
+            },
+            {
+              "name": "Vegetarian Selection"
+            }
+          ]
+        },
+        {
+          "title": "Also Includes",
+          "title_print": "ALSO INCLUDES",
+          "items": [
+            {
+              "name": "Chef’s Soup of the Day"
+            },
+            {
+              "name": "Select One Salad",
+              "choices": [
+                "Classic Caesar",
+                "Seasonal Mixed Greens with Assorted Dressings"
+              ]
+            },
+            {
+              "name": "Assorted Dessert Squares"
+            },
+            {
+              "name": "Soft Drinks"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "polos-burger-bar",
+      "name": "Polo’s Burger Bar",
+      "name_print": "POLO’S BURGER BAR",
+      "price": 33,
+      "unit": "guest",
+      "description": "A casual crowd favourite with everything your guests need to build their perfect burger.",
+      "sections": [
+        {
+          "title": "Includes",
+          "title_print": "INCLUDES",
+          "items": [
+            {
+              "name": "House-Prepared Beef Burgers"
+            },
+            {
+              "name": "Fresh Kaiser Buns"
+            },
+            {
+              "name": "French Fries"
+            },
+            {
+              "name": "Cheese"
+            },
+            {
+              "name": "Lettuce, Tomato & Onion"
+            },
+            {
+              "name": "Pickles"
+            },
+            {
+              "name": "Mayonnaise & Mustard"
+            },
+            {
+              "name": "Assorted Dessert Squares"
+            },
+            {
+              "name": "Soft Drinks"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "italian-lunch",
+      "name": "Italian Lunch",
+      "name_print": "ITALIAN LUNCH",
+      "price": 43,
+      "unit": "guest",
+      "description": "A comforting Italian-inspired buffet perfect for groups and corporate lunches.",
+      "sections": [
+        {
+          "title": "Includes",
+          "title_print": "INCLUDES",
+          "items": [
+            {
+              "name": "Creamy Chicken Penne Alfredo"
+            },
+            {
+              "name": "Spaghetti & Meatballs"
+            },
+            {
+              "name": "Garlic Toast"
+            },
+            {
+              "name": "Select One Salad",
+              "choices": [
+                "Classic Caesar",
+                "Seasonal Mixed Greens with Assorted Dressings"
+              ]
+            },
+            {
+              "name": "Assorted Dessert Squares"
+            },
+            {
+              "name": "Soft Drinks"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "polos-lunch-buffet",
+      "name": "Polo’s Lunch Buffet",
+      "name_print": "POLO’S LUNCH BUFFET",
+      "price": 43,
+      "unit": "guest",
+      "description": "A complete hot lunch designed for corporate events, celebrations and larger gatherings.",
+      "sections": [
+        {
+          "title": "To Start",
+          "title_print": "TO START",
+          "items": [
+            {
+              "name": "Fresh-Baked Rolls & Butter"
+            },
+            {
+              "name": "Select One Salad",
+              "choices": [
+                "Classic Caesar",
+                "Seasonal Mixed Greens with Assorted Dressings"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Select One Starch",
+          "title_print": "SELECT ONE STARCH",
+          "items": [
+            {
+              "name": "Creamy Mashed Potatoes"
+            },
+            {
+              "name": "Herb-Roasted Potatoes"
+            },
+            {
+              "name": "Seasoned Rice"
+            }
+          ]
+        },
+        {
+          "title": "Select One Chicken",
+          "title_print": "SELECT ONE CHICKEN",
+          "items": [
+            {
+              "name": "Herb-Roasted Chicken Breast",
+              "note": "Choice of tomato basil or mushroom sauce"
+            },
+            {
+              "name": "Italian Roasted Chicken",
+              "note": "Garlic, herbs & Italian seasoning"
+            },
+            {
+              "name": "Cajun Baked Chicken"
+            },
+            {
+              "name": "Chicken Parmesan",
+              "note": "Tomato sauce & melted cheese"
+            },
+            {
+              "name": "Chicken Alfredo",
+              "note": "Creamy Alfredo sauce & pasta"
+            },
+            {
+              "name": "Butter Chicken",
+              "note": "Served with rice & naan"
+            },
+            {
+              "name": "Chicken Stir-Fry"
+            }
+          ]
+        },
+        {
+          "title": "Select One Beef",
+          "title_print": "SELECT ONE BEEF",
+          "items": [
+            {
+              "name": "Slow-Roasted Beef",
+              "note": "Pan gravy & horseradish"
+            },
+            {
+              "name": "English-Cut Roast Beef",
+              "note": "Horseradish au jus"
+            },
+            {
+              "name": "Beer-Braised Beef Brisket"
+            },
+            {
+              "name": "Beef Stroganoff"
+            },
+            {
+              "name": "Beef Stir-Fry"
+            }
+          ]
+        },
+        {
+          "title": "To Finish",
+          "title_print": "TO FINISH",
+          "items": [
+            {
+              "name": "Assorted Dessert Squares"
+            },
+            {
+              "name": "Soft Drinks"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "polos-dinner-buffet",
+      "name": "Polo’s Dinner Buffet",
+      "name_print": "POLO’S DINNER BUFFET",
+      "price": 58,
+      "unit": "guest",
+      "description": "Our signature banquet buffet — designed for celebrations, corporate dinners, holiday parties and special occasions.",
+      "sections": [
+        {
+          "title": "To Start",
+          "title_print": "TO START",
+          "items": [
+            {
+              "name": "Fresh-Baked Dinner Rolls & Butter"
+            },
+            {
+              "name": "Classic Caesar Salad"
+            },
+            {
+              "name": "Seasonal Mixed Greens with Assorted Dressings"
+            },
+            {
+              "name": "Fresh Vegetable Platter with Herb Dip"
+            },
+            {
+              "name": "Domestic & Imported Cheese Board"
+            }
+          ]
+        },
+        {
+          "title": "Select One Starch",
+          "title_print": "SELECT ONE STARCH",
+          "items": [
+            {
+              "name": "Creamy Mashed Potatoes"
+            },
+            {
+              "name": "Herb-Roasted Potatoes"
+            },
+            {
+              "name": "Seasoned Rice"
+            }
+          ]
+        },
+        {
+          "title": "Select One Chicken",
+          "title_print": "SELECT ONE CHICKEN",
+          "items": [
+            {
+              "name": "Herb-Roasted Chicken Breast",
+              "note": "Choice of tomato basil or mushroom sauce"
+            },
+            {
+              "name": "Italian Roasted Chicken",
+              "note": "Garlic, herbs & Italian seasoning"
+            },
+            {
+              "name": "Cajun Baked Chicken"
+            },
+            {
+              "name": "Chicken Parmesan",
+              "note": "Tomato sauce & melted cheese"
+            },
+            {
+              "name": "Chicken Alfredo",
+              "note": "Creamy Alfredo sauce & pasta"
+            },
+            {
+              "name": "Coq au Vin",
+              "note": "Slow-braised chicken in a rich wine sauce"
+            },
+            {
+              "name": "Butter Chicken",
+              "note": "Served with rice & naan"
+            },
+            {
+              "name": "Chicken Stir-Fry"
+            }
+          ]
+        },
+        {
+          "title": "Select One Beef",
+          "title_print": "SELECT ONE BEEF",
+          "items": [
+            {
+              "name": "Slow-Roasted Beef",
+              "note": "Pan gravy & horseradish"
+            },
+            {
+              "name": "English-Cut Roast Beef",
+              "note": "Horseradish au jus"
+            },
+            {
+              "name": "Beer-Braised Beef Brisket"
+            },
+            {
+              "name": "Beef Stroganoff"
+            },
+            {
+              "name": "Beef Stir-Fry"
+            }
+          ]
+        },
+        {
+          "title": "To Finish",
+          "title_print": "TO FINISH",
+          "items": [
+            {
+              "name": "Chef’s Seasonal Vegetables"
+            },
+            {
+              "name": "Fresh Seasonal Fruit Platter"
+            },
+            {
+              "name": "Assorted Dessert Squares"
+            },
+            {
+              "name": "Soft Drinks"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "extras": {
+    "title": "Make It Your Own",
+    "lead": "Looking for something extra?",
+    "text": "Ask our Event Coordinator about customizing your event with additional appetizers, upgraded entrées, dessert selections, coffee & tea service, late-night food and other enhancements."
   },
-  "allergy": "At Polos Social Lounge, we take allergies seriously. However, we cannot guarantee a completely allergen-free environment due to the possibility of cross-contamination. Please inform our team of any dietary needs.",
+  "bar": {
+    "title": "Bar Options",
+    "lead": "Complete your event with bar service tailored to your gathering.",
+    "options": [
+      "Hosted Bar",
+      "Cash Bar",
+      "Drink Tickets",
+      "Standard & Premium Bar Options",
+      "Wine Service"
+    ],
+    "note": "Ask your Event Coordinator about available bar packages and options."
+  },
+  "dietary": {
+    "title": "Dietary Requests",
+    "text": [
+      "Vegetarian and other dietary options are available upon request.",
+      "Please advise our Event Coordinator of any allergies or dietary requirements when planning your event.",
+      "While our team takes care when preparing food for guests with allergies, our kitchen handles a variety of ingredients and we cannot guarantee an allergen-free environment."
+    ]
+  },
+  "plan": {
+    "title": "Plan Your Event",
+    "text": "Whether you’re planning a business lunch, holiday party, birthday, family celebration or private gathering, our team is here to make it easy."
+  },
+  "signoff": "Good Food. Great Company. Memorable Gatherings.",
+  "fine_print": "Prices are per guest. Applicable taxes and gratuities are additional. Menu selections, availability and pricing are subject to change. Minimum guest requirements may apply.",
   "capacity": null
 }
