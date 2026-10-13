@@ -25,7 +25,7 @@ _Last updated: 13 Oct 2026_
 - 13 Oct link check: all internal links/anchors OK except the 4 Phase 6 pages; Toast ordering, reservations, gift cards, catering enquiry, Polos Play, Instagram, Facebook, X all load.
 
 ## Open items
-- [ ] Banquet invoice (`/banquet-invoice`, staff only, not linked or indexed): Netlify form `banquet-invoice`. Add Form notification → email raj@poloslounge.com in Netlify. Add the GST registration number in `GST_NUMBER` at the top of the page file.
+- [x] Banquet invoice (`/banquet-invoice`, staff only, not linked or indexed): Netlify form `banquet-invoice`. Emails raj@ and gm@poloslounge.com (Netlify → Forms → Submission notifications). GST # 738318328 on invoice.
 - [ ] Giveaway rules (promoter legal name, eligibility, draw dates, entry deadlines, winner notification, contact email). Production build is blocked until filled. Have a lawyer review.
 - [ ] Tracking IDs: GTM container, Meta Pixel, Google Ads conversion ID + labels.
 - [ ] Link Netlify project **polos-oct2026-preview** to this repo (Netlify → Project configuration → Build & deploy → Link repository). Never set `PUBLIC_DEPLOY_ENV` there.
