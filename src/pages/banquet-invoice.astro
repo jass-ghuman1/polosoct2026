@@ -68,6 +68,7 @@ const logo = lockup.replace(/role="img" aria-label="[^"]*"/, 'role="img" aria-la
             <label>Misc. description<input name="misc_description" placeholder="e.g. Room fee, cake cutting" autocomplete="off" /></label>
             <label>Misc. charges ($)<input name="misc_total" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00" /></label>
           </div>
+          <label>Discount (%)<input name="discount_rate" type="number" inputmode="decimal" min="0" max="100" step="0.01" placeholder="0" /></label>
           <div class="row">
             <label>Gratuity
               <select name="gratuity_rate">
@@ -85,6 +86,7 @@ const logo = lockup.replace(/role="img" aria-label="[^"]*"/, 'role="img" aria-la
         <input type="hidden" name="invoice_number" />
         <input type="hidden" name="food_total" />
         <input type="hidden" name="subtotal" />
+        <input type="hidden" name="discount_amount" />
         <input type="hidden" name="gratuity_amount" />
         <input type="hidden" name="gst_amount" />
         <input type="hidden" name="invoice_total" />
@@ -149,7 +151,9 @@ const logo = lockup.replace(/role="img" aria-label="[^"]*"/, 'role="img" aria-la
         </table>
 
         <table class="totals">
-          <tr><td>Subtotal</td><td class="num" data-o="subtotal">$0.00</td></tr>
+          <tr><td>Subtotal</td><td class="num" data-o="items_total">$0.00</td></tr>
+          <tr id="disc-row" hidden><td>Discount (<span data-o="discount_rate">0</span>%)</td><td class="num" data-o="discount_amount">−$0.00</td></tr>
+          <tr id="net-row" hidden><td>Subtotal after discount</td><td class="num" data-o="subtotal">$0.00</td></tr>
           <tr><td>Gratuity (<span data-o="gratuity_rate">18</span>%)</td><td class="num" data-o="gratuity_amount">$0.00</td></tr>
           <tr><td>GST (5%)</td><td class="num" data-o="gst_amount">$0.00</td></tr>
           <tr class="grand"><td>Total Due</td><td class="num" data-o="invoice_total">$0.00</td></tr>
@@ -192,13 +196,18 @@ const logo = lockup.replace(/role="img" aria-label="[^"]*"/, 'role="img" aria-la
       const rate = Number($('gratuity_rate').value);
       const food = r2(pp * g);
       const misc = r2(num('misc_total'));
-      const sub = r2(food + drinks + misc);
-      const grat = r2((food + drinks) * rate / 100); // gratuity on food + drinks only, not misc charges
+      const pct = Math.min(100, num('discount_rate'));
+      const items = r2(food + drinks + misc);
+      const disc = r2(items * pct / 100);
+      const sub = r2(items - disc);
+      // Gratuity on discounted food + drinks only (not misc). GST on discounted subtotal + gratuity.
+      const grat = r2((food + drinks) * (1 - pct / 100) * rate / 100);
       const gst = r2((sub + grat) * 0.05); // GST applies to the mandatory gratuity
       const total = r2(sub + grat + gst);
 
       $('food_total').value = food.toFixed(2);
       $('subtotal').value = sub.toFixed(2);
+      $('discount_amount').value = disc.toFixed(2);
       $('gratuity_amount').value = grat.toFixed(2);
       $('gst_amount').value = gst.toFixed(2);
       $('invoice_total').value = total.toFixed(2);
@@ -222,6 +231,11 @@ const logo = lockup.replace(/role="img" aria-label="[^"]*"/, 'role="img" aria-la
       out('misc_total2', money(misc));
       out('misc_description', $('misc_description').value);
       document.getElementById('misc-row').hidden = !misc;
+      out('items_total', money(items));
+      out('discount_rate', pct);
+      out('discount_amount', '−' + money(disc));
+      document.getElementById('disc-row').hidden = !disc;
+      document.getElementById('net-row').hidden = !disc;
       out('subtotal', money(sub));
       out('gratuity_rate', rate);
       out('gratuity_amount', money(grat));
@@ -237,7 +251,8 @@ const logo = lockup.replace(/role="img" aria-label="[^"]*"/, 'role="img" aria-la
         'Catering: ' + $('catering_type').value + ' — ' + g + ' guests x ' + money(pp) + ' = ' + money(food) + '\n' +
         'Drinks: ' + money(drinks) + '\n' +
         (misc ? 'Misc. charges' + ($('misc_description').value ? ' (' + $('misc_description').value + ')' : '') + ': ' + money(misc) + '\n' : '') +
-        'Subtotal: ' + money(sub) + '\n' +
+        'Subtotal: ' + money(items) + '\n' +
+        (disc ? 'Discount ' + pct + '%: -' + money(disc) + '\nSubtotal after discount: ' + money(sub) + '\n' : '') +
         'Gratuity ' + rate + '%: ' + money(grat) + '\n' +
         'GST 5%: ' + money(gst) + '\n' +
         'TOTAL DUE: ' + money(total) + '\n' +
