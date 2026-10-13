@@ -33,6 +33,7 @@ _Last updated: 13 Oct 2026_
 - [ ] Confirm photo ↔ dish pairings on the homepage: Steak Salad, Seafood Linguine, Salmon & Prawn Chardonnay.
 - [ ] Full-resolution photos / half-day shoot (exterior, room day + night, bar, guests, banquet room, brunch). Current Drive photos are ~500×656 px.
 - [ ] Event enquiries: keep Toast lead form or use own form (Netlify form `banquet-enquiry` exists on the old project)? Which email receives them?
+- 13 Oct: Brand spelling is POLOS / Polos everywhere — never Polo's (owner). All apostrophe spellings removed.
 - 13 Oct: Banquet & Catering menu replaced with owner's updated text (6 buffets $33–$58 per guest). The old $250 booking-fee paragraph and "16 beers on tap" are no longer shown (not in the new text).
 - [ ] Private events: room capacity (not shown until supplied); confirm whether the $250 booking fee still applies.
 - [ ] Google Search Console access (legacy URL check before launch).

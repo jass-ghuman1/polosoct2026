@@ -1,10 +1,10 @@
 {
   "_source": "Owner's updated banquet & catering menu text, 13 Oct 2026 (source/2026-10-13-banquet-menu-source.txt). Replaces the old website packages.",
-  "brand": "POLO’S SOCIAL LOUNGE",
+  "brand": "POLOS SOCIAL LOUNGE",
   "title": "Banquet & Catering",
   "tagline": "Gather. Celebrate. Enjoy.",
   "intro": [
-    "From corporate lunches and holiday parties to birthdays, celebrations and private gatherings, Polo’s makes hosting easy.",
+    "From corporate lunches and holiday parties to birthdays, celebrations and private gatherings, Polos makes hosting easy.",
     "Choose from our thoughtfully prepared buffet packages, with flexible options to suit your event."
   ],
   "packages": [
@@ -102,8 +102,8 @@
     },
     {
       "id": "polos-burger-bar",
-      "name": "Polo’s Burger Bar",
-      "name_print": "POLO’S BURGER BAR",
+      "name": "Polos Burger Bar",
+      "name_print": "POLOS BURGER BAR",
       "price": 33,
       "unit": "guest",
       "description": "A casual crowd favourite with everything your guests need to build their perfect burger.",
@@ -183,8 +183,8 @@
     },
     {
       "id": "polos-lunch-buffet",
-      "name": "Polo’s Lunch Buffet",
-      "name_print": "POLO’S LUNCH BUFFET",
+      "name": "Polos Lunch Buffet",
+      "name_print": "POLOS LUNCH BUFFET",
       "price": 43,
       "unit": "guest",
       "description": "A complete hot lunch designed for corporate events, celebrations and larger gatherings.",
@@ -291,8 +291,8 @@
     },
     {
       "id": "polos-dinner-buffet",
-      "name": "Polo’s Dinner Buffet",
-      "name_print": "POLO’S DINNER BUFFET",
+      "name": "Polos Dinner Buffet",
+      "name_print": "POLOS DINNER BUFFET",
       "price": 58,
       "unit": "guest",
       "description": "Our signature banquet buffet — designed for celebrations, corporate dinners, holiday parties and special occasions.",

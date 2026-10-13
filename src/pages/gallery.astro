@@ -40,7 +40,7 @@ const items = await Promise.all(list.map(async (p) => {
 const b = business;
 const jsonLd = [breadcrumbJsonLd([{ name: 'Home', url: `${b.url}/` }, { name: 'Gallery', url: `${b.url}/gallery` }])];
 ---
-<Base title="Gallery | Polo's Social Lounge, Sherwood Park" description="Browse food and drink photos from Polo's Social Lounge in Sherwood Park, then reserve a table for your next visit." jsonLd={jsonLd}>
+<Base title="Gallery | Polos Social Lounge, Sherwood Park" description="Browse food and drink photos from Polos Social Lounge in Sherwood Park, then reserve a table for your next visit." jsonLd={jsonLd}>
   <header class="page-hero container">
     <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li aria-current="page">Gallery</li></ol></nav>
     <p class="eyebrow">Polos · Sherwood Park</p>
@@ -68,7 +68,7 @@ const jsonLd = [breadcrumbJsonLd([{ name: 'Home', url: `${b.url}/` }, { name: 'G
     <div class="double-rule" aria-hidden="true"></div>
     <p class="eyebrow">Stay connected</p>
     <h2 class="h2">Follow us on Instagram</h2>
-    <p class="lede">See the latest food, drinks, events and behind-the-scenes moments from Polo's Social Lounge.</p>
+    <p class="lede">See the latest food, drinks, events and behind-the-scenes moments from Polos Social Lounge.</p>
     <div class="btn-row">
       <a class="btn btn--secondary" href={b.links.instagram} rel="noopener">@poloslounge</a>
       <a class="btn btn--primary" href={b.links.reserve} data-track="reserve_click" data-track-location="gallery">Reserve a Table</a>
