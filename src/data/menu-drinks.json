@@ -38,7 +38,7 @@
         {
           "id": "pollys-crisp-martini",
           "name": "Polly's Crisp Martini",
-          "description": "1.5oz Bombay Gin, 1oz St. Germain, fresh squeezed lemon juice, 2oz Oyster Bay Sauvignon Blanc, lime wedge",
+          "description": "1.5oz Grey Goose, 0.5oz St. Germain, fresh squeezed lemon juice, 2oz Oyster Bay Sauvignon Blanc, lime wedge",
           "price": 15.0,
           "signature": false,
           "easter_egg": "duck"
@@ -716,6 +716,7 @@
   },
   "corrections": [
     "12 Oct 2026: Apothic Blend removed from White Wine at owner direction (it is a red). The printed v7 menu still lists it under White Wine.",
-    "13 Oct 2026: 'The Hillstone Crisp Martini' renamed to \"Polly's Crisp Martini\" (owner). Recipe and price unchanged. Printed drinks menu still shows the old name."
+    "13 Oct 2026: 'The Hillstone Crisp Martini' renamed to \"Polly's Crisp Martini\" (owner). Recipe and price unchanged. Printed drinks menu still shows the old name.",
+    "13 Oct 2026: Polly's Crisp Martini recipe changed to 1.5oz Grey Goose, 0.5oz St. Germain (owner). Rest of recipe and price unchanged."
   ]
 }
