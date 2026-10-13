@@ -43,7 +43,6 @@ const bites = hhPick(hhBites, ['hh-wings', 'hh-curry-chicken-poutine', 'hh-happy
 const sips = hhPick(hhSips, ['hh-house-draft', 'hh-cocktails', 'hh-house-wine']);
 const hhPrice = (i: any) => i.prices ? `${i.prices['6oz']} / ${i.prices['9oz']}` : i.deal_text ?? price(i.price);
 
-const story = happyHour.story;
 
 const todayCfg = JSON.stringify({ tz: b.timezone, hours: b.hours.weekly, hh: b.happyHour.windows });
 
@@ -203,24 +202,6 @@ const jsonLd = [{
         <a class="btn btn--secondary" href={b.links.reserve} data-track="reserve_click" data-track-location="home_hh">Reserve for Happy Hour</a>
         <a class="text-link play-link" href={b.links.play} data-track="play_open" data-track-location="home_hh">Play at your table <span class="arrow" aria-hidden="true">→</span></a>
       </div>
-    </div>
-  </section>
-
-  <!-- 7 · BEFORE IT WAS SHERWOOD PARK — text from the printed Happy Hour menu, word for word -->
-  <section class="section story theme-night" data-theme="night" aria-labelledby="story-title">
-    <div class="container story-inner">
-      <h2 id="story-title" class="rule-title story-title" data-reveal><span>{story.title}</span></h2>
-      <div class="story-body">
-        {story.blocks.map((blk: any, i: number) => {
-          const em = (t: string, w?: string) => w && t.includes(w) ? <>{t.split(w)[0]}<em>{w}</em>{t.split(w)[1]}</> : t;
-          if (blk.type === 'statement') return <p class="story-statement" data-reveal style={`--i:0`}>{em(blk.text, blk.em)}</p>;
-          if (blk.type === 'streets') return <p class="story-streets eyebrow" data-reveal aria-label="Original street names">{blk.items.join(' · ')}</p>;
-          // the story's closing line is the homepage's final heading, so it is not repeated here
-          if (blk.type === 'closing') return null;
-          return <p class="story-p" data-reveal>{em(blk.text, blk.em)}</p>;
-        })}
-      </div>
-      <p class="story-source muted">Source: {story.source}</p>
     </div>
   </section>
 
@@ -430,18 +411,6 @@ const jsonLd = [{
   .hh-img :global(img) { width: 100%; height: 100%; object-fit: cover; }
   .hh-foot { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3) var(--s-4); margin-top: var(--s-8); }
   .play-link { margin-left: auto; color: var(--stone-night); }
-
-  /* ---------- 7 · story (pending text) ---------- */
-  .story { background: radial-gradient(120% 80% at 50% 0%, #2B2119 0%, var(--night) 60%); }
-  .story-inner { max-width: 46rem; display: grid; gap: var(--s-6); text-align: center; justify-items: center; }
-  .story-title { width: 100%; font-family: var(--font-sans); font-weight: 600; font-size: clamp(0.9rem, 0.8rem + 0.5vw, 1.15rem); letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); }
-  .story-body { display: grid; gap: var(--s-6); }
-  .story-p { font-size: clamp(1.2rem, 1.1rem + 0.4vw, 1.45rem); line-height: 1.65; }
-  .story-statement { font-size: var(--fs-h2); line-height: 1.15; }
-  .story-statement em, .story-p em { color: var(--gold); }
-  .story-streets { color: var(--gold); letter-spacing: 0.4em; }
-  .story-closing { font-size: var(--fs-h3); font-style: italic; color: var(--gold); }
-  .story-source { font-size: 0.95rem; }
 
   /* ---------- 8 · atmosphere ---------- */
   .atmos { padding-top: var(--s-6); }

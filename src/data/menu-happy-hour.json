@@ -41,53 +41,6 @@
     ],
     "confirmed": "Confirmed by owner 12 Oct 2026"
   },
-  "story": {
-    "title": "Before it was Sherwood Park",
-    "source": "Strathcona County History",
-    "blocks": [
-      {
-        "type": "p",
-        "text": "In the mid-1950s, two developers, John Campbell and John Mitchell, had a modest idea: a little satellite town of about 100 houses at the edge of the prairie, for families working at the plants east of Edmonton."
-      },
-      {
-        "type": "statement",
-        "text": "They called it Campbelltown.",
-        "em": "Campbelltown"
-      },
-      {
-        "type": "p",
-        "text": "In December 1955, the first family moved into a model home on Birch Avenue. Houses sold for $10,459 to $14,100, and neighbours knew each other by name."
-      },
-      {
-        "type": "streets",
-        "items": [
-          "Cottonwood",
-          "Conifer",
-          "Birch",
-          "Alder",
-          "Fir"
-        ]
-      },
-      {
-        "type": "p",
-        "text": "There was just one problem. Canada Post wouldn't accept the name, because too many places were called something similar. One early resident even had a cheque from Edmonton arrive by way of Campbeltown, Scotland.",
-        "em": "Campbeltown, Scotland"
-      },
-      {
-        "type": "statement",
-        "text": "So in 1956, Campbelltown became Sherwood Park.",
-        "em": "Sherwood Park"
-      },
-      {
-        "type": "p",
-        "text": "The houses got bigger and the streets kept going, but the idea never changed: a place where neighbours meet at the end of the day."
-      },
-      {
-        "type": "closing",
-        "text": "Pull up a chair. You're among neighbours."
-      }
-    ]
-  },
   "categories": [
     {
       "id": "bites",

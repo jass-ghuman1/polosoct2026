@@ -1,10 +1,10 @@
 # Project status — pick up here
 
-_Last updated: 12 Oct 2026_
+_Last updated: 13 Oct 2026_
 
 ## Done
 - **Phase 1–3** Discovery, creative proposal, technical plan (approved 12 Oct). Proposal doc: https://claude.ai/code/artifact/c0d8c455-8866-48fd-9fd4-a457cfd4c074
-- **Phase 4** Homepage (`/`): Day-to-Night flow, traced POLOS wordmark, "Today at POLOS" live status, Sherwood Park story (from the printed Happy Hour menu), Happy Hour, events, visit, closing CTA.
+- **Phase 4** Homepage (`/`): Day-to-Night flow, traced POLOS wordmark, "Today at POLOS" live status, Happy Hour, events, visit, closing CTA.
 - **Phase 5** Native HTML menus: `/menu`, `/menu/food`, `/menu/drinks`, `/happy-hour`, `/menu/brunch`, `/menu/gluten-free`, `/menu/kids`.
 - QA: axe accessibility scan clean (desktop + mobile); Lighthouse mobile 97 perf / 100 a11y.
 
@@ -14,6 +14,8 @@ _Last updated: 12 Oct 2026_
 - Apothic Blend is a **red** (removed from White Wine). Printed drinks v7 still lists it under White — fix on next print.
 - Gluten-free bun: **no charge**. Printed food menu v8 still says "gluten-free bun 2" — fix on next print.
 - Happy Hour times confirmed: Mon–Fri 2–5 PM & 9 PM–Close, Sunday all day. Lounge and patio, dine-in only.
+
+- 13 Oct: Sherwood Park story removed from the website (owner).
 
 ## Open items
 - [ ] Link Netlify project **polos-oct2026-preview** to this repo (Netlify → Project configuration → Build & deploy → Link repository). Never set `PUBLIC_DEPLOY_ENV` there.
