@@ -200,8 +200,8 @@ const logo = lockup.replace(/role="img" aria-label="[^"]*"/, 'role="img" aria-la
       const items = r2(food + drinks + misc);
       const disc = r2(items * pct / 100);
       const sub = r2(items - disc);
-      // Gratuity on discounted food + drinks only (not misc). GST on discounted subtotal + gratuity.
-      const grat = r2((food + drinks) * (1 - pct / 100) * rate / 100);
+      // Gratuity and GST both apply to food + drinks + misc (after discount). GST also applies to the gratuity.
+      const grat = r2(sub * rate / 100);
       const gst = r2((sub + grat) * 0.05); // GST applies to the mandatory gratuity
       const total = r2(sub + grat + gst);
 
