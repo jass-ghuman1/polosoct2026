@@ -8,6 +8,9 @@ _Last updated: 13 Oct 2026_
 - **Phase 5** Native HTML menus: `/menu`, `/menu/food`, `/menu/drinks`, `/happy-hour`, `/menu/brunch`, `/menu/gluten-free`, `/menu/kids`.
 - QA: axe accessibility scan clean (desktop + mobile); Lighthouse mobile 97 perf / 100 a11y.
 
+- **Phase 6** Private Events, Gallery (`/gallery` keeps its exact URL), About, Contact — content copied from the live site (13 Oct). sitemap.xml + robots.txt (previews disallow all).
+- Link check 13 Oct: 0 broken links across 13 pages; 23/23 click tests pass; axe clean on new pages.
+
 ## Owner decisions (12 Oct 2026)
 - Hero line: "Sherwood Park's place to meet up."
 - Retire the AI chat assistant. Menus are HTML only — no PDF downloads.
@@ -30,12 +33,12 @@ _Last updated: 13 Oct 2026_
 - [ ] Confirm photo ↔ dish pairings on the homepage: Steak Salad, Seafood Linguine, Salmon & Prawn Chardonnay.
 - [ ] Full-resolution photos / half-day shoot (exterior, room day + night, bar, guests, banquet room, brunch). Current Drive photos are ~500×656 px.
 - [ ] Event enquiries: keep Toast lead form or use own form (Netlify form `banquet-enquiry` exists on the old project)? Which email receives them?
-- [ ] Private events facts: current packages/prices, room capacity.
+- [ ] Private events: banquet packages/prices copied from the old site — confirm still current; room capacity (not shown until supplied). Old banquet PDF link (Wix) dropped; packages are now HTML.
 - [ ] Google Search Console access (legacy URL check before launch).
 - [ ] Make the GitHub repo private.
 
-## Next: Phase 6
-Private Events, Gallery (`/gallery` must keep its exact URL), About, Contact, Polos Play at `/play` (source: `~/Sites/polos-play` on the owner's Mac), sitemap.xml + robots.txt, then Phase 7 QA and Phase 8 staging.
+## Next
+Polos Play at `/play` (optional; currently links to the existing Netlify site), Phase 7 full QA on the hosted preview, Phase 8 staging → owner approval → cut-over.
 
 ## How changes reach GitHub
 The cloud workspace cannot push directly. Work is bundled (`git bundle`), copied to `~/Sites/Claude outputs/` on the owner's Mac, and pushed from there after the owner approves a one-time GitHub device sign-in.

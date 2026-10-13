@@ -1,0 +1,75 @@
+---
+import Base from '../layouts/Base.astro';
+import business from '../data/business.json';
+import { breadcrumbJsonLd } from '../lib/menu';
+const b = business;
+const jsonLd = [breadcrumbJsonLd([{ name: 'Home', url: `${b.url}/` }, { name: 'Contact', url: `${b.url}/contact` }])];
+---
+<Base title="Contact & Hours | Polos Social Lounge, Sherwood Park" description="Find Polos Social Lounge at #150 – 950 Emerald Drive, Sherwood Park. Call 780-570-1550, see opening hours, get directions or book a table." jsonLd={jsonLd}>
+  <header class="page-hero container">
+    <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li aria-current="page">Contact</li></ol></nav>
+    <p class="eyebrow">Find us</p>
+    <h1 class="h1">Visit Polos Social Lounge</h1>
+  </header>
+  <section class="container contact-grid">
+    <div class="c-cards">
+      <article>
+        <h2 class="section-title">Address</h2>
+        <address>{b.address.line1}<br />{b.address.city}, {b.address.regionName} {b.address.postalCode}</address>
+        <a class="text-link" href={b.links.directions} data-track="directions_click" data-track-location="contact">Get directions <span class="arrow" aria-hidden="true">→</span></a>
+      </article>
+      <article>
+        <h2 class="section-title">Phone</h2>
+        <p><a class="big" href={`tel:${b.phone.tel}`} data-track="phone_click" data-track-location="contact">{b.phone.display}</a></p>
+      </article>
+      <article>
+        <h2 class="section-title">Opening Hours</h2>
+        <dl class="hours">{b.hours.weekly.map((h) => (<div><dt>{h.label}</dt><dd>{h.text}</dd></div>))}</dl>
+        <p class="muted">{b.hours.note}</p>
+      </article>
+      <article>
+        <h2 class="section-title">Happy Hour</h2>
+        <dl class="hours">{b.happyHour.lines.map((l) => (<div><dt>{l.label}</dt><dd>{l.text}</dd></div>))}</dl>
+      </article>
+      <article>
+        <h2 class="section-title">Gift Cards</h2>
+        <a class="text-link" href={b.links.giftCards} data-track="gift_card_click">Purchase online <span class="arrow" aria-hidden="true">→</span></a>
+      </article>
+      <article>
+        <h2 class="section-title">Private Events</h2>
+        <a class="text-link" href={b.links.eventLead} data-track="event_enquiry_open" data-track-location="contact">Plan your event <span class="arrow" aria-hidden="true">→</span></a>
+      </article>
+    </div>
+    <div class="c-side">
+      <div class="map frame"><iframe src={b.links.mapEmbed} title="Map: Polos Social Lounge, 950 Emerald Drive, Sherwood Park" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+      <p class="muted hotel">{b.hotelNote}</p>
+      <div class="btn-row">
+        <a class="btn btn--primary" href={b.links.reserve} data-track="reserve_click" data-track-location="contact">Book Your Table</a>
+        <a class="btn btn--secondary" href={b.links.order} data-track="order_click" data-track-location="contact">Order Online</a>
+      </div>
+      <ul class="social">
+        <li><a href={b.links.instagram} rel="noopener">Instagram</a></li>
+        <li><a href={b.links.facebook} rel="noopener">Facebook</a></li>
+        <li><a href={b.links.x} rel="noopener">X</a></li>
+      </ul>
+    </div>
+  </section>
+</Base>
+<style>
+  .contact-grid { display: grid; gap: var(--s-8); padding-bottom: var(--section-pad); }
+  @media (min-width: 900px) { .contact-grid { grid-template-columns: 1fr 1fr; } }
+  .c-cards { display: grid; gap: var(--s-6) var(--gutter); grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); align-content: start; }
+  .c-cards article { display: grid; gap: var(--s-3); align-content: start; border-top: 1px solid var(--gold); padding-top: var(--s-4); }
+  address { font-style: normal; font-size: 1.2rem; }
+  .big { font-size: var(--fs-h3); text-decoration: none; border-bottom: 1px solid var(--gold); }
+  .hours { margin: 0; display: grid; gap: var(--s-1); }
+  .hours div { display: flex; justify-content: space-between; gap: var(--s-4); }
+  .hours dt { font-family: var(--font-sans); font-weight: 600; font-size: 0.72rem; letter-spacing: var(--track-ui); text-transform: uppercase; color: var(--stone); padding-top: 0.35em; }
+  .hours dd { margin: 0; white-space: nowrap; }
+  .c-side { display: grid; gap: var(--s-5); align-content: start; }
+  .map { aspect-ratio: 4 / 3; margin: var(--s-3); }
+  .map iframe { width: 100%; height: 100%; border: 0; filter: grayscale(0.6) sepia(0.15); }
+  .hotel { font-size: 1.02rem; }
+  .social { display: flex; gap: var(--s-5); font-family: var(--font-sans); font-weight: 600; font-size: var(--fs-ui); letter-spacing: var(--track-ui); text-transform: uppercase; }
+  .social a { display: inline-block; padding-block: var(--s-2); }
+</style>

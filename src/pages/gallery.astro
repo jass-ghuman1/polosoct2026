@@ -1,0 +1,130 @@
+---
+import Base from '../layouts/Base.astro';
+import { getImage } from 'astro:assets';
+import Photo from '../components/Photo.astro';
+import business from '../data/business.json';
+import { breadcrumbJsonLd } from '../lib/menu';
+
+// Authentic POLOS photography (Facebook, Aug–Sep 2026). Category drives the All / Food / Drinks filter.
+const photos = import.meta.glob<{ default: ImageMetadata }>('../assets/photos/*.jpg', { eager: true });
+const list: { file: string; cat: 'food' | 'drinks'; alt: string }[] = [
+  { file: 'pink-martini', cat: 'drinks', alt: 'Pink cocktail in a stemmed glass in the sunlit dining room' },
+  { file: 'steak-salad', cat: 'food', alt: 'Steak salad with blue cheese and garlic toast' },
+  { file: 'espresso-martini', cat: 'drinks', alt: 'Espresso martini topped with three coffee beans' },
+  { file: 'seafood-pasta', cat: 'food', alt: 'Seafood pasta with mussels and garlic bread' },
+  { file: 'red-wine-pour', cat: 'drinks', alt: 'Red wine being poured at a table by the window' },
+  { file: 'ribs-entree', cat: 'food', alt: 'Sauced entrée with mashed potatoes and mixed vegetables' },
+  { file: 'old-fashioned', cat: 'drinks', alt: 'Old fashioned with a large ice cube, cherry and orange peel' },
+  { file: 'salmon-prawns', cat: 'food', alt: 'Salmon topped with prawns, with asparagus and cream sauce' },
+  { file: 'tall-pink-cocktail', cat: 'drinks', alt: 'Tall pink drink with lime and mint' },
+  { file: 'burger-onion-rings', cat: 'food', alt: 'Burger topped with onion rings, served with fries' },
+  { file: 'caesar', cat: 'drinks', alt: 'Caesar with a rimmed glass and skewer garnish' },
+  { file: 'glazed-bites', cat: 'food', alt: 'Glazed bites with cucumber slices and green onion' },
+  { file: 'draft-beer-pour', cat: 'drinks', alt: 'A freshly poured draft beer held under the taps' },
+  { file: 'steak-yam-fries', cat: 'food', alt: 'Grilled steak with yam fries and vegetables' },
+  { file: 'martini-brick', cat: 'drinks', alt: 'Red cocktail in a martini glass beside exposed brick' },
+  { file: 'pizza-tomato-herb', cat: 'food', alt: 'Pizza topped with cherry tomatoes and fresh herbs' },
+  { file: 'sangria', cat: 'drinks', alt: 'Red sangria with fresh fruit in the dining room' },
+  { file: 'poutine', cat: 'food', alt: 'Poutine with cheese curds and gravy' },
+  { file: 'red-wine-in-hand', cat: 'drinks', alt: 'A guest holding a glass of red wine against the brick wall' },
+  { file: 'wings', cat: 'food', alt: 'Chicken wings with carrot and celery sticks and dip' },
+  { file: 'polos-napkin-cocktail', cat: 'drinks', alt: 'A cocktail beside a POLOS napkin' },
+  { file: 'nachos', cat: 'food', alt: 'Nachos with salsa and sour cream' },
+  { file: 'sandwich-fries', cat: 'food', alt: 'Sandwich halves with a bowl of fries' },
+];
+const items = await Promise.all(list.map(async (p) => {
+  const src = photos[`../assets/photos/${p.file}.jpg`].default;
+  const large = await getImage({ src, format: 'webp', width: src.width });
+  return { ...p, src, large: large.src };
+}));
+const b = business;
+const jsonLd = [breadcrumbJsonLd([{ name: 'Home', url: `${b.url}/` }, { name: 'Gallery', url: `${b.url}/gallery` }])];
+---
+<Base title="Gallery | Polo's Social Lounge, Sherwood Park" description="Browse food and drink photos from Polo's Social Lounge in Sherwood Park, then reserve a table for your next visit." jsonLd={jsonLd}>
+  <header class="page-hero container">
+    <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li aria-current="page">Gallery</li></ol></nav>
+    <p class="eyebrow">Polos · Sherwood Park</p>
+    <h1 class="h1">Gallery</h1>
+    <div class="filters" role="group" aria-label="Filter photos">
+      <button type="button" aria-pressed="true" data-filter="all">All</button>
+      <button type="button" aria-pressed="false" data-filter="food">Food</button>
+      <button type="button" aria-pressed="false" data-filter="drinks">Drinks</button>
+    </div>
+  </header>
+
+  <section class="container" aria-label="Photos">
+    <ul class="masonry" data-grid>
+      {items.map((p, i) => (
+        <li data-cat={p.cat}>
+          <button type="button" class="tile" data-index={i} data-large={p.large} data-alt={p.alt} aria-label={`Open photo: ${p.alt}`}>
+            <span data-reveal="mask" style={`--i:${i % 3}`}><Photo src={p.src} alt={p.alt} sizes="(min-width: 1100px) 30vw, (min-width: 600px) 45vw, 90vw" /></span>
+          </button>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="container ig">
+    <div class="double-rule" aria-hidden="true"></div>
+    <p class="eyebrow">Stay connected</p>
+    <h2 class="h2">Follow us on Instagram</h2>
+    <p class="lede">See the latest food, drinks, events and behind-the-scenes moments from Polo's Social Lounge.</p>
+    <div class="btn-row">
+      <a class="btn btn--secondary" href={b.links.instagram} rel="noopener">@poloslounge</a>
+      <a class="btn btn--primary" href={b.links.reserve} data-track="reserve_click" data-track-location="gallery">Reserve a Table</a>
+    </div>
+  </section>
+
+  <dialog class="lightbox" data-lightbox aria-label="Photo viewer">
+    <button type="button" class="lb-close" data-lb-close aria-label="Close">×</button>
+    <button type="button" class="lb-nav prev" data-lb-prev aria-label="Previous photo">‹</button>
+    <figure><img data-lb-img alt="" /><figcaption data-lb-cap></figcaption></figure>
+    <button type="button" class="lb-nav next" data-lb-next aria-label="Next photo">›</button>
+  </dialog>
+</Base>
+
+<script>
+  const grid = document.querySelector<HTMLElement>('[data-grid]')!;
+  const tiles = Array.from(grid.querySelectorAll<HTMLButtonElement>('.tile'));
+  const lb = document.querySelector<HTMLDialogElement>('[data-lightbox]')!;
+  const img = lb.querySelector<HTMLImageElement>('[data-lb-img]')!;
+  const cap = lb.querySelector<HTMLElement>('[data-lb-cap]')!;
+  let current = 0;
+  const visible = () => tiles.filter((t) => !t.closest('li')!.hidden);
+  const show = (t: HTMLButtonElement) => { current = visible().indexOf(t); img.src = t.dataset.large!; img.alt = t.dataset.alt!; cap.textContent = t.dataset.alt!; };
+  const step = (d: number) => { const v = visible(); show(v[(current + d + v.length) % v.length]); };
+  tiles.forEach((t) => t.addEventListener('click', () => { show(t); lb.showModal(); }));
+  lb.querySelector('[data-lb-close]')!.addEventListener('click', () => lb.close());
+  lb.querySelector('[data-lb-prev]')!.addEventListener('click', () => step(-1));
+  lb.querySelector('[data-lb-next]')!.addEventListener('click', () => step(1));
+  lb.addEventListener('keydown', (e) => { if (e.key === 'ArrowLeft') step(-1); if (e.key === 'ArrowRight') step(1); });
+  lb.addEventListener('click', (e) => { if (e.target === lb) lb.close(); });
+  document.querySelectorAll<HTMLButtonElement>('[data-filter]').forEach((btn) => btn.addEventListener('click', () => {
+    const f = btn.dataset.filter;
+    document.querySelectorAll('[data-filter]').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+    grid.querySelectorAll<HTMLLIElement>('li').forEach((li) => { li.hidden = f !== 'all' && li.dataset.cat !== f; });
+  }));
+</script>
+
+<style>
+  .filters { display: flex; gap: var(--s-2); margin-top: var(--s-3); }
+  .filters button { min-height: 2.75rem; padding: 0.7rem 1.2rem 0.55rem; border: 1px solid var(--champagne-line); background: none; cursor: pointer; font-family: var(--font-sans); font-weight: 600; font-size: var(--fs-ui); letter-spacing: var(--track-ui); text-transform: uppercase; }
+  .filters button[aria-pressed="true"] { background: var(--charcoal); color: var(--ivory); border-color: var(--charcoal); }
+  .masonry { columns: 3 18rem; column-gap: var(--gutter); }
+  .masonry li { break-inside: avoid; margin-bottom: var(--gutter); }
+  .tile { display: block; width: 100%; padding: 0; border: 0; background: var(--ivory-warm); cursor: zoom-in; overflow: hidden; }
+  .tile span { display: block; }
+  .tile :global(img) { width: 100%; height: auto; transition: transform 1.2s var(--ease); }
+  .tile:hover :global(img) { transform: scale(1.04); }
+  .ig { display: grid; justify-items: center; text-align: center; gap: var(--s-4); padding-block: var(--s-9) var(--section-pad); }
+  .ig .double-rule { width: 100%; margin-bottom: var(--s-6); }
+  .lightbox { padding: 0; border: 0; background: transparent; max-width: 100vw; max-height: 100dvh; width: 100vw; height: 100dvh; }
+  .lightbox::backdrop { background: rgba(20, 9, 0, 0.92); }
+  .lightbox[open] { display: grid; grid-template-columns: auto 1fr auto; align-items: center; }
+  .lightbox figure { margin: 0; display: grid; justify-items: center; gap: var(--s-3); }
+  .lightbox img { max-height: 80dvh; max-width: min(90vw, 40rem); object-fit: contain; }
+  .lightbox figcaption { color: var(--ivory-on-night); font-style: italic; text-align: center; padding-inline: var(--s-4); }
+  .lb-close { position: absolute; top: var(--s-3); right: var(--s-3); }
+  .lb-close, .lb-nav { width: 3rem; height: 3rem; border: 1px solid rgba(184,154,102,.5); background: rgba(20,9,0,.5); color: var(--gold); font-size: 1.8rem; line-height: 1; cursor: pointer; }
+  .lb-nav { margin: var(--s-3); }
+</style>
