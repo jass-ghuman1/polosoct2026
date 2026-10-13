@@ -36,11 +36,12 @@
           "signature": false
         },
         {
-          "id": "the-hillstone-crisp-martini",
-          "name": "The Hillstone Crisp Martini",
+          "id": "pollys-crisp-martini",
+          "name": "Polly's Crisp Martini",
           "description": "1.5oz Bombay Gin, 1oz St. Germain, fresh squeezed lemon juice, 2oz Oyster Bay Sauvignon Blanc, lime wedge",
           "price": 15.0,
-          "signature": false
+          "signature": false,
+          "easter_egg": "duck"
         },
         {
           "id": "sunkissed-sangria",
@@ -714,6 +715,7 @@
     "responsibility": "✦ marks a Polos signature · Please enjoy responsibly."
   },
   "corrections": [
-    "12 Oct 2026: Apothic Blend removed from White Wine at owner direction (it is a red). The printed v7 menu still lists it under White Wine."
+    "12 Oct 2026: Apothic Blend removed from White Wine at owner direction (it is a red). The printed v7 menu still lists it under White Wine.",
+    "13 Oct 2026: 'The Hillstone Crisp Martini' renamed to \"Polly's Crisp Martini\" (owner). Recipe and price unchanged. Printed drinks menu still shows the old name."
   ]
 }

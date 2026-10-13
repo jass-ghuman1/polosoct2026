@@ -18,6 +18,7 @@ _Last updated: 13 Oct 2026_
 - 13 Oct: Sherwood Park story removed from the website (owner).
 - 13 Oct: "Win a $200 gift card" popup added: shows on arrival (after first paint), once per visitor; bottom sheet on phones. Sign-ups go to Toast guest marketing (owner's Toast sign-up page). Quarterly draw. Rules page `/giveaway`.
 - 13 Oct: Tracking framework for GA4 + GTM + Meta Pixel + Google Ads (production only). IDs go in `business.json → analytics`.
+- 13 Oct: "The Hillstone Crisp Martini" renamed "Polly's Crisp Martini" with a tap-to-quack duck easter egg (printed drinks menu still has the old name).
 - 13 Oct link check: all internal links/anchors OK except the 4 Phase 6 pages; Toast ordering, reservations, gift cards, catering enquiry, Polos Play, Instagram, Facebook, X all load.
 
 ## Open items

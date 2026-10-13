@@ -1,0 +1,33 @@
+---
+// Easter egg: a tiny gold duck head next to Polly's Crisp Martini. Tap it.
+---
+<button type="button" class="duck" aria-label="Quack" data-duck>
+  <svg viewBox="0 0 24 20" width="22" height="18" aria-hidden="true" focusable="false">
+    <path d="M9.5 3.2c3.3 0 5.8 2.4 5.8 5.5 0 .7-.1 1.3-.4 1.9 1.4-.1 3.2-.5 5.6-1.6.6-.3 1.2.3.9.9-1.2 2.6-3.6 4.4-6.9 4.8-1.2 1.6-3.1 2.6-5.2 2.6-3.6 0-6.4-2.8-6.4-6.3 0-4.3 2.9-7.8 6.6-7.8z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+    <circle cx="10.6" cy="7.4" r="1.05" fill="currentColor"/>
+  </svg>
+  <span class="quack" aria-hidden="true">Quack.</span>
+</button>
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-duck]').forEach((b) =>
+    b.addEventListener('click', () => {
+      b.classList.remove('is-quacking'); void b.offsetWidth; b.classList.add('is-quacking');
+      document.dispatchEvent(new CustomEvent('polos:track', { detail: { event: 'easter_egg_duck', location: 'drinks_menu' } }));
+    }),
+  );
+</script>
+<style>
+  .duck { position: relative; display: inline-grid; place-items: center; width: 1.75rem; height: 1.75rem; margin-left: 0.15rem; padding: 0; border: 0; background: none;
+    color: var(--price, var(--gold)); cursor: pointer; vertical-align: -0.2em; opacity: 0.85; transition: opacity var(--t-hover) var(--ease); }
+  .duck:hover { opacity: 1; }
+  .duck svg { transform-origin: 40% 80%; }
+  .duck:hover svg { animation: duck-bob 600ms var(--ease); }
+  .duck.is-quacking svg { animation: duck-quack 520ms var(--ease); }
+  .quack { position: absolute; left: 50%; bottom: 100%; transform: translate(-50%, 4px); opacity: 0; pointer-events: none; white-space: nowrap;
+    font-family: var(--font-serif); font-style: italic; font-size: 0.95rem; letter-spacing: 0; text-transform: none; color: var(--price, var(--gold)); }
+  .duck.is-quacking .quack { animation: quack-pop 1.4s var(--ease) both; }
+  @keyframes duck-bob { 50% { transform: rotate(-12deg); } }
+  @keyframes duck-quack { 20% { transform: rotate(-18deg) scale(1.15); } 45% { transform: rotate(10deg); } 70% { transform: rotate(-6deg); } }
+  @keyframes quack-pop { 15% { opacity: 1; transform: translate(-50%, -2px); } 75% { opacity: 1; } 100% { opacity: 0; transform: translate(-50%, -10px); } }
+  @media (prefers-reduced-motion: reduce) { .duck svg { animation: none !important; } }
+</style>

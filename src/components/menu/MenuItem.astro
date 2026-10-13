@@ -1,6 +1,7 @@
 ---
 // One menu item, rendered in the printed menu's language: caps name, gold price, serif description.
 import { price } from '../../lib/menu';
+import Duck from './Duck.astro';
 interface Props { item: any }
 const { item: i } = Astro.props;
 const sub = i.detail ?? i.details ?? null;
@@ -10,7 +11,7 @@ const sub = i.detail ?? i.details ?? null;
   <div class="mi-head">
     <h3 class="mi-name">
       {i.signature && <span class="star" aria-hidden="true">✦ </span>}
-      {i.name}
+      {i.name}{i.easter_egg === 'duck' && <Duck />}
       {i.signature && <span class="visually-hidden"> (Polos signature)</span>}
     </h3>
     {i.badge && <span class="mi-badge">{i.badge === 'NEW' ? 'New' : i.badge.toLowerCase().replace(/(^|\s)\S/g, (m: string) => m.toUpperCase())}</span>}
