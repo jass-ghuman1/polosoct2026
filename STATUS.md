@@ -48,3 +48,5 @@ Polos Play at `/play` (optional; currently links to the existing Netlify site), 
 
 ## How changes reach GitHub
 The cloud workspace cannot push directly. Work is bundled (`git bundle`), copied to `~/Sites/Claude outputs/` on the owner's Mac, and pushed from there after the owner approves a one-time GitHub device sign-in.
+
+- 16 Oct 2026: Gluten-free menu prices aligned with food menu v12; Sirloin removed. (polosspeciality.netlify.app and Toast still show old prices; update separately.)

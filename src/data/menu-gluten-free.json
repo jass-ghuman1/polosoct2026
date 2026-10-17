@@ -76,7 +76,7 @@
           "id": "steak-salad",
           "name": "Steak Salad",
           "description": "6oz AAA striploin, garlic butter, mixed greens, bell peppers, cherry tomatoes, red onion, blue cheese crumble, balsamic dressing",
-          "price": 26.75,
+          "price": 30.75,
           "signature": false
         },
         {
@@ -98,14 +98,14 @@
           "id": "santa-cruz-smash-burger",
           "name": "Santa Cruz Smash Burger",
           "description": "Two smashed AAA beef patties, cheddar, lettuce, tomato, special spread, gluten-free bun",
-          "price": 23.75,
+          "price": 25.75,
           "signature": false
         },
         {
           "id": "aaa-steak-sandwich",
           "name": "AAA Steak Sandwich",
           "description": "6oz AAA striploin, gluten-free garlic bread, crisp lettuce, horseradish aioli",
-          "price": 27.75,
+          "price": 30.75,
           "signature": false
         },
         {
@@ -150,15 +150,15 @@
             },
             {
               "label": "chicken",
-              "price": 24.75
+              "price": 26.75
             },
             {
               "label": "prawns",
-              "price": 25.75
+              "price": 27.75
             },
             {
               "label": "AAA steak",
-              "price": 28.75
+              "price": 32.75
             }
           ]
         }
@@ -174,21 +174,14 @@
           "id": "rib-eye",
           "name": "Rib Eye",
           "description": "10oz AAA ribeye",
-          "price": 42.75,
+          "price": 54.75,
           "signature": false
         },
         {
           "id": "new-york",
           "name": "New York",
           "description": "8oz AAA striploin",
-          "price": 36.75,
-          "signature": false
-        },
-        {
-          "id": "sirloin",
-          "name": "Sirloin",
-          "description": "7oz AAA sirloin",
-          "price": 31.75,
+          "price": 49.75,
           "signature": false
         }
       ],
@@ -240,5 +233,8 @@
       "section_notes": []
     }
   ],
-  "notice": "Our kitchen also handles wheat. We take every care, but we cannot guarantee a gluten-free environment. Please tell your server about any allergies before ordering."
+  "notice": "Our kitchen also handles wheat. We take every care, but we cannot guarantee a gluten-free environment. Please tell your server about any allergies before ordering.",
+  "corrections": [
+    "16 Oct 2026: prices aligned with food menu v12 (Rib Eye, New York, Steak Salad, Santa Cruz Smash Burger, AAA Steak Sandwich, Pad Thai); Sirloin removed (no longer on the food menu)."
+  ]
 }
