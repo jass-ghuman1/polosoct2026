@@ -24,8 +24,11 @@ _Last updated: 13 Oct 2026_
 - 13 Oct: "The Hillstone Crisp Martini" renamed "Polly's Crisp Martini" with a tap-to-quack duck easter egg (printed drinks menu still has the old name).
 - 13 Oct link check: all internal links/anchors OK except the 4 Phase 6 pages; Toast ordering, reservations, gift cards, catering enquiry, Polos Play, Instagram, Facebook, X all load.
 
+- 16 Oct: Food menu updated to printed v12 (owner JSON): steak prices up, Sirloin removed, Braised Short Ribs + Meatloaf moved to "Steaks & House Classics".
+
 ## Open items
 - [x] Banquet invoice (`/banquet-invoice`, staff only, not linked or indexed): Netlify form `banquet-invoice`. Emails raj@ and gm@poloslounge.com (Netlify → Forms → Submission notifications). GST # 738318328 on invoice.
+- [ ] Gluten-free menu still shows the old prices for 6 shared items and still lists Sirloin — owner to confirm update.
 - [ ] Giveaway rules (promoter legal name, eligibility, draw dates, entry deadlines, winner notification, contact email). Production build is blocked until filled. Have a lawyer review.
 - [ ] Tracking IDs: GTM container, Meta Pixel, Google Ads conversion ID + labels.
 - [ ] Link Netlify project **polos-oct2026-preview** to this repo (Netlify → Project configuration → Build & deploy → Link repository). Never set `PUBLIC_DEPLOY_ENV` there.

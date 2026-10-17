@@ -1,5 +1,5 @@
 {
-  "source": "POLOS food menu v8, October 12, 2026 (text supplied by owner)",
+  "source": "POLOS food menu v12, October 16, 2026 (printed menu)",
   "currency": "CAD",
   "price_display": "no dollar sign, as printed",
   "signature_marker": "✦ marks a Polos signature.",
@@ -135,7 +135,7 @@
           "id": "steak-salad",
           "name": "Steak Salad",
           "description": "6oz AAA striploin, garlic butter, mixed greens, peppers, cherry tomatoes, red onion, blue cheese crumble, balsamic dressing",
-          "price": 26.75,
+          "price": 30.75,
           "signature": false
         },
         {
@@ -197,7 +197,7 @@
           "id": "santa-cruz-smash-burger",
           "name": "Santa Cruz Smash Burger",
           "description": "Two smashed AAA beef patties, cheddar, lettuce, tomato, special spread, brioche bun",
-          "price": 23.75,
+          "price": 25.75,
           "signature": true,
           "badge": "POLOS SIGNATURE"
         },
@@ -212,7 +212,7 @@
           "id": "aaa-steak-sandwich",
           "name": "AAA Steak Sandwich",
           "description": "6oz AAA striploin, chimichurri mayo, crisp lettuce, onion rings, ciabatta",
-          "price": 27.75,
+          "price": 30.75,
           "signature": false
         },
         {
@@ -279,13 +279,6 @@
           "badge": "CHEF'S PICK"
         },
         {
-          "id": "braised-short-ribs",
-          "name": "Braised Short Ribs",
-          "description": "Braised AAA beef short ribs, garlic mashed potato, seasonal vegetables",
-          "price": 32.75,
-          "signature": false
-        },
-        {
           "id": "maharaja-chicken-curry",
           "name": "Maharaja Chicken Curry",
           "description": "Tender chicken breast, tomato, ginger, garam masala, cream, basmati rice, warm naan, mint chutney",
@@ -305,15 +298,15 @@
             },
             {
               "label": "crispy chicken",
-              "price": 24.75
+              "price": 26.75
             },
             {
               "label": "prawns",
-              "price": 25.75
+              "price": 27.75
             },
             {
               "label": "AAA steak",
-              "price": 28.75
+              "price": 32.75
             }
           ],
           "note": "gluten-free rice noodles available"
@@ -331,15 +324,15 @@
             },
             {
               "label": "chicken",
-              "price": 24.75
+              "price": 26.75
             },
             {
               "label": "prawns",
-              "price": 25.75
+              "price": 27.75
             },
             {
               "label": "AAA steak",
-              "price": 28.75
+              "price": 32.75
             }
           ]
         },
@@ -358,13 +351,6 @@
           "signature": false
         },
         {
-          "id": "smoked-cheddar-meatloaf",
-          "name": "Smoked Cheddar Meatloaf",
-          "description": "House-made AAA meatloaf, cognac demi, garlic mashed potato, seasonal vegetables",
-          "price": 26.75,
-          "signature": false
-        },
-        {
           "id": "salmon-and-prawn-chardonnay",
           "name": "Salmon & Prawn Chardonnay",
           "description": "6oz salmon fillet, two tiger prawns, buttered gnocchi, broccoli, asparagus, creamy chardonnay sauce",
@@ -376,36 +362,43 @@
     },
     {
       "id": "steaks",
-      "title": "Steaks",
-      "title_print": "STEAKS",
-      "note": "Garlic butter · choice of two sides",
+      "title": "Steaks & House Classics",
+      "title_print": "STEAKS & HOUSE CLASSICS",
+      "note": "Steaks: garlic butter · choice of two sides",
       "items": [
         {
           "id": "rib-eye",
           "name": "Rib Eye",
           "description": "10oz AAA ribeye",
-          "price": 42.75,
+          "price": 54.75,
           "signature": false
         },
         {
           "id": "new-york",
           "name": "New York",
           "description": "8oz AAA striploin",
-          "price": 36.75,
+          "price": 49.75,
           "signature": false
         },
         {
-          "id": "sirloin",
-          "name": "Sirloin",
-          "description": "7oz AAA sirloin",
-          "price": 31.75,
+          "id": "braised-short-ribs",
+          "name": "Braised Short Ribs",
+          "description": "Braised AAA beef short ribs, garlic mashed potato, seasonal vegetables",
+          "price": 43.75,
+          "signature": false
+        },
+        {
+          "id": "smoked-cheddar-meatloaf",
+          "name": "Smoked Cheddar Meatloaf",
+          "description": "House-made AAA meatloaf, cognac demi, garlic mashed potato, seasonal vegetables",
+          "price": 26.75,
           "signature": false
         }
       ],
       "section_notes": [
         {
           "type": "sides",
-          "text": "Garlic mashed potato · double-stuffed baked potato · seasonal vegetables · peppercorn fries · yam fries · Caesar salad · house salad · blue cheese wedge",
+          "text": "Steak sides: Garlic mashed potato · double-stuffed baked potato · seasonal vegetables · peppercorn fries · yam fries · Caesar salad · house salad · blue cheese wedge",
           "items": [
             "Garlic mashed potato",
             "double-stuffed baked potato",
@@ -560,6 +553,8 @@
     }
   },
   "corrections": [
-    "12 Oct 2026: gluten-free bun is no charge (owner). Printed food menu v8 still shows \"gluten-free bun 2\"."
+    "12 Oct 2026: gluten-free bun is no charge (owner). Printed food menu v8 still shows \"gluten-free bun 2\".",
+    "16 Oct 2026: prices updated to printed food menu v11 (owner): Rib Eye 54.75, New York 49.75, Sirloin removed, Steak Salad 30.75, AAA Steak Sandwich 30.75, Santa Cruz 25.75, Braised Short Ribs 42.75, Kung Pao/Pad Thai chicken 26.75 · prawns 27.75 · AAA steak 32.75.",
+    "16 Oct 2026: Braised Short Ribs (now 43.75) and Smoked Cheddar Meatloaf moved from Entrées into the Steaks section, renamed \"Steaks & House Classics\" (owner), matching printed food menu v12. Classics keep their own sides (garlic mashed potato, seasonal vegetables)."
   ]
 }
