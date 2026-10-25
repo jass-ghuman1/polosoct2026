@@ -20,7 +20,6 @@
   },
   "timezone": "America/Edmonton",
   "hours": {
-    "_needs_review": "Taken from the current live website (Oct 2026). Confirm before launch.",
     "weekly": [
       {
         "days": [
@@ -46,7 +45,8 @@
         "text": "11 AM – 11 PM"
       }
     ],
-    "note": "Please call for holiday hours."
+    "note": "Please call for holiday hours.",
+    "_confirmed": "Owner confirmed 25 Oct 2026"
   },
   "happyHour": {
     "windows": [
@@ -121,7 +121,8 @@
     "instagram": "https://www.instagram.com/poloslounge/",
     "facebook": "https://www.facebook.com/Poloslounge",
     "x": "https://x.com/poloslounge780",
-    "play": "https://polos-games-fun-1631b2.netlify.app"
+    "play": "https://polos-games-fun-1631b2.netlify.app",
+    "googleProfile": "https://maps.app.goo.gl/YS5VHvp41Bimtb43A"
   },
   "analytics": {
     "_note": "Tags load ONLY on production (PUBLIC_DEPLOY_ENV=production). Leave an ID as null to keep that tag off. If GTM is used to fire GA4, set ga4ViaGtm=true so GA4 is not loaded twice.",

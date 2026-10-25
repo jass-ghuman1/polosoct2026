@@ -61,6 +61,7 @@ const jsonLd = [{
   openingHoursSpecification: b.hours.weekly.map((h) => ({ '@type': 'OpeningHoursSpecification', dayOfWeek: h.days, opens: h.opens, closes: h.closes })),
   hasMenu: `${b.url}/menu`,
   acceptsReservations: b.links.reserve,
+  hasMap: b.links.googleProfile,
   potentialAction: { '@type': 'ReserveAction', target: b.links.reserve },
   sameAs: [b.links.facebook, b.links.instagram, b.links.x],
 }];
