@@ -391,7 +391,7 @@
           "id": "smoked-cheddar-meatloaf",
           "name": "Smoked Cheddar Meatloaf",
           "description": "House-made AAA meatloaf, cognac demi, garlic mashed potato, seasonal vegetables",
-          "price": 26.75,
+          "price": 29.75,
           "signature": false
         }
       ],
@@ -555,6 +555,7 @@
   "corrections": [
     "12 Oct 2026: gluten-free bun is no charge (owner). Printed food menu v8 still shows \"gluten-free bun 2\".",
     "16 Oct 2026: prices updated to printed food menu v11 (owner): Rib Eye 54.75, New York 49.75, Sirloin removed, Steak Salad 30.75, AAA Steak Sandwich 30.75, Santa Cruz 25.75, Braised Short Ribs 42.75, Kung Pao/Pad Thai chicken 26.75 · prawns 27.75 · AAA steak 32.75.",
-    "16 Oct 2026: Braised Short Ribs (now 43.75) and Smoked Cheddar Meatloaf moved from Entrées into the Steaks section, renamed \"Steaks & House Classics\" (owner), matching printed food menu v12. Classics keep their own sides (garlic mashed potato, seasonal vegetables)."
+    "16 Oct 2026: Braised Short Ribs (now 43.75) and Smoked Cheddar Meatloaf moved from Entrées into the Steaks section, renamed \"Steaks & House Classics\" (owner), matching printed food menu v12. Classics keep their own sides (garlic mashed potato, seasonal vegetables).",
+    "25 Oct 2026: Smoked Cheddar Meatloaf 29.75, matching printed food menu v13 (2026-10-19 FINAL)."
   ]
 }

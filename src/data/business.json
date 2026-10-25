@@ -146,15 +146,18 @@
       "_note": "Toast's sign-up page uses reCAPTCHA, so guests complete it on Toast (opens in a new tab). Emails land directly in Toast guest marketing; the website stores nothing."
     },
     "rules": {
-      "REQUIRED_promoter": null,
-      "REQUIRED_eligibility": null,
-      "REQUIRED_drawDates": null,
-      "REQUIRED_entryDeadlines": null,
-      "REQUIRED_winnerNotification": null,
+      "REQUIRED_promoter": "Polos Social Lounge, #150 – 950 Emerald Drive, Sherwood Park, AB T8H 0W6.",
+      "REQUIRED_eligibility": "Open to residents of Alberta who are 19 years of age or older. Employees of Polos Social Lounge and members of their households are not eligible.",
+      "REQUIRED_drawDates": "One winner is drawn at random from all eligible entries within the first week after each quarter ends (January, April, July and October).",
+      "REQUIRED_entryDeadlines": "Entries for each draw close at 11:59 PM Mountain Time on the last day of the quarter (March 31, June 30, September 30 and December 31).",
+      "REQUIRED_winnerNotification": "The winner is contacted by email and has 14 days to respond. If there is no response, another winner is drawn.",
       "REQUIRED_skillTestingQuestion": "Winner must correctly answer a mathematical skill-testing question.",
       "REQUIRED_noPurchase": "No purchase necessary.",
       "REQUIRED_contactEmail": null,
-      "oddsStatement": "Odds of winning depend on the number of eligible entries received for that draw."
+      "oddsStatement": "Odds of winning depend on the number of eligible entries received for that draw.",
+      "prizeConditions": "One $200 Polos gift card per draw. The prize must be accepted as awarded and cannot be exchanged for cash.",
+      "privacy": "By signing up, you agree that Polos Social Lounge may use your email address to send news, advertising and promotional offers. You can unsubscribe at any time.",
+      "_approved": "Owner approved basic rules 25 Oct 2026 (age 19+). Contact email still to confirm. Recommend a quick legal review."
     }
   }
 }

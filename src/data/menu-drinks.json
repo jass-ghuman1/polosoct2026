@@ -434,9 +434,9 @@
           "signature": false
         },
         {
-          "id": "casa-viva-chardonnay",
-          "name": "Casa Viva Chardonnay",
-          "region": "Chile",
+          "id": "josh-cellars-chardonnay",
+          "name": "Josh Cellars Chardonnay",
+          "region": "California",
           "prices": {
             "6oz": null,
             "9oz": null,
@@ -717,6 +717,7 @@
   "corrections": [
     "12 Oct 2026: Apothic Blend removed from White Wine at owner direction (it is a red). The printed v7 menu still lists it under White Wine.",
     "13 Oct 2026: 'The Hillstone Crisp Martini' renamed to \"Polly's Crisp Martini\" (owner). Recipe and price unchanged. Printed drinks menu still shows the old name.",
-    "13 Oct 2026: Polly's Crisp Martini recipe changed to 1.5oz Grey Goose, 0.5oz St. Germain (owner). Rest of recipe and price unchanged."
+    "13 Oct 2026: Polly's Crisp Martini recipe changed to 1.5oz Grey Goose, 0.5oz St. Germain (owner). Rest of recipe and price unchanged.",
+    "25 Oct 2026: Casa Viva Chardonnay replaced by Josh Cellars Chardonnay (California, bottle 45), matching printed drink menu v10 (2026-10-16)."
   ]
 }

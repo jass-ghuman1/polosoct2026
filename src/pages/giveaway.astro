@@ -7,7 +7,7 @@ const g = (business as any).giveaway;
 const r = g.rules;
 const tbc = (v: string | null) => v ?? 'To be confirmed';
 const rows = [
-  ['Prize', g.prize],
+  ['Prize', r.prizeConditions ?? g.prize],
   ['Draws', `${g.frequency}. ${tbc(r.REQUIRED_drawDates)}`],
   ['Entry deadlines', tbc(r.REQUIRED_entryDeadlines)],
   ['How to enter', 'Sign up for the Polos email list through our Toast sign-up page. One entry per person per draw.'],
@@ -18,6 +18,7 @@ const rows = [
   ['Winner notification', tbc(r.REQUIRED_winnerNotification)],
   ['Promoter', tbc(r.REQUIRED_promoter)],
   ['Questions', tbc(r.REQUIRED_contactEmail)],
+  ['Your email', r.privacy],
 ];
 ---
 <Base title="Win a $200 Gift Card | Contest Rules | Polos Social Lounge" description="Join the Polos Social Lounge email list for a chance to win a $200 gift card. Contest rules and eligibility.">
