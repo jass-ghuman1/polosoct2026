@@ -8,7 +8,7 @@ const nav = [
   { href: '/gallery', label: 'Gallery' },
   { href: '/about', label: 'About' },
 ];
-const current = Astro.url.pathname.replace(/\/$/, '') || '/';
+const current = Astro.url.pathname.replace(/(^|\/)index\.html$/, '/').replace(/\.html$/, '').replace(/(.)\/$/, '$1') || '/';
 const isHome = current === '/';
 ---
 <header class:list={["site-header", { "is-home": isHome }]} data-header>

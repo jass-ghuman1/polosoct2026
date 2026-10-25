@@ -15,7 +15,9 @@ interface Props {
 }
 const { title, description, image = '/assets/v1/social-share.png', jsonLd = [] } = Astro.props;
 const site = Astro.site ?? new URL(business.url);
-const canonical = new URL(Astro.url.pathname === '/' ? '/' : Astro.url.pathname.replace(/\/$/, ''), site).href;
+// build.format 'file' makes pathname end in .html; canonical URLs stay clean (/about, /)
+const cleanPath = Astro.url.pathname.replace(/(^|\/)index\.html$/, '/').replace(/\.html$/, '').replace(/(.)\/$/, '$1') || '/';
+const canonical = new URL(cleanPath, site).href;
 // Only production sends analytics and allows indexing. Staging/previews are noindex and silent.
 const isProd = import.meta.env.PUBLIC_DEPLOY_ENV === 'production';
 const gtm = (business.analytics as any).gtm;
