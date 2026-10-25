@@ -51,3 +51,4 @@ The cloud workspace cannot push directly. Work is bundled (`git bundle`), copied
 
 - 16 Oct 2026: Gluten-free menu prices aligned with food menu v12; Sirloin removed. (polosspeciality.netlify.app and Toast still show old prices; update separately.)
 - 25 Oct 2026: Contest rules filled in (19+, quarterly, email used for news/ads/promotions); contact email still needed. Price check vs printed food v13, drinks v10, Happy Hour 2026-10-10: Meatloaf 29.75, Josh Cellars Chardonnay replaces Casa Viva. Open: Apothic Blend white (on print, not on site).
+- 25 Oct 2026: Apothic Blend white added (owner: comes in white and red).
