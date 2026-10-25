@@ -153,11 +153,11 @@
       "REQUIRED_winnerNotification": "The winner is contacted by email and has 14 days to respond. If there is no response, another winner is drawn.",
       "REQUIRED_skillTestingQuestion": "Winner must correctly answer a mathematical skill-testing question.",
       "REQUIRED_noPurchase": "No purchase necessary.",
-      "REQUIRED_contactEmail": null,
+      "REQUIRED_contactEmail": "info@poloslounge.com",
       "oddsStatement": "Odds of winning depend on the number of eligible entries received for that draw.",
       "prizeConditions": "One $200 Polos gift card per draw. The prize must be accepted as awarded and cannot be exchanged for cash.",
       "privacy": "By signing up, you agree that Polos Social Lounge may use your email address to send news, advertising and promotional offers. You can unsubscribe at any time.",
-      "_approved": "Owner approved basic rules 25 Oct 2026 (age 19+). Contact email still to confirm. Recommend a quick legal review."
+      "_approved": "Owner approved basic rules 25 Oct 2026 (age 19+, contact info@poloslounge.com). Recommend a quick legal review."
     }
   }
 }
