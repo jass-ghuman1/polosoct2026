@@ -60,6 +60,10 @@ const jsonLd = [breadcrumbJsonLd([{ name: 'Home', url: `${b.url}/` }, { name: 'P
           </li>
         ))}
       </ul>
+      <div class="rental" data-reveal>
+        <p class="rental-head"><span class="section-title gold">{ev.rental.title}</span><span class="pk-price">${ev.rental.price}</span></p>
+        <p>{ev.rental.text}</p>
+      </div>
       <p class="fine muted">{ev.fine_print}</p>
     </section>
 
@@ -115,6 +119,8 @@ const jsonLd = [breadcrumbJsonLd([{ name: 'Home', url: `${b.url}/` }, { name: 'P
   .pk-sec-title { font-family: var(--font-sans); font-weight: 600; font-size: 0.72rem; letter-spacing: var(--track-ui); text-transform: uppercase; color: var(--gold); margin-bottom: var(--s-2); }
   .pk-sec li { font-size: 1.05rem; line-height: 1.35; padding-block: 0.28rem; }
   .pk-note { display: block; font-size: 0.95rem; font-style: italic; color: var(--stone-night); }
+  .rental { border: 1px solid var(--gold); padding: var(--s-5); display: grid; gap: var(--s-2); text-align: center; max-width: 34rem; width: 100%; justify-self: center; margin-top: var(--s-6); }
+  .rental-head { display: flex; justify-content: center; align-items: baseline; gap: var(--s-4); flex-wrap: wrap; }
   .fine { font-size: 0.98rem; text-align: center; max-width: 46rem; justify-self: center; }
   .ev-info { display: grid; gap: var(--gutter); grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); margin-top: var(--s-8); }
   .ev-card { border: 1px solid rgba(184,154,102,.35); padding: var(--s-6) var(--s-5); display: grid; gap: var(--s-3); align-content: start; }

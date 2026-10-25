@@ -443,6 +443,12 @@
     "text": "Whether you’re planning a business lunch, holiday party, birthday, family celebration or private gathering, our team is here to make it easy."
   },
   "signoff": "Good Food. Great Company. Memorable Gatherings.",
-  "fine_print": "Prices are per guest. Applicable taxes and gratuities are additional. Menu selections, availability and pricing are subject to change. Minimum guest requirements may apply.",
-  "capacity": null
+  "fine_print": "Prices are per guest. Applicable taxes and gratuities are additional. A non-refundable $250 room rental fee applies to secure your space. Menu selections, availability and pricing are subject to change. Minimum guest requirements may apply.",
+  "capacity": null,
+  "rental": {
+    "title": "Room Rental",
+    "price": 250,
+    "text": "A $250 room rental fee secures your space. The rental fee is non-refundable.",
+    "_source": "Owner, 25 Oct 2026"
+  }
 }

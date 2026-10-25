@@ -55,3 +55,4 @@ The cloud workspace cannot push directly. Work is bundled (`git bundle`), copied
 - 25 Oct 2026: Contest contact email info@poloslounge.com; production build now passes.
 - 25 Oct 2026: LIVE. Owner linked production project dulcet-pothos-f1d3e1 (poloslounge.com) to this repo. PUBLIC_DEPLOY_ENV=production set on that project (production context, owner approved). Preview project: finalpolos-oct-17 (no env vars). polos-oct2026-preview is unused.
 - 25 Oct 2026: Hours confirmed by owner. SEO: shorter titles (drinks, private events, about), sitemap lastmod, hasMap -> Google Business Profile.
+- 25 Oct 2026: Banquet $250 non-refundable room rental fee (secures the space) added to Private Events page + fine print.
