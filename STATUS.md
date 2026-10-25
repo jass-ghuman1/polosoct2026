@@ -53,3 +53,4 @@ The cloud workspace cannot push directly. Work is bundled (`git bundle`), copied
 - 25 Oct 2026: Contest rules filled in (19+, quarterly, email used for news/ads/promotions); contact email still needed. Price check vs printed food v13, drinks v10, Happy Hour 2026-10-10: Meatloaf 29.75, Josh Cellars Chardonnay replaces Casa Viva. Open: Apothic Blend white (on print, not on site).
 - 25 Oct 2026: Apothic Blend white added (owner: comes in white and red).
 - 25 Oct 2026: Contest contact email info@poloslounge.com; production build now passes.
+- 25 Oct 2026: LIVE. Owner linked production project dulcet-pothos-f1d3e1 (poloslounge.com) to this repo. PUBLIC_DEPLOY_ENV=production set on that project (production context, owner approved). Preview project: finalpolos-oct-17 (no env vars). polos-oct2026-preview is unused.
