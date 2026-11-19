@@ -80,6 +80,23 @@ const jsonLd = [{
         <p class="hero-lockup" aria-hidden="true"><span class="dot"></span>Social Lounge<span class="dot"></span></p>
         <p class="hero-place eyebrow">Sherwood Park</p>
         <p class="hero-line">{b.tagline}</p>
+        <p class="holiday-greeting-2026" hidden>
+          <span aria-hidden="true">✦</span> Season’s greetings from Polo’s <span aria-hidden="true">✦</span>
+        </p>
+        <script is:inline>
+          (() => {
+            const greeting = document.currentScript.previousElementSibling;
+            const end = Date.parse('2027-01-01T00:00:00-07:00');
+
+            function updateGreeting() {
+              const remaining = end - Date.now();
+              greeting.hidden = remaining <= 0;
+              if (remaining > 0) setTimeout(updateGreeting, Math.min(remaining, 86400000));
+            }
+
+            updateGreeting();
+          })();
+        </script>
         <div class="btn-row hero-cta">
           <a class="btn btn--primary" href="/menu" data-track="menu_view" data-track-location="hero">View Menu</a>
           <a class="btn btn--secondary" href={b.links.reserve} data-track="reserve_click" data-track-location="hero">Reserve a Table</a>
@@ -462,4 +479,23 @@ const jsonLd = [{
   @media (prefers-reduced-motion: reduce) {
     .hero-mark, .hero-lockup, .hero-place, .hero-line, .hero-cta, .hero-main :global(picture), .hero-second, .today, .hero-main :global(img) { animation: none !important; }
   }
+</style>
+
+<style>
+  .holiday-greeting-2026:not([hidden]) {
+    display: table;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: .65rem 0;
+    padding: .38em .9em;
+    border: 1px solid #d1ac64;
+    border-radius: 2em;
+    background: #25231c;
+    color: #fff4d4;
+    font: 600 clamp(.78rem, 2vw, .94rem)/1.45 system-ui, sans-serif;
+    letter-spacing: .025em;
+  }
+
+  .holiday-greeting-2026 span { color: #d1ac64; }
+  @media print { .holiday-greeting-2026 { display: none !important; } }
 </style>
